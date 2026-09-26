@@ -1,3 +1,4 @@
+import { apiMismatches } from './api.js';
 import type { Change, ComparisonResult } from './types.js';
 
 /** Unchanged QA concerns (locator / wait strategy / assertion) worth calling out. */
@@ -14,7 +15,8 @@ export function formatValue(v: unknown): string {
   return s.length > 60 ? `${s.slice(0, 57)}...` : s;
 }
 
-const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
+const plural = (n: number, word: string) =>
+  `${n} ${word}${n === 1 ? '' : /(ch|s|x)$/.test(word) ? 'es' : 's'}`;
 
 const impactLine = (c: Change) =>
   c.impact && c.impact !== 'informational' ? `\n  Impact: ${c.impact.toUpperCase()}` : '';
@@ -35,7 +37,28 @@ const line0 = (c: Change): string => {
 };
 
 /** Plain-text change summary (PRD §9). Unchanged entries are counted, not listed. */
+const apiPath = (p: string) => (p.startsWith('body.') ? p.slice(5) : p);
+
+function apiLine(c: Change): string {
+  const p = apiPath(c.path);
+  if (c.kind === 'unchanged') return `${p}:\n  ${formatValue(c.before)} → ${formatValue(c.after)} ✓`;
+  if (c.kind === 'removed') return `${p}:\n  ${formatValue(c.before)} → (missing) ❌`;
+  if (c.kind === 'added') return `${p}:\n  (not expected) → ${formatValue(c.after)} ❌`;
+  return `${p}:\n  ${formatValue(c.before)} → ${formatValue(c.after)} ❌`;
+}
+
+/** PRD §15 expected-vs-actual report. */
+function renderApiReport(result: ResultLike): string {
+  const bad = apiMismatches(result);
+  const out = ['DiffSense — API Response Comparison', '', `Expected: ${result.left}`, `Actual:   ${result.right}`, ''];
+  for (const c of result.changes) out.push(apiLine(c), '');
+  out.push(bad === 0 ? 'Result: PASS — actual matches expected' : `Result: FAIL — ${plural(bad, 'mismatch')}`);
+  for (const w of result.warnings) out.push(`Note: ${w}`);
+  return out.join('\n').trimEnd() + '\n';
+}
+
 export function renderSummary(result: ResultLike): string {
+  if (result.format === 'api') return renderApiReport(result);
   const { added, removed, modified, unchanged } = result.stats;
   const total = added + removed + modified;
   const out = ['DiffSense — Change Summary', '', 'Files:', result.left, result.right, ''];
@@ -57,12 +80,34 @@ export function renderSummary(result: ResultLike): string {
   return out.join('\n').trimEnd() + '\n';
 }
 
-type ResultLike = Pick<ComparisonResult, 'left' | 'right' | 'changes' | 'stats' | 'impact' | 'warnings'>;
+type ResultLike = Pick<ComparisonResult, 'format' | 'left' | 'right' | 'changes' | 'stats' | 'impact' | 'warnings'>;
 
 const mdCode = (v: string) => '`' + v.replace(/`/g, "'").replace(/\n/g, ' ') + '`';
 
 /** Markdown change summary, suitable for export or pasting into a PR. */
 export function renderMarkdown(result: ResultLike): string {
+  if (result.format === 'api') {
+    const bad = apiMismatches(result);
+    const out = [
+      '# DiffSense — API Response Comparison',
+      '',
+      `**Expected:** ${mdCode(result.left)}  `,
+      `**Actual:** ${mdCode(result.right)}`,
+      '',
+      `**Result:** ${bad === 0 ? 'PASS' : `FAIL (${plural(bad, 'mismatch')})`}`,
+      '',
+      '| Field | Expected | Actual | |',
+      '|---|---|---|:-:|',
+    ];
+    const cell = (v: unknown) => mdCode(formatValue(v)).replace(/\|/g, '\\|');
+    for (const c of result.changes) {
+      const exp = c.kind === 'added' ? '_(not expected)_' : cell(c.before);
+      const act = c.kind === 'removed' ? '_(missing)_' : cell(c.after);
+      out.push(`| ${mdCode(apiPath(c.path))} | ${exp} | ${act} | ${c.kind === 'unchanged' ? '✓' : '❌'} |`);
+    }
+    for (const w of result.warnings) out.push('', `> Note: ${w}`);
+    return out.join('\n') + '\n';
+  }
   const { added, removed, modified, unchanged } = result.stats;
   const out = [
     '# DiffSense — Change Summary',

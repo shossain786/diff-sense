@@ -43,3 +43,21 @@ describe('panel html', () => {
     expect(escapeHtml(`<>&"'`)).toBe('&lt;&gt;&amp;&quot;&#39;');
   });
 });
+
+describe('API panel', () => {
+  it('lists matches and mismatches with a verdict, escaped', () => {
+    const r = compare(
+      { name: 'expected.json', content: '{"status":200,"body":{"amount":100,"n":"<b>"}}' },
+      { name: 'actual.json', content: '{"status":200,"body":{"amount":120,"n":"<b>"}}' },
+      { format: 'api' },
+    );
+    const html = renderPanelHtml(r, 'n', 'x');
+    expect(html).toContain('API Response Comparison');
+    expect(html).toContain('<b>FAIL</b> — 1 mismatch');
+    expect(html).toContain('Expected (left)');
+    expect(html).toContain('<del>100</del> → <ins>120</ins>');
+    expect(html).toContain('&lt;b&gt;');
+    expect(html).not.toContain('<b></b>');
+    expect(html).toContain('❌ mismatched');
+  });
+});

@@ -137,6 +137,8 @@
           "description": "XML: ignore the <?xml ...?> declaration."
         },
         "diffsense.qaMode": { "type": "string", "enum": ["auto", "on", "off"], "default": "auto", "description": "Java: test-automation rules (locators, waits, assertions, Page Object hints). Auto enables them when the file imports Selenium, JUnit, TestNG, Cucumber, Playwright or REST Assured." },
+        "diffsense.ignoreExtraFields": { "type": "boolean", "default": false, "description": "API comparison: ignore fields that are only in the actual response." },
+        "diffsense.ignoreHeaders": { "type": "array", "items": { "type": "string" }, "default": [], "description": "API comparison: header names that are never compared." },
         "diffsense.maxFileSizeMB": {
           "type": "number",
           "default": 10,

@@ -49,10 +49,11 @@ export function classifyChange(change: Change): Change {
 
 /**
  * Fills in impact/reason on every change that lacks one and sets the overall
- * estimate. Free text has no structure to reason about, so it is left alone.
+ * estimate. Free text has no structure to reason about, and API comparisons are
+ * pass/fail against an expectation, so both are left alone.
  */
 export function applyImpact(result: ComparisonResult): ComparisonResult {
-  if (result.format === 'text') return result;
+  if (result.format === 'text' || result.format === 'api') return result;
   const changes = result.changes.map(classifyChange);
   const changed = changes.filter((c) => c.kind !== 'unchanged');
   const impact = changed.reduce<Impact | undefined>(

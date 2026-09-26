@@ -1,3 +1,4 @@
+import { compareApi } from './api.js';
 import { detectFormat } from './detect.js';
 import { compareJava } from './java.js';
 import { applyImpact } from './impact.js';
@@ -19,6 +20,7 @@ function compareRaw(
   const format = options.format ?? detectFormat(left.name);
   try {
     if (format === 'json') return compareJson(left, right, options);
+    if (format === 'api') return compareApi(left, right, options);
     if (format === 'java') return compareJava(left, right, options);
     if (format === 'xml') return compareXml(left, right, options);
     if (format === 'yaml') return compareYaml(left, right, options);

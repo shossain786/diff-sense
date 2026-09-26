@@ -24,7 +24,41 @@ function row(c: Change): string {
 }
 
 /** Summary panel body. All file-derived text is escaped; script is nonce-gated. */
-export function renderPanelHtml(result: ComparisonResult, nonce: string, cspSource: string): string {
+function apiRow(c: Change): string {
+  const p = c.path.startsWith('body.') ? c.path.slice(5) : c.path;
+  const ok = c.kind === 'unchanged';
+  const vals =
+    c.kind === 'added'
+      ? `<em>(not expected)</em> → <ins>${escapeHtml(formatValue(c.after))}</ins>`
+      : c.kind === 'removed'
+        ? `<del>${escapeHtml(formatValue(c.before))}</del> → <em>(missing)</em>`
+        : ok
+          ? `${escapeHtml(formatValue(c.before))} → ${escapeHtml(formatValue(c.after))}`
+          : `<del>${escapeHtml(formatValue(c.before))}</del> → <ins>${escapeHtml(formatValue(c.after))}</ins>`;
+  return `<li class="${ok ? 'same' : 'mod'}"><span class="icon">${ok ? '✓' : '❌'}</span><span class="path">${escapeHtml(p)}</span><div class="vals">${vals}</div></li>`;
+}
+
+/** Expected-vs-actual view: every check is listed, with a pass/fail verdict. */
+function renderApiPanel(result: ComparisonResult, nonce: string, cspSource: string): string {
+  const bad = result.stats.added + result.stats.removed + result.stats.modified;
+  const rows = result.changes.slice(0, MAX_ROWS * 2).map(apiRow).join('');
+  return renderPanelHtml({ ...result, format: 'text' }, nonce, cspSource, {
+    title: 'API Response Comparison',
+    stats: `<div class="stat"><b>${result.stats.unchanged}</b>✓ matched</div><div class="stat"><b>${bad}</b>❌ mismatched</div>`,
+    body: `<p><b>${bad === 0 ? 'PASS' : 'FAIL'}</b> — ${bad === 0 ? 'actual matches expected' : `${bad} mismatch${bad === 1 ? '' : 'es'}`}</p><ul>${rows}</ul>`,
+    labels: ['Expected (left)', 'Actual (right)'],
+  });
+}
+
+interface Override {
+  title: string;
+  stats: string;
+  body: string;
+  labels: [string, string];
+}
+
+export function renderPanelHtml(result: ComparisonResult, nonce: string, cspSource: string, override?: Override): string {
+  if (result.format === 'api' && !override) return renderApiPanel(result, nonce, cspSource);
   const { added, removed, modified, unchanged } = result.stats;
   const total = added + removed + modified;
   const changed = result.changes.filter((c) => c.kind !== 'unchanged');
@@ -57,15 +91,15 @@ del{color:var(--vscode-gitDecoration-deletedResourceForeground)}
 button{background:var(--vscode-button-secondaryBackground);color:var(--vscode-button-secondaryForeground);border:0;padding:6px 12px;border-radius:3px;cursor:pointer}
 button.primary{background:var(--vscode-button-background);color:var(--vscode-button-foreground)}
 </style></head><body>
-<h1>DiffSense</h1>
+<h1>${escapeHtml(override?.title ?? 'DiffSense')}</h1>
 <div class="muted">${escapeHtml(base(result.left))} ↔ ${escapeHtml(base(result.right))} · ${escapeHtml(result.format)}</div>
-<div class="muted">Before (left): <b>${escapeHtml(base(result.left))}</b> · After (right): <b>${escapeHtml(base(result.right))}</b></div>
+<div class="muted">${escapeHtml(override?.labels[0] ?? 'Before (left)')}: <b>${escapeHtml(base(result.left))}</b> · ${escapeHtml(override?.labels[1] ?? 'After (right)')}: <b>${escapeHtml(base(result.right))}</b></div>
 <div class="stats">
-<div class="stat"><b>${total}</b>changes</div>
+${override?.stats ?? `<div class="stat"><b>${total}</b>changes</div>
 <div class="stat"><b>${modified}</b>⚠ modified</div>
 <div class="stat"><b>${added}</b>+ added</div>
 <div class="stat"><b>${removed}</b>− removed</div>
-<div class="stat"><b>${unchanged}</b>✓ unchanged</div>
+<div class="stat"><b>${unchanged}</b>✓ unchanged</div>`}
 </div>
 ${warnings}
 <div class="actions">
@@ -74,7 +108,7 @@ ${warnings}
 <button data-cmd="copyMarkdown">Copy as Markdown</button>
 <button data-cmd="exportMarkdown">Export Markdown…</button>
 </div>
-${total === 0 ? '<p>No differences found.</p>' : `<ul>${shown}</ul>${more}${same ? `<ul class="unchanged">${same}</ul>` : ''}`}
+${override ? override.body : total === 0 ? '<p>No differences found.</p>' : `<ul>${shown}</ul>${more}${same ? `<ul class="unchanged">${same}</ul>` : ''}`}
 ${result.impact ? `<p class="muted">Potential impact (estimate): <b>${escapeHtml(result.impact)}</b></p>` : ''}
 <script nonce="${nonce}">
 const vscode = acquireVsCodeApi();

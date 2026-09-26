@@ -1,0 +1,10 @@
+{
+  "status": 200,
+  "headers": { "content-type": "application/json", "date": "Sat, 26 Sep 2026 10:00:00 GMT" },
+  "body": {
+    "user": { "id": 123, "name": "John" },
+    "amount": 120,
+    "currency": "INR",
+    "traceId": "abc-123"
+  }
+}

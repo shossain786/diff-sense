@@ -18,9 +18,10 @@ const BOOLEANS = [
   'ignoreXmlDeclaration',
   'ignoreNamespaces',
   'qaMode',
+  'ignoreExtraFields',
 ] as const;
-const LISTS = ['ignorePaths', 'ignoreAttributes'] as const;
-const FORMATS: Format[] = ['text', 'json', 'xml', 'yaml', 'java'];
+const LISTS = ['ignorePaths', 'ignoreAttributes', 'ignoreHeaders'] as const;
+const FORMATS: Format[] = ['text', 'json', 'xml', 'yaml', 'java', 'api'];
 
 /** Validates untrusted option input; returns cleaned options and problems. */
 export function sanitizeOptions(raw: unknown, where = 'options'): { options: CompareOptions; errors: string[] } {

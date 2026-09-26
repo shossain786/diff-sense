@@ -10,3 +10,4 @@ export * from './config.js';
 export { renderSummary, renderMarkdown, formatValue, qaUnchangedPaths } from './summary.js';
 export { applyImpact, classifyChange, maxImpact, IMPACT_ORDER } from './impact.js';
 export { compareJava } from './java.js';
+export { compareApi, parseApiResponse, apiMismatches } from './api.js';

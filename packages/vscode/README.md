@@ -41,6 +41,19 @@ When direct Selenium calls are replaced by a page-object style call, DiffSense a
 
 It turns on automatically when the file imports Selenium, JUnit, TestNG, Cucumber, Playwright or REST Assured. Override with the `diffsense.qaMode` setting (`auto`, `on`, `off`).
 
+## API response comparison
+
+**DiffSense: Compare API Responses (Expected vs Actual)** checks an actual response against an expected one and gives a pass/fail verdict, listing every check with ✓ or ❌:
+
+```
+status:        200 → 200 ✓
+user.id:       123 → 123 ✓
+amount:        100 → 120 ❌
+currency:      INR → INR ✓
+```
+
+Inputs can be a raw HTTP response (`HTTP/1.1 200 OK`, headers, blank line, body), a JSON envelope (`{ "status": 200, "headers": {...}, "body": {...} }`), or just the body. The current file is treated as *expected*. Volatile headers (`Date`, `Server`, request IDs, ...) are ignored, and only headers present in the expected response are checked. Use `diffsense.ignoreExtraFields` to allow extra fields in the actual response.
+
 ## Ignore rules
 
 Settings (`diffsense.*`), or a `.diffsense.json` in the workspace root, which takes precedence:
@@ -55,7 +68,7 @@ Settings (`diffsense.*`), or a `.diffsense.json` in the workspace root, which ta
 }
 ```
 
-Available options: `ignoreWhitespace`, `ignoreCase`, `ignoreArrayOrder`, `numericEquality`, `ignorePaths`, `ignoreAttributes`, `ignoreNamespaces`, `ignoreXmlDeclaration`, `qaMode` (`.diffsense.json` only, boolean). Path globs use `*` within one segment and `**` across segments, for example `items[*].id`.
+Available options: `ignoreWhitespace`, `ignoreCase`, `ignoreArrayOrder`, `numericEquality`, `ignorePaths`, `ignoreAttributes`, `ignoreNamespaces`, `ignoreXmlDeclaration`, `ignoreExtraFields` and `ignoreHeaders` (API comparison), `qaMode` (`.diffsense.json` only, boolean). Path globs use `*` within one segment and `**` across segments, for example `items[*].id`.
 
 ## Privacy
 

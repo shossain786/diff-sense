@@ -3,7 +3,7 @@
  * no `vscode` imports, no I/O, pure functions only.
  */
 
-export type Format = 'text' | 'json' | 'xml' | 'yaml' | 'java';
+export type Format = 'text' | 'json' | 'xml' | 'yaml' | 'java' | 'api';
 
 export type ChangeKind = 'added' | 'removed' | 'modified' | 'unchanged';
 
@@ -55,6 +55,10 @@ export interface CompareOptions {
   ignoreXmlDeclaration?: boolean;
   ignoreAttributes?: string[];
   ignoreNamespaces?: boolean;
+  /** API responses: ignore fields present in the actual response but not in the expected one. */
+  ignoreExtraFields?: boolean;
+  /** API responses: header names (case-insensitive) that are never compared. */
+  ignoreHeaders?: string[];
   /** Java: apply test-automation rules. Undefined = auto-detect from imports. */
   qaMode?: boolean;
 }

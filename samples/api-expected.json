@@ -1,0 +1,9 @@
+{
+  "status": 200,
+  "headers": { "Content-Type": "application/json" },
+  "body": {
+    "user": { "id": 123, "name": "John" },
+    "amount": 100,
+    "currency": "INR"
+  }
+}

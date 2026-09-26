@@ -6,7 +6,7 @@ See [docs/DiffSense_Product_Requirements.md](docs/DiffSense_Product_Requirements
 
 ## Layout
 - `packages/core` — VS Code-independent comparison engine (pure functions)
-- `packages/cli` — thin CLI over the core (`diffsense compare a b`)
+- `packages/cli` — thin CLI over the core (`diffsense compare a b`, `diffsense api expected actual`)
 - `packages/vscode` — the VS Code extension
 
 ## Develop

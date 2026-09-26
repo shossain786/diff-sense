@@ -30,7 +30,7 @@ class VirtualDocs implements vscode.TextDocumentContentProvider {
 
 const virtualDocs = new VirtualDocs();
 let panel: vscode.WebviewPanel | undefined;
-let last: { result: ComparisonResult; left: vscode.Uri; right: vscode.Uri } | undefined;
+let last: { result: ComparisonResult; left: vscode.Uri; right: vscode.Uri; forced: CompareOptions } | undefined;
 let pendingSelection: { text: string; fileName: string } | undefined;
 
 const fileName = (uri: vscode.Uri) => uri.path.split('/').pop() ?? uri.path;
@@ -55,13 +55,13 @@ async function loadConfig(): Promise<DiffSenseConfig> {
 function settingsOptions(): CompareOptions {
   const c = vscode.workspace.getConfiguration('diffsense');
   const o: CompareOptions = {};
-  for (const k of ['ignoreWhitespace', 'ignoreCase', 'ignoreArrayOrder', 'numericEquality', 'ignoreNamespaces', 'ignoreXmlDeclaration'] as const) {
+  for (const k of ['ignoreWhitespace', 'ignoreCase', 'ignoreArrayOrder', 'numericEquality', 'ignoreNamespaces', 'ignoreXmlDeclaration', 'ignoreExtraFields'] as const) {
     if (c.get<boolean>(k)) o[k] = true;
   }
   const qa = c.get<string>('qaMode');
   if (qa === 'on') o.qaMode = true;
   else if (qa === 'off') o.qaMode = false;
-  for (const k of ['ignorePaths', 'ignoreAttributes'] as const) {
+  for (const k of ['ignorePaths', 'ignoreAttributes', 'ignoreHeaders'] as const) {
     const v = c.get<string[]>(k) ?? [];
     if (v.length > 0) o[k] = v;
   }
@@ -81,17 +81,17 @@ async function readText(uri: vscode.Uri): Promise<string> {
   }
 }
 
-async function analyze(left: vscode.Uri, right: vscode.Uri, openDiff: boolean): Promise<void> {
+async function analyze(left: vscode.Uri, right: vscode.Uri, openDiff: boolean, forced: CompareOptions = {}): Promise<void> {
   try {
     await vscode.window.withProgress(
       { location: vscode.ProgressLocation.Notification, title: 'DiffSense: analyzing…' },
       async () => {
         const [a, b] = await Promise.all([readText(left), readText(right)]);
         // Workspace file config wins over user settings; both are local-only.
-        const format = detectFormat(fileName(left));
-        const options = { ...settingsOptions(), ...resolveOptions(await loadConfig(), format) };
+        const format = forced.format ?? detectFormat(fileName(left));
+        const options = { ...settingsOptions(), ...resolveOptions(await loadConfig(), format), ...forced };
         const result = compare({ name: fileName(left), content: a }, { name: fileName(right), content: b }, options);
-        last = { result, left, right };
+        last = { result, left, right, forced };
         if (openDiff) await openNativeDiff();
         showPanel(result);
       },
@@ -125,7 +125,7 @@ function showPanel(result: ComparisonResult): void {
 async function onPanelMessage(msg: { cmd?: string }): Promise<void> {
   if (!last) return;
   if (msg.cmd === 'openDiff') await openNativeDiff();
-  else if (msg.cmd === 'swap') await analyze(last.right, last.left, true);
+  else if (msg.cmd === 'swap') await analyze(last.right, last.left, true, last.forced);
   else if (msg.cmd === 'copyMarkdown') {
     await vscode.env.clipboard.writeText(renderMarkdown(last.result));
     void vscode.window.setStatusBarMessage('DiffSense: summary copied as Markdown', 3000);
@@ -152,13 +152,17 @@ async function pickFile(title: string, near?: vscode.Uri): Promise<vscode.Uri | 
   return picked?.[0];
 }
 
-async function compareFiles(clicked?: vscode.Uri, selected?: vscode.Uri[]): Promise<void> {
-  if (selected && selected.length === 2) return analyze(selected[0]!, selected[1]!, true);
+async function compareFiles(clicked?: vscode.Uri, selected?: vscode.Uri[], forced: CompareOptions = {}): Promise<void> {
+  if (selected && selected.length === 2) return analyze(selected[0]!, selected[1]!, true, forced);
   const left = clicked ?? vscode.window.activeTextEditor?.document.uri ?? (await pickFile('Select the first file'));
   if (!left) return;
   const right = await pickFile(`Compare ${fileName(left)} with…`, left);
-  if (right) await analyze(left, right, true);
+  if (right) await analyze(left, right, true, forced);
 }
+
+/** Expected (current file) vs actual (picked file), reported as pass/fail. */
+const compareApiResponses = (clicked?: vscode.Uri, selected?: vscode.Uri[]) =>
+  compareFiles(clicked, selected, { format: 'api' });
 
 async function compareClipboard(): Promise<void> {
   const editor = vscode.window.activeTextEditor;
@@ -201,7 +205,8 @@ async function analyzeCurrentDiff(): Promise<void> {
 export function activate(context: vscode.ExtensionContext): void {
   context.subscriptions.push(
     vscode.workspace.registerTextDocumentContentProvider(SCHEME, virtualDocs),
-    vscode.commands.registerCommand('diffsense.compareFiles', compareFiles),
+    vscode.commands.registerCommand('diffsense.compareFiles', (u?: vscode.Uri, s?: vscode.Uri[]) => compareFiles(u, s)),
+    vscode.commands.registerCommand('diffsense.compareApiResponses', compareApiResponses),
     vscode.commands.registerCommand('diffsense.compareClipboard', compareClipboard),
     vscode.commands.registerCommand('diffsense.compareSelection', compareSelection),
     vscode.commands.registerCommand('diffsense.analyzeCurrentDiff', analyzeCurrentDiff),

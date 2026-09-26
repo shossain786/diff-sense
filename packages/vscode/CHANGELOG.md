@@ -3,7 +3,9 @@
 ## Unreleased
 
 - Java semantic comparison (classes, fields, methods, signatures, annotations, imports, calls, conditions, exception handling)
+- Swap sides button; panel labels the before/after files
 - Test-automation mode for Java: locator, wait, assertion and test-annotation changes, plus a labelled inferred Page Object hint
+- API response comparison (expected vs actual, pass/fail) for raw HTTP, JSON envelopes and bare bodies
 - Impact estimates (informational to critical) with a stated reason for each change
 
 ## 0.0.1
