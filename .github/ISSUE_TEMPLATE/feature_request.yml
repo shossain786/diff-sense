@@ -1,0 +1,35 @@
+name: Feature request
+description: Suggest an improvement or a new format
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to understand or do?
+      description: Describe the problem, not just the solution. A real example of two files you compared helps a lot.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like DiffSense to do?
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - New file format
+        - Impact rules
+        - VS Code extension
+        - IntelliJ plugin
+        - CLI
+        - Docs
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Can you help?
+      options:
+        - label: I would like to work on this myself

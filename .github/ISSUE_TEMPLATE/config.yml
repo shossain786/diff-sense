@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/shossain786/diff-sense/security/advisories/new
+    about: Please report security problems privately, not as a public issue.
+  - name: Contributing guide
+    url: https://github.com/shossain786/diff-sense/blob/master/CONTRIBUTING.md
+    about: New here? Start with the contributing guide and the "good first issue" label.

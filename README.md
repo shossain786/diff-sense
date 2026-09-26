@@ -13,6 +13,16 @@ Compare files. Understand what changed.
 
 See [docs/DiffSense_Product_Requirements.md](docs/DiffSense_Product_Requirements.md) for the product requirements.
 
+## Contributing
+
+DiffSense is open source (MIT) and contributions are welcome, from typo fixes to new file formats.
+
+- Start with [CONTRIBUTING.md](CONTRIBUTING.md) and the [architecture guide](docs/ARCHITECTURE.md)
+- Pick something from the [`good first issue`](https://github.com/shossain786/diff-sense/labels/good%20first%20issue) or [`help wanted`](https://github.com/shossain786/diff-sense/labels/help%20wanted) labels
+- Be kind: see the [Code of Conduct](CODE_OF_CONDUCT.md). Security problems: [SECURITY.md](SECURITY.md)
+
+Every comparison runs on your machine. No network calls, no telemetry, and that will not change.
+
 ## Layout
 - `packages/core` — VS Code-independent comparison engine (pure functions)
 - `packages/cli` — thin CLI over the core (`diffsense compare a b`, `diffsense api expected actual`)

@@ -1,0 +1,54 @@
+name: Bug report
+description: Something is wrong, confusing, or crashes
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. **Please remove secrets and private code from anything you paste.**
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where did it happen?
+      options:
+        - VS Code extension
+        - IntelliJ plugin
+        - CLI
+        - Core engine
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Extension/plugin version, and your VS Code / IDE version.
+      placeholder: "DiffSense 0.1.3, VS Code 1.9x"
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: The two inputs
+      description: The smallest pair of files (or snippets) that shows the problem, and the file type.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened instead?
+      description: Paste the summary text or a screenshot. Errors from the log are welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: settings
+    attributes:
+      label: Settings or .diffsense.json in use (if any)
+      render: json
