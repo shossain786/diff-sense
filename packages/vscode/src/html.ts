@@ -9,7 +9,10 @@ export const escapeHtml = (s: string): string =>
 const base = (p: string) => p.split(/[\\/]/).pop() ?? p;
 
 function row(c: Change): string {
-  const path = `<span class="path">${escapeHtml(c.path)}</span>`;
+  const badge = c.impact && c.impact !== 'informational'
+    ? ` <span class="badge ${escapeHtml(c.impact)}" title="${escapeHtml(c.reason ?? '')}">${escapeHtml(c.impact)}</span>`
+    : '';
+  const path = `<span class="path">${escapeHtml(c.path)}</span>${badge}`;
   switch (c.kind) {
     case 'modified':
       return `<li class="mod"><span class="icon">⚠</span>${path}<div class="vals"><del>${escapeHtml(formatValue(c.before))}</del> → <ins>${escapeHtml(formatValue(c.after))}</ins></div></li>`;
@@ -43,6 +46,8 @@ ul{list-style:none;padding:0;margin:0}li{padding:6px 0;border-bottom:1px solid v
 .vals{margin:2px 0 0 1.4em;font-family:var(--vscode-editor-font-family);word-break:break-all}
 ins{text-decoration:none;color:var(--vscode-gitDecoration-addedResourceForeground)}
 del{color:var(--vscode-gitDecoration-deletedResourceForeground)}
+.badge{font-size:.75em;padding:0 6px;border-radius:8px;border:1px solid var(--vscode-panel-border);text-transform:uppercase}
+.badge.medium{color:var(--vscode-editorWarning-foreground)}.badge.high,.badge.critical{color:var(--vscode-editorError-foreground)}
 .warn{color:var(--vscode-editorWarning-foreground)}
 .actions{margin:12px 0;display:flex;gap:8px;flex-wrap:wrap}
 button{background:var(--vscode-button-secondaryBackground);color:var(--vscode-button-secondaryForeground);border:0;padding:6px 12px;border-radius:3px;cursor:pointer}
@@ -64,7 +69,7 @@ ${warnings}
 <button data-cmd="exportMarkdown">Export Markdown…</button>
 </div>
 ${total === 0 ? '<p>No differences found.</p>' : `<ul>${shown}</ul>${more}`}
-${result.impact ? `<p class="muted">Potential impact (estimate): ${escapeHtml(result.impact)}</p>` : ''}
+${result.impact ? `<p class="muted">Potential impact (estimate): <b>${escapeHtml(result.impact)}</b></p>` : ''}
 <script nonce="${nonce}">
 const vscode = acquireVsCodeApi();
 document.querySelectorAll('button[data-cmd]').forEach(b => b.addEventListener('click', () => vscode.postMessage({ cmd: b.dataset.cmd })));

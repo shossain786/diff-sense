@@ -27,6 +27,12 @@ describe('panel html', () => {
     const r = compare({ name: 'a.json', content: big(0) }, { name: 'b.json', content: big(1) });
     expect(renderPanelHtml(r, 'n', 'x')).toContain('…and 200 more');
   });
+  it('shows impact badges with an escaped reason', () => {
+    const r = compare({ name: 'a.json', content: '{"port":1}' }, { name: 'b.json', content: '{"port":2}' });
+    const html = renderPanelHtml(r, 'n', 'x');
+    expect(html).toContain('badge high');
+    expect(html).toContain('Potential impact (estimate): <b>high</b>');
+  });
   it('escapeHtml handles all special chars', () => {
     expect(escapeHtml(`<>&"'`)).toBe('&lt;&gt;&amp;&quot;&#39;');
   });

@@ -9,7 +9,12 @@ export function formatValue(v: unknown): string {
 
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
-const line = (c: Change): string => {
+const impactLine = (c: Change) =>
+  c.impact && c.impact !== 'informational' ? `\n  Impact: ${c.impact.toUpperCase()}` : '';
+
+const line = (c: Change): string => line0(c) + impactLine(c);
+
+const line0 = (c: Change): string => {
   switch (c.kind) {
     case 'modified':
       return `⚠ ${c.path}\n  ${formatValue(c.before)} → ${formatValue(c.after)}`;

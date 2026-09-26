@@ -1,4 +1,6 @@
 import { detectFormat } from './detect.js';
+import { compareJava } from './java.js';
+import { applyImpact } from './impact.js';
 import { compareJson, ParseError } from './json.js';
 import { compareText } from './text.js';
 import { compareXml } from './xml.js';
@@ -9,7 +11,7 @@ import type { CompareOptions, ComparisonResult, FileInput } from './types.js';
  * Entry point. Dispatches by format; anything without a structural
  * comparator (or that fails to parse) falls back to a line diff.
  */
-export function compare(
+function compareRaw(
   left: FileInput,
   right: FileInput,
   options: CompareOptions = {},
@@ -17,6 +19,7 @@ export function compare(
   const format = options.format ?? detectFormat(left.name);
   try {
     if (format === 'json') return compareJson(left, right, options);
+    if (format === 'java') return compareJava(left, right, options);
     if (format === 'xml') return compareXml(left, right, options);
     if (format === 'yaml') return compareYaml(left, right, options);
   } catch (e) {
@@ -28,4 +31,13 @@ export function compare(
   const warnings =
     format === 'text' ? [] : [`No structural comparator for ${format} yet; used text comparison`];
   return compareText(left, right, options, 'text', warnings);
+}
+
+/** Public entry: comparison plus impact estimates. */
+export function compare(
+  left: FileInput,
+  right: FileInput,
+  options: CompareOptions = {},
+): ComparisonResult {
+  return applyImpact(compareRaw(left, right, options));
 }

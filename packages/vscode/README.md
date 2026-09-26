@@ -28,9 +28,10 @@ The summary can be copied or exported as Markdown, for example to paste into a p
 | JSON | Structural: key order, whitespace and formatting are ignored |
 | YAML | Structural: comments, anchors, aliases, merge keys and multi-document files handled |
 | XML | Structural: elements, attributes, namespaces, CDATA |
+| Java | Semantic: classes, fields, methods, signatures, annotations, imports, method calls, conditions and exception handling |
 | Anything else | Line-by-line |
 
-If a JSON, YAML or XML file cannot be parsed, DiffSense falls back to a line diff and says so.
+If a JSON, YAML, XML or Java file cannot be parsed, DiffSense falls back to a line diff and says so.
 
 ## Ignore rules
 
@@ -56,7 +57,9 @@ DiffSense runs entirely on your machine. It makes no network requests, needs no 
 
 - XML child order across differently named elements is not compared (repeated same-name siblings keep their order).
 - XML namespaces are compared by prefix unless `ignoreNamespaces` is enabled.
-- Java analysis, impact classification and AI explanations are planned but not part of this release.
+- Impact levels are keyword-based estimates, never guarantees. Read the reason shown with each one.
+- Java analysis covers a single file at a time, and does not resolve types across files.
+- AI explanations are planned but not part of this release.
 
 ## Feedback
 

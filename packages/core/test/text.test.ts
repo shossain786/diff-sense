@@ -29,9 +29,10 @@ describe('text comparison', () => {
     expect(t('Hello\n', 'hello\n', { ignoreCase: true }).changes).toEqual([]);
     expect(t('a\r\nb\r\n', 'a\nb\n').changes).toEqual([]);
   });
-  it('non-implemented structural formats fall back with a warning', () => {
-    const r = compare({ name: 'a.java', content: '<a/>' }, { name: 'b.java', content: '<b/>' });
-    expect(r.warnings[0]).toMatch(/No structural comparator for java/);
+  it('unknown extensions use the text comparison without warnings', () => {
+    const r = compare({ name: 'a.md', content: '# a' }, { name: 'b.md', content: '# b' });
+    expect(r.format).toBe('text');
+    expect(r.warnings).toEqual([]);
     expect(r.changes).toHaveLength(1);
   });
 });

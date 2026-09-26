@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Java semantic comparison (classes, fields, methods, signatures, annotations, imports, calls, conditions, exception handling)
+- Impact estimates (informational to critical) with a stated reason for each change
+
 ## 0.0.1
 
 Initial preview.
