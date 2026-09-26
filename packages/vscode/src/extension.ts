@@ -125,6 +125,7 @@ function showPanel(result: ComparisonResult): void {
 async function onPanelMessage(msg: { cmd?: string }): Promise<void> {
   if (!last) return;
   if (msg.cmd === 'openDiff') await openNativeDiff();
+  else if (msg.cmd === 'swap') await analyze(last.right, last.left, true);
   else if (msg.cmd === 'copyMarkdown') {
     await vscode.env.clipboard.writeText(renderMarkdown(last.result));
     void vscode.window.setStatusBarMessage('DiffSense: summary copied as Markdown', 3000);

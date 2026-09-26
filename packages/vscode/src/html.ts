@@ -55,6 +55,7 @@ button.primary{background:var(--vscode-button-background);color:var(--vscode-but
 </style></head><body>
 <h1>DiffSense</h1>
 <div class="muted">${escapeHtml(base(result.left))} ↔ ${escapeHtml(base(result.right))} · ${escapeHtml(result.format)}</div>
+<div class="muted">Before (left): <b>${escapeHtml(base(result.left))}</b> · After (right): <b>${escapeHtml(base(result.right))}</b></div>
 <div class="stats">
 <div class="stat"><b>${total}</b>changes</div>
 <div class="stat"><b>${modified}</b>⚠ modified</div>
@@ -65,6 +66,7 @@ button.primary{background:var(--vscode-button-background);color:var(--vscode-but
 ${warnings}
 <div class="actions">
 <button class="primary" data-cmd="openDiff">Open Diff</button>
+<button data-cmd="swap" title="Treat the right file as the old version and the left as the new one">Swap sides</button>
 <button data-cmd="copyMarkdown">Copy as Markdown</button>
 <button data-cmd="exportMarkdown">Export Markdown…</button>
 </div>

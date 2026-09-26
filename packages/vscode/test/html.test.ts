@@ -33,6 +33,12 @@ describe('panel html', () => {
     expect(html).toContain('badge high');
     expect(html).toContain('Potential impact (estimate): <b>high</b>');
   });
+  it('labels before/after sides and offers a swap', () => {
+    const r = compare({ name: 'old.json', content: '{"a":1}' }, { name: 'new.json', content: '{"a":2}' });
+    const html = renderPanelHtml(r, 'n', 'x');
+    expect(html).toContain('Before (left): <b>old.json</b> · After (right): <b>new.json</b>');
+    expect(html).toContain('data-cmd="swap"');
+  });
   it('escapeHtml handles all special chars', () => {
     expect(escapeHtml(`<>&"'`)).toBe('&lt;&gt;&amp;&quot;&#39;');
   });
