@@ -1,6 +1,6 @@
 # DiffSense
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/RazaTech.diffsense-vscode?label=VS%20Code)](https://marketplace.visualstudio.com/items?itemName=RazaTech.diffsense-vscode)
+[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code-Install-007ACC?logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=RazaTech.diffsense-vscode)
 
 ![DiffSense](packages/vscode/media/hero.png)
 
