@@ -3,7 +3,7 @@
   "displayName": "DiffSense",
   "description": "Compare files. Understand what changed. Structure-aware summaries for JSON, XML, YAML and text, on top of VS Code's native diff.",
   "version": "0.0.1",
-  "publisher": "shossain786",
+  "publisher": "RazaTech",
   "license": "MIT",
   "private": true,
   "repository": { "type": "git", "url": "https://github.com/shossain786/diff-sense.git" },
