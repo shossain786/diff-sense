@@ -1,0 +1,4 @@
+[
+  { "path": "user.name", "kind": "unchanged", "before": "John", "after": "John" },
+  { "path": "user.age", "kind": "modified", "before": "30", "after": "31" }
+]

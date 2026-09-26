@@ -1,0 +1,11 @@
+{
+  "name": "@diffsense/cli",
+  "version": "0.0.0",
+  "type": "module",
+  "bin": { "diffsense": "dist/index.js" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": { "@diffsense/core": "*" }
+}

@@ -1,0 +1,5 @@
+[
+  { "path": "timeout", "kind": "modified", "before": 30000, "after": 45000 },
+  { "path": "retryCount", "kind": "modified", "before": 3, "after": 5 },
+  { "path": "enabled", "kind": "unchanged", "before": true, "after": true }
+]

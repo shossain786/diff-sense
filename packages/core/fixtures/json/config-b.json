@@ -1,0 +1,5 @@
+{
+  "timeout": 45000,
+  "retryCount": 5,
+  "enabled": true
+}
