@@ -4,3 +4,4 @@ node_modules/**
 **/*.map
 esbuild.mjs
 tsconfig.json
+media/hero.png

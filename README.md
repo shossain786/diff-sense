@@ -1,5 +1,7 @@
 # DiffSense
 
+![DiffSense](packages/vscode/media/hero.png)
+
 Compare files. Understand what changed.
 
 See [docs/DiffSense_Product_Requirements.md](docs/DiffSense_Product_Requirements.md) for the product requirements.

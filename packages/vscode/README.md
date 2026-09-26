@@ -1,3 +1,5 @@
+![DiffSense: a Java test diff with a semantic summary panel](media/hero.png)
+
 # DiffSense
 
 **Compare files. Understand what changed.**
