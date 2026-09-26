@@ -33,6 +33,14 @@ The summary can be copied or exported as Markdown, for example to paste into a p
 
 If a JSON, YAML, XML or Java file cannot be parsed, DiffSense falls back to a line diff and says so.
 
+## Test-automation mode (Java)
+
+For Java test files, DiffSense reports what matters for test stability instead of raw call diffs: **locator** changes (`By.id("login")` → `By.cssSelector(".login-button")`), **wait strategy** changes (`Duration.ofSeconds(10)` → `20`), **assertion** changes, and removed or disabled test annotations (`@Test`, `@Disabled`, `@BeforeEach`, ...).
+
+When direct Selenium calls are replaced by a page-object style call, DiffSense adds one clearly labelled **inferred** note ("Possible intent: improved test abstraction"). Observed facts and inferred intent are never mixed.
+
+It turns on automatically when the file imports Selenium, JUnit, TestNG, Cucumber, Playwright or REST Assured. Override with the `diffsense.qaMode` setting (`auto`, `on`, `off`).
+
 ## Ignore rules
 
 Settings (`diffsense.*`), or a `.diffsense.json` in the workspace root, which takes precedence:
@@ -47,7 +55,7 @@ Settings (`diffsense.*`), or a `.diffsense.json` in the workspace root, which ta
 }
 ```
 
-Available options: `ignoreWhitespace`, `ignoreCase`, `ignoreArrayOrder`, `numericEquality`, `ignorePaths`, `ignoreAttributes`, `ignoreNamespaces`, `ignoreXmlDeclaration`. Path globs use `*` within one segment and `**` across segments, for example `items[*].id`.
+Available options: `ignoreWhitespace`, `ignoreCase`, `ignoreArrayOrder`, `numericEquality`, `ignorePaths`, `ignoreAttributes`, `ignoreNamespaces`, `ignoreXmlDeclaration`, `qaMode` (`.diffsense.json` only, boolean). Path globs use `*` within one segment and `**` across segments, for example `items[*].id`.
 
 ## Privacy
 

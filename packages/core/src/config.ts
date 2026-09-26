@@ -17,6 +17,7 @@ const BOOLEANS = [
   'numericEquality',
   'ignoreXmlDeclaration',
   'ignoreNamespaces',
+  'qaMode',
 ] as const;
 const LISTS = ['ignorePaths', 'ignoreAttributes'] as const;
 const FORMATS: Format[] = ['text', 'json', 'xml', 'yaml', 'java'];

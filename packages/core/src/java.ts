@@ -1,6 +1,7 @@
 import { parse } from 'java-parser';
 import { matchesAny, compileGlobs } from './glob.js';
 import { ParseError } from './json.js';
+import { applyQaPack, looksLikeTest } from './qa.js';
 import { computeStats } from './stats.js';
 import type { Change, ComparisonResult, CompareOptions, FileInput, Impact } from './types.js';
 
@@ -470,6 +471,8 @@ export function compareJava(
   const a = buildModel(left);
   const b = buildModel(right);
   let changes = diffModels(a, b);
+  const qa = options.qaMode ?? looksLikeTest([...a.imports, ...b.imports]);
+  if (qa) changes = applyQaPack(changes);
   if (options.ignorePaths?.length) {
     const ig = compileGlobs(options.ignorePaths);
     changes = changes.filter((c) => !matchesAny(c.path, ig));

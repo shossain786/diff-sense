@@ -55,6 +55,8 @@ export interface CompareOptions {
   ignoreXmlDeclaration?: boolean;
   ignoreAttributes?: string[];
   ignoreNamespaces?: boolean;
+  /** Java: apply test-automation rules. Undefined = auto-detect from imports. */
+  qaMode?: boolean;
 }
 
 export interface ComparisonResult {

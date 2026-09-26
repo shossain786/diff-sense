@@ -58,6 +58,9 @@ function settingsOptions(): CompareOptions {
   for (const k of ['ignoreWhitespace', 'ignoreCase', 'ignoreArrayOrder', 'numericEquality', 'ignoreNamespaces', 'ignoreXmlDeclaration'] as const) {
     if (c.get<boolean>(k)) o[k] = true;
   }
+  const qa = c.get<string>('qaMode');
+  if (qa === 'on') o.qaMode = true;
+  else if (qa === 'off') o.qaMode = false;
   for (const k of ['ignorePaths', 'ignoreAttributes'] as const) {
     const v = c.get<string[]>(k) ?? [];
     if (v.length > 0) o[k] = v;

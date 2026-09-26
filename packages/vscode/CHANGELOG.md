@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Java semantic comparison (classes, fields, methods, signatures, annotations, imports, calls, conditions, exception handling)
+- Test-automation mode for Java: locator, wait, assertion and test-annotation changes, plus a labelled inferred Page Object hint
 - Impact estimates (informational to critical) with a stated reason for each change
 
 ## 0.0.1
