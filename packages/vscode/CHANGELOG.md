@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 — 2026-09-26
+
+- Marketplace page: hero image and refreshed README (no functional changes)
+
 ## 0.1.0 — 2026-09-26
 
 First public release.
