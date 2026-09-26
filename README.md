@@ -1,8 +1,15 @@
 # DiffSense
 
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/RazaTech.diffsense-vscode?label=VS%20Code)](https://marketplace.visualstudio.com/items?itemName=RazaTech.diffsense-vscode)
+
 ![DiffSense](packages/vscode/media/hero.png)
 
 Compare files. Understand what changed.
+
+## Install
+
+- **VS Code:** [DiffSense Semantic Compare on the Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=RazaTech.diffsense-vscode), or search for "DiffSense Semantic Compare" in the Extensions view.
+- **IntelliJ IDEA and other JetBrains IDEs:** submitted to the JetBrains Marketplace and awaiting review. Until it is published you can install the zip from [`packages/intellij`](packages/intellij) (build it with `./gradlew buildPlugin`) through Settings | Plugins | Install Plugin from Disk.
 
 See [docs/DiffSense_Product_Requirements.md](docs/DiffSense_Product_Requirements.md) for the product requirements.
 
