@@ -44,6 +44,7 @@ function renderApiPanel(result: ComparisonResult, nonce: string, cspSource: stri
   const rows = result.changes.slice(0, MAX_ROWS * 2).map(apiRow).join('');
   return renderPanelHtml({ ...result, format: 'text' }, nonce, cspSource, {
     title: 'API Response Comparison',
+    compact: true,
     stats: `<div class="stat"><b>${result.stats.unchanged}</b>✓ matched</div><div class="stat"><b>${bad}</b>❌ mismatched</div>`,
     body: `<p><b>${bad === 0 ? 'PASS' : 'FAIL'}</b> — ${bad === 0 ? 'actual matches expected' : `${bad} mismatch${bad === 1 ? '' : 'es'}`}</p><ul>${rows}</ul>`,
     labels: ['Expected (left)', 'Actual (right)'],
@@ -52,6 +53,8 @@ function renderApiPanel(result: ComparisonResult, nonce: string, cspSource: stri
 
 interface Override {
   title: string;
+  /** Replaces the file-pair subtitle line (the labels line already names both files). */
+  compact?: boolean;
   stats: string;
   body: string;
   labels: [string, string];
@@ -92,7 +95,7 @@ button{background:var(--vscode-button-secondaryBackground);color:var(--vscode-bu
 button.primary{background:var(--vscode-button-background);color:var(--vscode-button-foreground)}
 </style></head><body>
 <h1>${escapeHtml(override?.title ?? 'DiffSense')}</h1>
-<div class="muted">${escapeHtml(base(result.left))} ↔ ${escapeHtml(base(result.right))} · ${escapeHtml(result.format)}</div>
+${override?.compact ? '' : `<div class="muted">${escapeHtml(base(result.left))} ↔ ${escapeHtml(base(result.right))} · ${escapeHtml(result.format)}</div>`}
 <div class="muted">${escapeHtml(override?.labels[0] ?? 'Before (left)')}: <b>${escapeHtml(base(result.left))}</b> · ${escapeHtml(override?.labels[1] ?? 'After (right)')}: <b>${escapeHtml(base(result.right))}</b></div>
 <div class="stats">
 ${override?.stats ?? `<div class="stat"><b>${total}</b>changes</div>

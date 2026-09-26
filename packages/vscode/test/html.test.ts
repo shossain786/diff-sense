@@ -59,5 +59,7 @@ describe('API panel', () => {
     expect(html).toContain('&lt;b&gt;');
     expect(html).not.toContain('<b></b>');
     expect(html).toContain('❌ mismatched');
+    expect(html).not.toContain('· text');
+    expect(html.match(/expected\.json/g)?.length).toBe(1);
   });
 });

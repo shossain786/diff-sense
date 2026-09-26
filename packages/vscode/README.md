@@ -23,6 +23,8 @@ Command Palette:
 
 The summary can be copied or exported as Markdown, for example to paste into a pull request.
 
+![Config changes explained: JSON compared by structure, with impact estimates](media/feature-json.png)
+
 ## Supported formats
 
 | Format | Comparison |
@@ -44,6 +46,8 @@ When direct Selenium calls are replaced by a page-object style call, DiffSense a
 It turns on automatically when the file imports Selenium, JUnit, TestNG, Cucumber, Playwright or REST Assured. Override with the `diffsense.qaMode` setting (`auto`, `on`, `off`).
 
 ## API response comparison
+
+![API response comparison: expected vs actual with a pass/fail verdict](media/feature-api.png)
 
 **DiffSense: Compare API Responses (Expected vs Actual)** checks an actual response against an expected one and gives a pass/fail verdict, listing every check with ✓ or ❌:
 

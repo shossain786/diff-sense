@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src x 'nonce-n'; script-src 'nonce-n';">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style nonce="n">
+body{font-family:var(--vscode-font-family);color:var(--vscode-foreground);padding:12px 16px}
+h1{font-size:1.2em;margin:0 0 4px}.muted{color:var(--vscode-descriptionForeground)}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.stat{border:1px solid var(--vscode-panel-border);border-radius:6px;padding:6px 12px;min-width:64px}
+.stat b{display:block;font-size:1.4em}
+ul{list-style:none;padding:0;margin:0}li{padding:6px 0;border-bottom:1px solid var(--vscode-panel-border)}
+.icon{display:inline-block;width:1.4em}.path{font-family:var(--vscode-editor-font-family);font-weight:600}
+.vals{margin:2px 0 0 1.4em;font-family:var(--vscode-editor-font-family);word-break:break-all}
+ul.unchanged{margin-top:8px}.same{color:var(--vscode-descriptionForeground)}
+ins{text-decoration:none;color:var(--vscode-gitDecoration-addedResourceForeground)}
+del{color:var(--vscode-gitDecoration-deletedResourceForeground)}
+.badge{font-size:.75em;padding:0 6px;border-radius:8px;border:1px solid var(--vscode-panel-border);text-transform:uppercase}
+.badge.medium{color:var(--vscode-editorWarning-foreground)}.badge.high,.badge.critical{color:var(--vscode-editorError-foreground)}
+.warn{color:var(--vscode-editorWarning-foreground)}
+.actions{margin:12px 0;display:flex;gap:8px;flex-wrap:wrap}
+button{background:var(--vscode-button-secondaryBackground);color:var(--vscode-button-secondaryForeground);border:0;padding:6px 12px;border-radius:3px;cursor:pointer}
+button.primary{background:var(--vscode-button-background);color:var(--vscode-button-foreground)}
+</style><style nonce="n">:root{
+--vscode-font-family:"Ubuntu","Segoe UI",sans-serif;--vscode-editor-font-family:"DejaVu Sans Mono",Consolas,monospace;
+--vscode-foreground:#cccccc;--vscode-descriptionForeground:#9d9d9d;--vscode-panel-border:#80808059;
+--vscode-gitDecoration-addedResourceForeground:#81b88b;--vscode-gitDecoration-deletedResourceForeground:#c74e39;
+--vscode-editorWarning-foreground:#cca700;--vscode-editorError-foreground:#f14c4c;
+--vscode-button-background:#0e639c;--vscode-button-foreground:#fff;
+--vscode-button-secondaryBackground:transparent;--vscode-button-secondaryForeground:#ccc}
+body{background:#181818;margin:0;width:620px}</style></head><body>
+<h1>DiffSense</h1>
+<div class="muted">config-a.json ↔ config-b.json · json</div>
+<div class="muted">Before (left): <b>config-a.json</b> · After (right): <b>config-b.json</b></div>
+<div class="stats">
+<div class="stat"><b>2</b>changes</div>
+<div class="stat"><b>2</b>⚠ modified</div>
+<div class="stat"><b>0</b>+ added</div>
+<div class="stat"><b>0</b>− removed</div>
+<div class="stat"><b>1</b>✓ unchanged</div>
+</div>
+
+<div class="actions">
+<button class="primary" data-cmd="openDiff">Open Diff</button>
+<button data-cmd="swap" title="Treat the right file as the old version and the left as the new one">Swap sides</button>
+<button data-cmd="copyMarkdown">Copy as Markdown</button>
+<button data-cmd="exportMarkdown">Export Markdown…</button>
+</div>
+<ul><li class="mod"><span class="icon">⚠</span><span class="path">timeout</span> <span class="badge medium" title="Name suggests a behaviour or tuning setting; runtime behaviour may differ.">medium</span><div class="vals"><del>30000</del> → <ins>45000</ins></div></li><li class="mod"><span class="icon">⚠</span><span class="path">retryCount</span> <span class="badge medium" title="Name suggests a behaviour or tuning setting; runtime behaviour may differ.">medium</span><div class="vals"><del>3</del> → <ins>5</ins></div></li></ul>
+<p class="muted">Potential impact (estimate): <b>medium</b></p>
+<script nonce="n">
+const vscode = acquireVsCodeApi();
+document.querySelectorAll('button[data-cmd]').forEach(b => b.addEventListener('click', () => vscode.postMessage({ cmd: b.dataset.cmd })));
+</script>
+</body></html>

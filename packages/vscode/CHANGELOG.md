@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3 — 2026-09-26
+
+- Marketplace page: added API-comparison and config-change images to the README
+- API comparison panel: fixed the subtitle showing "text" as the format and listing the file names twice
+
 ## 0.1.2 — 2026-09-26
 
 - Marketplace display name is now "DiffSense Semantic Compare" (the name "DiffSense" was already taken). No functional changes.
