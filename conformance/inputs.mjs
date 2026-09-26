@@ -43,6 +43,12 @@ export const cases = [
 
   c('json/bom-both', f('a.json', '\uFEFF{"a":1}'), f('b.json', '\uFEFF{"a":1}')),
 
+  c('json/integer-like-keys', f('a.json', '{"b":1,"2":2,"1":3,"a":4}'), f('b.json', '{"b":9,"2":2,"1":4,"10":5}')),
+  c('json/long-array-display', f('a.json', j({ l: Array.from({ length: 30 }, (_, i) => i) })), f('b.json', j({ l: Array.from({ length: 31 }, (_, i) => i + 1) }))),
+  c('json/number-display', f('a.json', '{"a":1e21,"b":0.000001,"c":1e-7,"d":123456789012,"e":-0,"f":1.5e300}'), f('b.json', '{"a":2e21,"b":0.0000011,"c":2e-7,"d":123456789013,"e":1,"f":1.6e300}')),
+  c('json/string-escapes', f('a.json', j({ s: 'line1\nline2\t"q"\\ \u0001' })), f('b.json', j({ s: 'other' }))),
+  c('json/markdown-specials', f('a.json', j({ 'k`ey': 'a|b`c' })), f('b.json', j({ 'k`ey': 'x' }))),
+
   // ---- YAML
   c('yaml/prd-example', f('a.yaml', 'timeout: 30\nretries: 3\n'), f('b.yaml', 'timeout: 45\nretries: 5\n')),
   c('yaml/comments-order', f('a.yaml', '# c\na: 1\nb: [1, 2]\n'), f('b.yaml', 'b:\n  - 1\n  - 2\na: 1 # note\n')),

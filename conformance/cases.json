@@ -47,7 +47,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 2 items modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ timeout\n  30000 → 45000\n  Impact: MEDIUM\n\n⚠ retryCount\n  3 → 5\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 2 | 1 |\n\n## Changes\n\n- ⚠ `timeout`: `30000` → `45000`\n- ⚠ `retryCount`: `3` → `5`\n\n**Potential impact (estimate):** medium\n"
  },
  {
   "name": "json/identical",
@@ -92,7 +94,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 3 |\n\nNo differences found.\n"
  },
  {
   "name": "json/add-remove-modify",
@@ -142,7 +146,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n+ 1 item added\n- 1 item removed\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n- a\n  1\n  Impact: LOW\n\n⚠ n.x\n  1 → 2\n  Impact: LOW\n\n+ b\n  2\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 1 | 0 |\n\n## Changes\n\n- − `a`: `1`\n- ⚠ `n.x`: `1` → `2`\n- + `b`: `2`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/type-changes",
@@ -198,7 +204,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 3 items modified\n\nDetails:\n────────────────────────────\n⚠ a\n  1 → 1\n  Impact: LOW\n\n⚠ o\n  {} → []\n  Impact: LOW\n\n⚠ l\n  [1] → {\"k\":1}\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 3 | 0 |\n\n## Changes\n\n- ⚠ `a`: `1` → `1`\n- ⚠ `o`: `{}` → `[]`\n- ⚠ `l`: `[1]` → `{\"k\":1}`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/array-length",
@@ -246,7 +254,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n- 2 items removed\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n- l[1]\n  2\n  Impact: LOW\n\n- l[2]\n  3\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 2 | 0 | 1 |\n\n## Changes\n\n- − `l[1]`: `2`\n- − `l[2]`: `3`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/array-grow",
@@ -293,7 +303,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n+ 1 item added\n✓ 2 unchanged\n\nDetails:\n────────────────────────────\n+ l[2]\n  3\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 0 | 2 |\n\n## Changes\n\n- + `l[2]`: `3`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/nested-arrays-of-objects",
@@ -359,7 +371,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n+ 1 item added\n⚠ 1 item modified\n✓ 3 unchanged\n\nDetails:\n────────────────────────────\n⚠ u[1].n\n  b → c\n  Impact: LOW\n\n+ u[2]\n  {\"id\":3,\"n\":\"d\"}\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 1 | 3 |\n\n## Changes\n\n- ⚠ `u[1].n`: `b` → `c`\n- + `u[2]`: `{\"id\":3,\"n\":\"d\"}`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/key-order-ignored",
@@ -397,7 +411,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 2 |\n\nNo differences found.\n"
  },
  {
   "name": "json/key-order-reported",
@@ -447,7 +463,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n✓ 2 unchanged\n\nDetails:\n────────────────────────────\n⚠ $\n  key order: a, b → key order: b, a\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 2 |\n\n## Changes\n\n- ⚠ `$`: `key order: a, b` → `key order: b, a`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/array-order-default",
@@ -499,7 +517,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 3 items modified\n\nDetails:\n────────────────────────────\n⚠ t[0]\n  1 → 3\n  Impact: LOW\n\n⚠ t[1]\n  2 → 1\n  Impact: LOW\n\n⚠ t[2]\n  3 → 2\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 3 | 0 |\n\n## Changes\n\n- ⚠ `t[0]`: `1` → `3`\n- ⚠ `t[1]`: `2` → `1`\n- ⚠ `t[2]`: `3` → `2`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/array-order-ignored",
@@ -546,7 +566,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 3 |\n\nNo differences found.\n"
  },
  {
   "name": "json/array-order-ignored-extra",
@@ -595,7 +617,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n+ 1 item added\n✓ 2 unchanged\n\nDetails:\n────────────────────────────\n+ t[2]\n  9\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 0 | 2 |\n\n## Changes\n\n- + `t[2]`: `9`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/array-order-objects",
@@ -638,7 +662,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ t[0].a\n  1 → 3\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `t[0].a`: `1` → `3`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/ignore-path-object",
@@ -683,7 +709,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ l[0].ts\n  1 → 9\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `l[0].ts`: `1` → `9`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/ignore-path-star",
@@ -719,7 +747,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "json/ignore-path-globstar",
@@ -764,7 +794,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ meta.by\n  x → y\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `meta.by`: `x` → `y`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/case-ws-default",
@@ -798,7 +830,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ s\n  Hello  World → hello world\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `s`: `Hello  World` → `hello world`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/case-ws-ignored",
@@ -832,7 +866,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "json/numeric-strings",
@@ -866,7 +902,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ n\n  30 → 30\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `n`: `30` → `30`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/numeric-equality",
@@ -906,7 +944,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 2 |\n\nNo differences found.\n"
  },
  {
   "name": "json/number-forms",
@@ -951,7 +991,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 3 |\n\nNo differences found.\n"
  },
  {
   "name": "json/nulls-booleans",
@@ -1001,7 +1043,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 2 items modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ a\n  null → 0\n  Impact: LOW\n\n⚠ b\n  true → false\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 2 | 1 |\n\n## Changes\n\n- ⚠ `a`: `null` → `0`\n- ⚠ `b`: `true` → `false`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/empty-containers",
@@ -1042,7 +1086,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n+ 2 items added\n\nDetails:\n────────────────────────────\n+ a.x\n  1\n  Impact: LOW\n\n+ b[0]\n  1\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 2 | 0 | 0 | 0 |\n\n## Changes\n\n- + `a.x`: `1`\n- + `b[0]`: `1`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/unicode-escapes",
@@ -1073,7 +1119,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "json/special-keys",
@@ -1114,7 +1162,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ a.b\n  1 → 2\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `a.b`: `1` → `2`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/root-scalar",
@@ -1148,7 +1198,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ $\n  1 → 2\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `$`: `1` → `2`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/root-array",
@@ -1189,7 +1241,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ [1]\n  2 → 3\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `[1]`: `2` → `3`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/long-value-truncation",
@@ -1223,7 +1277,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ k\n  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx → yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `k`: `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` → `yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/object-value-display",
@@ -1267,7 +1323,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n+ 1 item added\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n+ o.b\n  [1,\"two\",null]\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 0 | 1 |\n\n## Changes\n\n- + `o.b`: `[1,\"two\",null]`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/impact-keywords",
@@ -1335,7 +1393,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 4 items modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ timeout\n  30 → 45\n  Impact: MEDIUM\n\n⚠ baseUrl\n  a → b\n  Impact: HIGH\n\n⚠ title\n  x → y\n  Impact: LOW\n\n⚠ apiKey\n  1 → 2\n  Impact: CRITICAL\n\nPotential impact (estimate): critical\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 4 | 1 |\n\n## Changes\n\n- ⚠ `timeout`: `30` → `45`\n- ⚠ `baseUrl`: `a` → `b`\n- ⚠ `title`: `x` → `y`\n- ⚠ `apiKey`: `1` → `2`\n\n**Potential impact (estimate):** critical\n"
  },
  {
   "name": "json/impact-added-removed",
@@ -1383,7 +1443,9 @@
      "reason": "Name suggests credentials or secrets; a change may break authentication or expose access."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n+ 1 item added\n- 1 item removed\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n- password\n  p\n  Impact: CRITICAL\n\n+ token\n  t\n  Impact: CRITICAL\n\nPotential impact (estimate): critical\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 0 | 1 |\n\n## Changes\n\n- − `password`: `p`\n- + `token`: `t`\n\n**Potential impact (estimate):** critical\n"
  },
  {
   "name": "json/invalid-fallback",
@@ -1416,7 +1478,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ L1\n  {oops → {}\n\nNote: Invalid JSON, fell back to text comparison (a.json: Expected property name or '}' in JSON at position 1 (line 1 column 2))\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `L1`: `{oops` → `{}`\n\n> Note: Invalid JSON, fell back to text comparison (a.json: Expected property name or '}' in JSON at position 1 (line 1 column 2))\n"
  },
  {
   "name": "json/invalid-right",
@@ -1449,7 +1513,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ L1\n  {\"a\":1} → {\"a\":1,}\n\nNote: Invalid JSON, fell back to text comparison (b.json: Expected double-quoted property name in JSON at position 7 (line 1 column 8))\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `L1`: `{\"a\":1}` → `{\"a\":1,}`\n\n> Note: Invalid JSON, fell back to text comparison (b.json: Expected double-quoted property name in JSON at position 7 (line 1 column 8))\n"
  },
  {
   "name": "json/bom",
@@ -1483,7 +1549,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ a\n  1 → 2\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `a`: `1` → `2`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "json/bom-both",
@@ -1514,7 +1582,535 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
+ },
+ {
+  "name": "json/integer-like-keys",
+  "left": {
+   "name": "a.json",
+   "content": "{\"b\":1,\"2\":2,\"1\":3,\"a\":4}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"b\":9,\"2\":2,\"1\":4,\"10\":5}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 2,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "1",
+     "kind": "modified",
+     "before": 3,
+     "after": 4,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "2",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    },
+    {
+     "path": "b",
+     "kind": "modified",
+     "before": 1,
+     "after": 9,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "a",
+     "kind": "removed",
+     "before": 4,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "10",
+     "kind": "added",
+     "after": 5,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n+ 1 item added\n- 1 item removed\n⚠ 2 items modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ 1\n  3 → 4\n  Impact: LOW\n\n⚠ b\n  1 → 9\n  Impact: LOW\n\n- a\n  4\n  Impact: LOW\n\n+ 10\n  5\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 2 | 1 |\n\n## Changes\n\n- ⚠ `1`: `3` → `4`\n- ⚠ `b`: `1` → `9`\n- − `a`: `4`\n- + `10`: `5`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "json/long-array-display",
+  "left": {
+   "name": "a.json",
+   "content": "{\"l\":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"l\":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 30,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "l[0]",
+     "kind": "modified",
+     "before": 0,
+     "after": 1,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[1]",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[2]",
+     "kind": "modified",
+     "before": 2,
+     "after": 3,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[3]",
+     "kind": "modified",
+     "before": 3,
+     "after": 4,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[4]",
+     "kind": "modified",
+     "before": 4,
+     "after": 5,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[5]",
+     "kind": "modified",
+     "before": 5,
+     "after": 6,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[6]",
+     "kind": "modified",
+     "before": 6,
+     "after": 7,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[7]",
+     "kind": "modified",
+     "before": 7,
+     "after": 8,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[8]",
+     "kind": "modified",
+     "before": 8,
+     "after": 9,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[9]",
+     "kind": "modified",
+     "before": 9,
+     "after": 10,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[10]",
+     "kind": "modified",
+     "before": 10,
+     "after": 11,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[11]",
+     "kind": "modified",
+     "before": 11,
+     "after": 12,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[12]",
+     "kind": "modified",
+     "before": 12,
+     "after": 13,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[13]",
+     "kind": "modified",
+     "before": 13,
+     "after": 14,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[14]",
+     "kind": "modified",
+     "before": 14,
+     "after": 15,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[15]",
+     "kind": "modified",
+     "before": 15,
+     "after": 16,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[16]",
+     "kind": "modified",
+     "before": 16,
+     "after": 17,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[17]",
+     "kind": "modified",
+     "before": 17,
+     "after": 18,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[18]",
+     "kind": "modified",
+     "before": 18,
+     "after": 19,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[19]",
+     "kind": "modified",
+     "before": 19,
+     "after": 20,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[20]",
+     "kind": "modified",
+     "before": 20,
+     "after": 21,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[21]",
+     "kind": "modified",
+     "before": 21,
+     "after": 22,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[22]",
+     "kind": "modified",
+     "before": 22,
+     "after": 23,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[23]",
+     "kind": "modified",
+     "before": 23,
+     "after": 24,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[24]",
+     "kind": "modified",
+     "before": 24,
+     "after": 25,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[25]",
+     "kind": "modified",
+     "before": 25,
+     "after": 26,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[26]",
+     "kind": "modified",
+     "before": 26,
+     "after": 27,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[27]",
+     "kind": "modified",
+     "before": 27,
+     "after": 28,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[28]",
+     "kind": "modified",
+     "before": 28,
+     "after": 29,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[29]",
+     "kind": "modified",
+     "before": 29,
+     "after": 30,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[30]",
+     "kind": "added",
+     "after": 31,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n+ 1 item added\n⚠ 30 items modified\n\nDetails:\n────────────────────────────\n⚠ l[0]\n  0 → 1\n  Impact: LOW\n\n⚠ l[1]\n  1 → 2\n  Impact: LOW\n\n⚠ l[2]\n  2 → 3\n  Impact: LOW\n\n⚠ l[3]\n  3 → 4\n  Impact: LOW\n\n⚠ l[4]\n  4 → 5\n  Impact: LOW\n\n⚠ l[5]\n  5 → 6\n  Impact: LOW\n\n⚠ l[6]\n  6 → 7\n  Impact: LOW\n\n⚠ l[7]\n  7 → 8\n  Impact: LOW\n\n⚠ l[8]\n  8 → 9\n  Impact: LOW\n\n⚠ l[9]\n  9 → 10\n  Impact: LOW\n\n⚠ l[10]\n  10 → 11\n  Impact: LOW\n\n⚠ l[11]\n  11 → 12\n  Impact: LOW\n\n⚠ l[12]\n  12 → 13\n  Impact: LOW\n\n⚠ l[13]\n  13 → 14\n  Impact: LOW\n\n⚠ l[14]\n  14 → 15\n  Impact: LOW\n\n⚠ l[15]\n  15 → 16\n  Impact: LOW\n\n⚠ l[16]\n  16 → 17\n  Impact: LOW\n\n⚠ l[17]\n  17 → 18\n  Impact: LOW\n\n⚠ l[18]\n  18 → 19\n  Impact: LOW\n\n⚠ l[19]\n  19 → 20\n  Impact: LOW\n\n⚠ l[20]\n  20 → 21\n  Impact: LOW\n\n⚠ l[21]\n  21 → 22\n  Impact: LOW\n\n⚠ l[22]\n  22 → 23\n  Impact: LOW\n\n⚠ l[23]\n  23 → 24\n  Impact: LOW\n\n⚠ l[24]\n  24 → 25\n  Impact: LOW\n\n⚠ l[25]\n  25 → 26\n  Impact: LOW\n\n⚠ l[26]\n  26 → 27\n  Impact: LOW\n\n⚠ l[27]\n  27 → 28\n  Impact: LOW\n\n⚠ l[28]\n  28 → 29\n  Impact: LOW\n\n⚠ l[29]\n  29 → 30\n  Impact: LOW\n\n+ l[30]\n  31\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 30 | 0 |\n\n## Changes\n\n- ⚠ `l[0]`: `0` → `1`\n- ⚠ `l[1]`: `1` → `2`\n- ⚠ `l[2]`: `2` → `3`\n- ⚠ `l[3]`: `3` → `4`\n- ⚠ `l[4]`: `4` → `5`\n- ⚠ `l[5]`: `5` → `6`\n- ⚠ `l[6]`: `6` → `7`\n- ⚠ `l[7]`: `7` → `8`\n- ⚠ `l[8]`: `8` → `9`\n- ⚠ `l[9]`: `9` → `10`\n- ⚠ `l[10]`: `10` → `11`\n- ⚠ `l[11]`: `11` → `12`\n- ⚠ `l[12]`: `12` → `13`\n- ⚠ `l[13]`: `13` → `14`\n- ⚠ `l[14]`: `14` → `15`\n- ⚠ `l[15]`: `15` → `16`\n- ⚠ `l[16]`: `16` → `17`\n- ⚠ `l[17]`: `17` → `18`\n- ⚠ `l[18]`: `18` → `19`\n- ⚠ `l[19]`: `19` → `20`\n- ⚠ `l[20]`: `20` → `21`\n- ⚠ `l[21]`: `21` → `22`\n- ⚠ `l[22]`: `22` → `23`\n- ⚠ `l[23]`: `23` → `24`\n- ⚠ `l[24]`: `24` → `25`\n- ⚠ `l[25]`: `25` → `26`\n- ⚠ `l[26]`: `26` → `27`\n- ⚠ `l[27]`: `27` → `28`\n- ⚠ `l[28]`: `28` → `29`\n- ⚠ `l[29]`: `29` → `30`\n- + `l[30]`: `31`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "json/number-display",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":1e21,\"b\":0.000001,\"c\":1e-7,\"d\":123456789012,\"e\":-0,\"f\":1.5e300}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"a\":2e21,\"b\":0.0000011,\"c\":2e-7,\"d\":123456789013,\"e\":1,\"f\":1.6e300}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 6,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "modified",
+     "before": 1e+21,
+     "after": 2e+21,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "b",
+     "kind": "modified",
+     "before": 0.000001,
+     "after": 0.0000011,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "c",
+     "kind": "modified",
+     "before": 1e-7,
+     "after": 2e-7,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "d",
+     "kind": "modified",
+     "before": 123456789012,
+     "after": 123456789013,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "e",
+     "kind": "modified",
+     "before": 0,
+     "after": 1,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "f",
+     "kind": "modified",
+     "before": 1.5e+300,
+     "after": 1.6e+300,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 6 items modified\n\nDetails:\n────────────────────────────\n⚠ a\n  1e+21 → 2e+21\n  Impact: LOW\n\n⚠ b\n  0.000001 → 0.0000011\n  Impact: LOW\n\n⚠ c\n  1e-7 → 2e-7\n  Impact: LOW\n\n⚠ d\n  123456789012 → 123456789013\n  Impact: LOW\n\n⚠ e\n  0 → 1\n  Impact: LOW\n\n⚠ f\n  1.5e+300 → 1.6e+300\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 6 | 0 |\n\n## Changes\n\n- ⚠ `a`: `1e+21` → `2e+21`\n- ⚠ `b`: `0.000001` → `0.0000011`\n- ⚠ `c`: `1e-7` → `2e-7`\n- ⚠ `d`: `123456789012` → `123456789013`\n- ⚠ `e`: `0` → `1`\n- ⚠ `f`: `1.5e+300` → `1.6e+300`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "json/string-escapes",
+  "left": {
+   "name": "a.json",
+   "content": "{\"s\":\"line1\\nline2\\t\\\"q\\\"\\\\ \\u0001\"}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"s\":\"other\"}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "s",
+     "kind": "modified",
+     "before": "line1\nline2\t\"q\"\\ \u0001",
+     "after": "other",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ s\n  line1\nline2\t\"q\"\\ \u0001 → other\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `s`: `line1 line2\t\"q\"\\ \u0001` → `other`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "json/markdown-specials",
+  "left": {
+   "name": "a.json",
+   "content": "{\"k`ey\":\"a|b`c\"}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"k`ey\":\"x\"}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "k`ey",
+     "kind": "modified",
+     "before": "a|b`c",
+     "after": "x",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ k`ey\n  a|b`c → x\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `k'ey`: `a|b'c` → `x`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "yaml/prd-example",
@@ -1557,7 +2153,9 @@
      "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nChanges:\n⚠ 2 items modified\n\nDetails:\n────────────────────────────\n⚠ timeout\n  30 → 45\n  Impact: MEDIUM\n\n⚠ retries\n  3 → 5\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 2 | 0 |\n\n## Changes\n\n- ⚠ `timeout`: `30` → `45`\n- ⚠ `retries`: `3` → `5`\n\n**Potential impact (estimate):** medium\n"
  },
  {
   "name": "yaml/comments-order",
@@ -1602,7 +2200,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 3 |\n\nNo differences found.\n"
  },
  {
   "name": "yaml/anchors-merge",
@@ -1650,7 +2250,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nChanges:\n⚠ 1 item modified\n✓ 2 unchanged\n\nDetails:\n────────────────────────────\n⚠ svc.x\n  1 → 9\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 2 |\n\n## Changes\n\n- ⚠ `svc.x`: `1` → `9`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "yaml/anchors-merge-equal",
@@ -1695,7 +2297,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 3 |\n\nNo differences found.\n"
  },
  {
   "name": "yaml/multi-document",
@@ -1736,7 +2340,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ [1].b\n  2 → 3\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `[1].b`: `2` → `3`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "yaml/lists",
@@ -1778,7 +2384,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nChanges:\n- 1 item removed\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n- s[1]\n  {\"n\":\"b\"}\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 1 | 0 | 1 |\n\n## Changes\n\n- − `s[1]`: `{\"n\":\"b\"}`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "yaml/array-order-ignored",
@@ -1818,7 +2426,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 2 |\n\nNo differences found.\n"
  },
  {
   "name": "yaml/ignore-path",
@@ -1853,7 +2463,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "yaml/empty-docs",
@@ -1884,7 +2496,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "yaml/scalar-types",
@@ -1950,7 +2564,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nChanges:\n⚠ 3 items modified\n✓ 2 unchanged\n\nDetails:\n────────────────────────────\n⚠ a\n  1 → 1\n  Impact: LOW\n\n⚠ b\n  1 → 1\n  Impact: LOW\n\n⚠ c\n  true → true\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 3 | 2 |\n\n## Changes\n\n- ⚠ `a`: `1` → `1`\n- ⚠ `b`: `1` → `1`\n- ⚠ `c`: `true` → `true`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "yaml/yes-no-strings",
@@ -1991,7 +2607,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ a\n  yes → true\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `a`: `yes` → `true`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "yaml/multiline-strings",
@@ -2025,7 +2643,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ m\n  line1\nline2\n → line1\nlineX\n\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `m`: `line1 line2 ` → `line1 lineX `\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "yaml/nested",
@@ -2083,7 +2703,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yml\nb.yml\n\nChanges:\n+ 1 item added\n⚠ 2 items modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ a.b.c\n  1 → 2\n  Impact: LOW\n\n⚠ a.d[1].e\n  2 → 3\n  Impact: LOW\n\n+ a.d[2]\n  4\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yml` ↔ `b.yml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 2 | 1 |\n\n## Changes\n\n- ⚠ `a.b.c`: `1` → `2`\n- ⚠ `a.d[1].e`: `2` → `3`\n- + `a.d[2]`: `4`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "yaml/impact",
@@ -2126,7 +2748,9 @@
      "reason": "Name suggests a connection target or security setting; requests may reach a different service or be handled differently."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nChanges:\n⚠ 2 items modified\n\nDetails:\n────────────────────────────\n⚠ timeout\n  30 → 45\n  Impact: MEDIUM\n\n⚠ host\n  a → b\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 2 | 0 |\n\n## Changes\n\n- ⚠ `timeout`: `30` → `45`\n- ⚠ `host`: `a` → `b`\n\n**Potential impact (estimate):** high\n"
  },
  {
   "name": "yaml/bom",
@@ -2160,7 +2784,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ a\n  1 → 2\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `a`: `1` → `2`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "yaml/invalid-fallback",
@@ -2193,7 +2819,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.yaml\nb.yaml\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ L1\n  a: [1, 2 → a: 1\n\nNote: Invalid YAML, fell back to text comparison (a.yaml: Flow sequence in block collection must be sufficiently indented and end with a ] at line 2, column 1:)\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.yaml` ↔ `b.yaml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `L1`: `a: [1, 2` → `a: 1`\n\n> Note: Invalid YAML, fell back to text comparison (a.yaml: Flow sequence in block collection must be sufficiently indented and end with a ] at line 2, column 1:)\n"
  },
  {
   "name": "xml/prd-example",
@@ -2234,7 +2862,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ user.age\n  30 → 31\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `user.age`: `30` → `31`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/indent-comments",
@@ -2265,7 +2895,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "xml/attributes",
@@ -2307,7 +2939,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n+ 1 item added\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ a.@x\n  1 → 2\n  Impact: LOW\n\n+ a.@z\n  3\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `a.@x`: `1` → `2`\n- + `a.@z`: `3`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/attribute-order",
@@ -2345,7 +2979,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 2 |\n\nNo differences found.\n"
  },
  {
   "name": "xml/repeated",
@@ -2394,7 +3030,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n+ 1 item added\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ l.i[1]\n  2 → 3\n  Impact: LOW\n\n+ l.i[2]\n  4\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `l.i[1]`: `2` → `3`\n- + `l.i[2]`: `4`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/repeated-unordered",
@@ -2434,7 +3072,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 2 |\n\nNo differences found.\n"
  },
  {
   "name": "xml/added-removed",
@@ -2482,7 +3122,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n+ 1 item added\n- 1 item removed\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n- a.c\n  \n  Impact: LOW\n\n+ a.d\n  \n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 0 | 1 |\n\n## Changes\n\n- − `a.c`: ``\n- + `a.d`: ``\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/mixed-content",
@@ -2523,7 +3165,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ a.#text\n  hi → bye\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `a.#text`: `hi` → `bye`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/cdata",
@@ -2554,7 +3198,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "xml/entities",
@@ -2585,7 +3231,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "xml/ignore-attributes",
@@ -2620,7 +3268,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "xml/namespaces-default",
@@ -2677,7 +3327,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n+ 2 items added\n- 2 items removed\n\nDetails:\n────────────────────────────\n- r.@xmlns:p\n  u\n  Impact: LOW\n\n- r.p:i\n  1\n  Impact: LOW\n\n+ r.@xmlns:q\n  u\n  Impact: LOW\n\n+ r.q:i\n  1\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 2 | 2 | 0 | 0 |\n\n## Changes\n\n- − `r.@xmlns:p`: `u`\n- − `r.p:i`: `1`\n- + `r.@xmlns:q`: `u`\n- + `r.q:i`: `1`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/namespaces-ignored",
@@ -2710,7 +3362,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "xml/declaration-compared",
@@ -2753,7 +3407,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n- 1 item removed\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n- ?xml\n  {\"@version\":\"1.0\",\"@encoding\":\"UTF-8\"}\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 1 | 0 | 1 |\n\n## Changes\n\n- − `?xml`: `{\"@version\":\"1.0\",\"@encoding\":\"UTF-8\"}`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/declaration-ignored",
@@ -2786,7 +3442,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "xml/whitespace-text",
@@ -2820,7 +3478,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ a\n  x  y → x y\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `a`: `x  y` → `x y`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/whitespace-ignored",
@@ -2853,7 +3513,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "xml/empty-vs-text",
@@ -2887,7 +3549,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ a.b\n   → t\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `a.b`: `` → `t`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/nested-attrs-and-text",
@@ -2937,7 +3601,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n⚠ 2 items modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ a.b.@k\n  1 → 2\n  Impact: LOW\n\n⚠ a.b.#text\n  t → u\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 2 | 1 |\n\n## Changes\n\n- ⚠ `a.b.@k`: `1` → `2`\n- ⚠ `a.b.#text`: `t` → `u`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/impact",
@@ -2980,7 +3646,9 @@
      "reason": "Name suggests a connection target or security setting; requests may reach a different service or be handled differently."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n⚠ 2 items modified\n\nDetails:\n────────────────────────────\n⚠ cfg.timeout\n  30 → 45\n  Impact: MEDIUM\n\n⚠ cfg.host\n  a → b\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 2 | 0 |\n\n## Changes\n\n- ⚠ `cfg.timeout`: `30` → `45`\n- ⚠ `cfg.host`: `a` → `b`\n\n**Potential impact (estimate):** high\n"
  },
  {
   "name": "xml/bom",
@@ -3014,7 +3682,9 @@
      "reason": "No known behaviour-related name; likely a data or descriptive value."
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ a\n  1 → 2\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `a`: `1` → `2`\n\n**Potential impact (estimate):** low\n"
  },
  {
   "name": "xml/numeric-char-refs",
@@ -3052,7 +3722,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 2 |\n\nNo differences found.\n"
  },
  {
   "name": "xml/malformed-fallback",
@@ -3085,7 +3757,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.xml\nb.xml\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ L1\n  <a><b></a> → <a/>\n\nNote: Invalid XML, fell back to text comparison (a.xml: Expected closing tag 'b' (opened in line 1, col 4) instead of closing tag 'a'.)\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.xml` ↔ `b.xml`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `L1`: `<a><b></a>` → `<a/>`\n\n> Note: Invalid XML, fell back to text comparison (a.xml: Expected closing tag 'b' (opened in line 1, col 4) instead of closing tag 'a'.)\n"
  },
  {
   "name": "text/one-line-modified",
@@ -3116,7 +3790,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ L2\n  world → there\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `L2`: `world` → `there`\n"
  },
  {
   "name": "text/identical-empty",
@@ -3139,7 +3815,9 @@
    },
    "warnings": [],
    "changes": []
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 0 |\n\nNo differences found.\n"
  },
  {
   "name": "text/trailing-newline",
@@ -3162,7 +3840,9 @@
    },
    "warnings": [],
    "changes": []
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 2 |\n\nNo differences found.\n"
  },
  {
   "name": "text/add-remove",
@@ -3198,7 +3878,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nChanges:\n+ 1 item added\n- 1 item removed\n✓ 2 unchanged\n\nDetails:\n────────────────────────────\n- L2\n  b\n\n+ L3\n  d\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 0 | 2 |\n\n## Changes\n\n- − `L2`: `b`\n- + `L3`: `d`\n"
  },
  {
   "name": "text/crlf",
@@ -3221,7 +3903,9 @@
    },
    "warnings": [],
    "changes": []
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 2 |\n\nNo differences found.\n"
  },
  {
   "name": "text/ignore-ws",
@@ -3246,7 +3930,9 @@
    },
    "warnings": [],
    "changes": []
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "text/ignore-case",
@@ -3271,7 +3957,9 @@
    },
    "warnings": [],
    "changes": []
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 1 |\n\nNo differences found.\n"
  },
  {
   "name": "text/markdown-ext",
@@ -3302,7 +3990,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.md\nb.md\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ L1\n  # a → # b\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.md` ↔ `b.md`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `L1`: `# a` → `# b`\n"
  },
  {
   "name": "text/many-edits",
@@ -3402,7 +4092,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nChanges:\n- 1 item removed\n⚠ 10 items modified\n✓ 49 unchanged\n\nDetails:\n────────────────────────────\n⚠ L1\n  line 0 → LINE 0\n\n⚠ L8\n  line 7 → LINE 7\n\n⚠ L15\n  line 14 → LINE 14\n\n⚠ L22\n  line 21 → LINE 21\n\n⚠ L29\n  line 28 → LINE 28\n\n⚠ L31\n  line 30 → \n\n- L32\n  line 31\n\n⚠ L36\n  line 35 → LINE 35\n\n⚠ L43\n  line 42 → LINE 42\n\n⚠ L50\n  line 49 → LINE 49\n\n⚠ L57\n  line 56 → LINE 56\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 1 | 10 | 49 |\n\n## Changes\n\n- ⚠ `L1`: `line 0` → `LINE 0`\n- ⚠ `L8`: `line 7` → `LINE 7`\n- ⚠ `L15`: `line 14` → `LINE 14`\n- ⚠ `L22`: `line 21` → `LINE 21`\n- ⚠ `L29`: `line 28` → `LINE 28`\n- ⚠ `L31`: `line 30` → ``\n- − `L32`: `line 31`\n- ⚠ `L36`: `line 35` → `LINE 35`\n- ⚠ `L43`: `line 42` → `LINE 42`\n- ⚠ `L50`: `line 49` → `LINE 49`\n- ⚠ `L57`: `line 56` → `LINE 56`\n"
  },
  {
   "name": "text/reordered-blocks",
@@ -3450,7 +4142,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nChanges:\n+ 2 items added\n- 2 items removed\n✓ 3 unchanged\n\nDetails:\n────────────────────────────\n+ L1\n  d\n\n+ L2\n  e\n\n- L4\n  d\n\n- L5\n  e\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 2 | 2 | 0 | 3 |\n\n## Changes\n\n- + `L1`: `d`\n- + `L2`: `e`\n- − `L4`: `d`\n- − `L5`: `e`\n"
  },
  {
   "name": "text/forced-format-json-as-text",
@@ -3483,7 +4177,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.json\nb.json\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ L1\n  {\"a\":1} → {\"a\":2}\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.json` ↔ `b.json`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `L1`: `{\"a\":1}` → `{\"a\":2}`\n"
  },
  {
   "name": "text/blank-lines",
@@ -3519,7 +4215,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nChanges:\n+ 1 item added\n- 1 item removed\n✓ 3 unchanged\n\nDetails:\n────────────────────────────\n- L2\n  \n\n+ L3\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 0 | 3 |\n\n## Changes\n\n- − `L2`: ``\n- + `L3`: ``\n"
  },
  {
   "name": "api/prd-example",
@@ -3580,7 +4278,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: expected.json\nActual:   actual.json\n\nstatus:\n  200 → 200 ✓\n\nuser.id:\n  123 → 123 ✓\n\nuser.name:\n  John → John ✓\n\namount:\n  100 → 120 ❌\n\ncurrency:\n  INR → INR ✓\n\nResult: FAIL — 1 mismatch\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `expected.json`  \n**Actual:** `actual.json`\n\n**Result:** FAIL (1 mismatch)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `200` | ✓ |\n| `user.id` | `123` | `123` | ✓ |\n| `user.name` | `John` | `John` | ✓ |\n| `amount` | `100` | `120` | ❌ |\n| `currency` | `INR` | `INR` | ✓ |\n"
  },
  {
   "name": "api/pass",
@@ -3627,7 +4327,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nstatus:\n  200 → 200 ✓\n\nheaders.content-type:\n  application/json → application/json ✓\n\na:\n  1 → 1 ✓\n\nResult: PASS — actual matches expected\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** PASS\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `200` | ✓ |\n| `headers.content-type` | `application/json` | `application/json` | ✓ |\n| `a` | `1` | `1` | ✓ |\n"
  },
  {
   "name": "api/status-and-headers",
@@ -3669,7 +4371,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nstatus:\n  200 → 500 ❌\n\nheaders.content-type:\n  a → b ❌\n\nResult: FAIL — 2 mismatches\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** FAIL (2 mismatches)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `500` | ❌ |\n| `headers.content-type` | `a` | `b` | ❌ |\n"
  },
  {
   "name": "api/missing-header",
@@ -3708,7 +4412,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nstatus:\n  200 → 200 ✓\n\nheaders.x-a:\n  1 → (missing) ❌\n\nResult: FAIL — 1 mismatch\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** FAIL (1 mismatch)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `200` | ✓ |\n| `headers.x-a` | `1` | _(missing)_ | ❌ |\n"
  },
  {
   "name": "api/missing-and-extra-fields",
@@ -3773,7 +4479,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nstatus:\n  200 → 200 ✓\n\nuser.id:\n  123 → 123 ✓\n\nuser.name:\n  John → (missing) ❌\n\namount:\n  100 → 100 ✓\n\ncurrency:\n  INR → (missing) ❌\n\nextra:\n  (not expected) → true ❌\n\nResult: FAIL — 3 mismatches\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** FAIL (3 mismatches)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `200` | ✓ |\n| `user.id` | `123` | `123` | ✓ |\n| `user.name` | `John` | _(missing)_ | ❌ |\n| `amount` | `100` | `100` | ✓ |\n| `currency` | `INR` | _(missing)_ | ❌ |\n| `extra` | _(not expected)_ | `true` | ❌ |\n"
  },
  {
   "name": "api/ignore-extra",
@@ -3833,7 +4541,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nstatus:\n  200 → 200 ✓\n\nuser.id:\n  123 → 123 ✓\n\nuser.name:\n  John → (missing) ❌\n\namount:\n  100 → 100 ✓\n\ncurrency:\n  INR → (missing) ❌\n\nResult: FAIL — 2 mismatches\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** FAIL (2 mismatches)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `200` | ✓ |\n| `user.id` | `123` | `123` | ✓ |\n| `user.name` | `John` | _(missing)_ | ❌ |\n| `amount` | `100` | `100` | ✓ |\n| `currency` | `INR` | _(missing)_ | ❌ |\n"
  },
  {
   "name": "api/ignore-extra-and-paths",
@@ -3885,7 +4595,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nstatus:\n  200 → 200 ✓\n\nuser.id:\n  123 → 123 ✓\n\namount:\n  100 → 100 ✓\n\nResult: PASS — actual matches expected\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** PASS\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `200` | ✓ |\n| `user.id` | `123` | `123` | ✓ |\n| `amount` | `100` | `100` | ✓ |\n"
  },
  {
   "name": "api/ignore-headers",
@@ -3928,7 +4640,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nstatus:\n  200 → 200 ✓\n\nheaders.x-b:\n  2 → 2 ✓\n\nResult: PASS — actual matches expected\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** PASS\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `200` | ✓ |\n| `headers.x-b` | `2` | `2` | ✓ |\n"
  },
  {
   "name": "api/bodies-only",
@@ -3968,7 +4682,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nids[0]:\n  1 → 2 ❌\n\nids[1]:\n  2 → 1 ❌\n\nResult: FAIL — 2 mismatches\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** FAIL (2 mismatches)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `ids[0]` | `1` | `2` | ❌ |\n| `ids[1]` | `2` | `1` | ❌ |\n"
  },
  {
   "name": "api/bodies-only-unordered",
@@ -4009,7 +4725,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nids[0]:\n  1 → 1 ✓\n\nids[1]:\n  2 → 2 ✓\n\nResult: PASS — actual matches expected\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** PASS\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `ids[0]` | `1` | `1` | ✓ |\n| `ids[1]` | `2` | `2` | ✓ |\n"
  },
  {
   "name": "api/raw-http",
@@ -4063,7 +4781,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.http\nActual:   a.http\n\nstatus:\n  201 → 201 ✓\n\nheaders.content-type:\n  application/json → application/json ✓\n\nheaders.x-a:\n  1 → 2 ❌\n\nid:\n  5 → 6 ❌\n\nResult: FAIL — 2 mismatches\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.http`  \n**Actual:** `a.http`\n\n**Result:** FAIL (2 mismatches)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `201` | `201` | ✓ |\n| `headers.content-type` | `application/json` | `application/json` | ✓ |\n| `headers.x-a` | `1` | `2` | ❌ |\n| `id` | `5` | `6` | ❌ |\n"
  },
  {
   "name": "api/raw-http-no-headers",
@@ -4103,7 +4823,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.txt\nActual:   a.txt\n\nstatus:\n  200 → 200 ✓\n\nbody:\n  hello → bye ❌\n\nResult: FAIL — 1 mismatch\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.txt`  \n**Actual:** `a.txt`\n\n**Result:** FAIL (1 mismatch)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `200` | ✓ |\n| `body` | `hello` | `bye` | ❌ |\n"
  },
  {
   "name": "api/raw-http-vs-envelope",
@@ -4150,7 +4872,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.txt\nActual:   a.json\n\nstatus:\n  200 → 200 ✓\n\nheaders.content-type:\n  text/plain → text/plain ✓\n\na:\n  1 → 1 ✓\n\nResult: PASS — actual matches expected\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.txt`  \n**Actual:** `a.json`\n\n**Result:** PASS\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `200` | ✓ |\n| `headers.content-type` | `text/plain` | `text/plain` | ✓ |\n| `a` | `1` | `1` | ✓ |\n"
  },
  {
   "name": "api/status-one-side",
@@ -4185,7 +4909,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\na:\n  1 → 1 ✓\n\nResult: PASS — actual matches expected\nNote: Status code is present in only one input, so it was not compared.\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** PASS\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `a` | `1` | `1` | ✓ |\n\n> Note: Status code is present in only one input, so it was not compared.\n"
  },
  {
   "name": "api/envelope-data-key",
@@ -4225,7 +4951,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nstatus:\n  200 → 200 ✓\n\na:\n  1 → 2 ❌\n\nResult: FAIL — 1 mismatch\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** FAIL (1 mismatch)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `200` | `200` | ✓ |\n| `a` | `1` | `2` | ❌ |\n"
  },
  {
   "name": "api/text-bodies",
@@ -4258,7 +4986,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.txt\nActual:   a.txt\n\nbody:\n  plain text → plain text! ❌\n\nResult: FAIL — 1 mismatch\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.txt`  \n**Actual:** `a.txt`\n\n**Result:** FAIL (1 mismatch)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `body` | `plain text` | `plain text!` | ❌ |\n"
  },
  {
   "name": "api/string-status-not-envelope",
@@ -4298,7 +5028,9 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\nstatus:\n  ok → ok ✓\n\ndata:\n  1 → 2 ❌\n\nResult: FAIL — 1 mismatch\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** FAIL (1 mismatch)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `status` | `ok` | `ok` | ✓ |\n| `data` | `1` | `2` | ❌ |\n"
  },
  {
   "name": "api/many-mismatches",
@@ -4338,6 +5070,8 @@
      "evidence": "fact"
     }
    ]
-  }
+  },
+  "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\na:\n  1 → 2 ❌\n\nb:\n  1 → 2 ❌\n\nResult: FAIL — 2 mismatches\n",
+  "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** FAIL (2 mismatches)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `a` | `1` | `2` | ❌ |\n| `b` | `1` | `2` | ❌ |\n"
  }
 ]

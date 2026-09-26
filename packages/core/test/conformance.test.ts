@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 // @ts-expect-error plain .mjs shared with the Kotlin engine's test suite
 import { normalize } from '../../../conformance/normalize.mjs';
-import { compare } from '../src/index.js';
+import { compare, renderMarkdown, renderSummary } from '../src/index.js';
 
 interface Case {
   name: string;
@@ -10,6 +10,8 @@ interface Case {
   right: { name: string; content: string };
   options: Parameters<typeof compare>[2];
   expected: unknown;
+  summary: string;
+  markdown: string;
 }
 
 // cases.json is generated from this engine (`node conformance/generate.mjs`); the Kotlin plugin engine
@@ -21,6 +23,9 @@ const cases: Case[] = JSON.parse(
 describe('conformance cases', () => {
   it('has cases', () => expect(cases.length).toBeGreaterThan(90));
   it.each(cases.map((c) => [c.name, c] as const))('%s', (_name, c) => {
-    expect(normalize(compare(c.left, c.right, c.options))).toEqual(c.expected);
+    const result = compare(c.left, c.right, c.options);
+    expect(normalize(result)).toEqual(c.expected);
+    expect(renderSummary(result)).toBe(c.summary);
+    expect(renderMarkdown(result)).toBe(c.markdown);
   });
 });
