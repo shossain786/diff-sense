@@ -79,3 +79,19 @@ describe('QA rule pack', () => {
     expect(jv(A, A.replace('"login"', '"x"'), { qaMode: false }).changes.some((c) => c.path.endsWith('› locator'))).toBe(false);
   });
 });
+
+describe('QA unchanged reporting', () => {
+  it('lists concerns that stayed the same (PRD: "Assertion unchanged")', () => {
+    const r = jv(A, src('By.cssSelector(".login-button")', '20'));
+    const same = r.changes.filter((c) => c.kind === 'unchanged').map((c) => c.path);
+    expect(same).toContain('LoginTest.login() › assertion');
+    expect(same).not.toContain('LoginTest.login() › locator');
+    const s = renderSummary(r);
+    expect(s).toContain('Unchanged:\n✓ LoginTest.login() › assertion');
+    expect(r.stats.unchanged).toBeGreaterThan(0);
+  });
+  it('does not claim a concern is unchanged when it changed', () => {
+    const r = jv(A, A.replace('"Home"', '"Dashboard"'));
+    expect(r.changes.filter((c) => c.kind === 'unchanged').map((c) => c.path)).not.toContain('LoginTest.login() › assertion');
+  });
+});

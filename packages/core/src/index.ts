@@ -7,6 +7,6 @@ export { computeStats } from './stats.js';
 export { compareYaml } from './yaml.js';
 export { compareXml } from './xml.js';
 export * from './config.js';
-export { renderSummary, renderMarkdown, formatValue } from './summary.js';
+export { renderSummary, renderMarkdown, formatValue, qaUnchangedPaths } from './summary.js';
 export { applyImpact, classifyChange, maxImpact, IMPACT_ORDER } from './impact.js';
 export { compareJava } from './java.js';

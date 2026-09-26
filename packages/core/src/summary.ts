@@ -1,5 +1,12 @@
 import type { Change, ComparisonResult } from './types.js';
 
+/** Unchanged QA concerns (locator / wait strategy / assertion) worth calling out. */
+export function qaUnchangedPaths(changes: Change[]): string[] {
+  return changes
+    .filter((c) => c.kind === 'unchanged' && / › (locator|wait strategy|assertion)$/.test(c.path))
+    .map((c) => c.path);
+}
+
 export function formatValue(v: unknown): string {
   if (typeof v === 'string') return v;
   if (v === undefined) return '';
@@ -42,6 +49,8 @@ export function renderSummary(result: ResultLike): string {
     if (unchanged) out.push(`✓ ${unchanged} unchanged`);
     out.push('', 'Details:', '────────────────────────────');
     for (const c of result.changes.filter((x) => x.kind !== 'unchanged')) out.push(line(c), '');
+    const same = qaUnchangedPaths(result.changes);
+    if (same.length > 0) out.push('Unchanged:', ...same.map((p) => `✓ ${p}`), '');
   }
   if (result.impact) out.push(`Potential impact (estimate): ${result.impact}`);
   for (const w of result.warnings) out.push(`Note: ${w}`);
@@ -77,6 +86,8 @@ export function renderMarkdown(result: ResultLike): string {
     }
     out.push('');
   }
+  const same = qaUnchangedPaths(result.changes);
+  if (same.length > 0) out.push('## Unchanged', '', ...same.map((p) => `- ✓ ${mdCode(p)}`), '');
   if (result.impact) out.push(`**Potential impact (estimate):** ${result.impact}`, '');
   for (const w of result.warnings) out.push(`> Note: ${w}`, '');
   return out.join('\n').trimEnd() + '\n';

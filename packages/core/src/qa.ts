@@ -10,7 +10,7 @@ import type { Change } from './types.js';
  * Object heuristic is the only `inferred` result and says so.
  */
 
-type Category = 'locator' | 'wait' | 'assertion';
+export type Category = 'locator' | 'wait' | 'assertion';
 
 const LOCATOR = /^By\.\w+$|\.(findElements?)$|^new (?:By\.\w+)$/;
 const WAIT =
@@ -18,7 +18,7 @@ const WAIT =
 const ASSERTION =
   /^(Assert|Assertions|Assumptions)\.\w+$|^assert\w+$|^assertThat$|^verify\w*$|^expect$|^\.(isEqualTo|isNotEqualTo|isTrue|isFalse|isNull|isNotNull|hasSize|contains|containsExactly|isEmpty|isNotEmpty|shouldBe|shouldHave)$/;
 
-const LABEL: Record<Category, string> = { locator: 'locator', wait: 'wait strategy', assertion: 'assertion' };
+export const QA_LABEL: Record<Category, string> = { locator: 'locator', wait: 'wait strategy', assertion: 'assertion' };
 
 const TEST_ANNOTATION =
   /^(Test|Ignore|Disabled|Before|After|BeforeEach|AfterEach|BeforeAll|AfterAll|BeforeClass|AfterClass|BeforeMethod|AfterMethod|BeforeSuite|AfterSuite|ParameterizedTest|RepeatedTest|DataProvider|Given|When|Then)$/;
@@ -27,7 +27,7 @@ const DISABLING = /^(Ignore|Disabled)$/;
 const CALL = / › call (.+)$/;
 const ANNO = / › @([\w.$]+)$/;
 
-function categoryOf(callee: string): Category | undefined {
+export function categoryOf(callee: string): Category | undefined {
   if (ASSERTION.test(callee)) return 'assertion';
   if (LOCATOR.test(callee)) return 'locator';
   if (WAIT.test(callee)) return 'wait';
@@ -96,7 +96,7 @@ export function applyQaPack(changes: Change[]): Change[] {
     for (const [cat, items] of byCat) {
       const sem = SEMANTIC[cat];
       const at = Math.min(...items.map((i) => i.idx));
-      const path = `${method} › ${LABEL[cat]}`;
+      const path = `${method} › ${QA_LABEL[cat]}`;
       items.forEach((i) => consumed.add(i.idx));
 
       const removed = dropParents(items.filter((i) => i.change.kind === 'removed').map((i) => String(i.change.before)));

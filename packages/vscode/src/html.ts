@@ -1,5 +1,5 @@
 import type { Change, ComparisonResult } from '@diffsense/core';
-import { formatValue } from '@diffsense/core';
+import { formatValue, qaUnchangedPaths } from '@diffsense/core';
 
 const MAX_ROWS = 500;
 
@@ -30,6 +30,9 @@ export function renderPanelHtml(result: ComparisonResult, nonce: string, cspSour
   const changed = result.changes.filter((c) => c.kind !== 'unchanged');
   const shown = changed.slice(0, MAX_ROWS).map(row).join('');
   const more = changed.length > MAX_ROWS ? `<p class="muted">…and ${changed.length - MAX_ROWS} more (export to see all).</p>` : '';
+  const same = qaUnchangedPaths(result.changes)
+    .map((p) => `<li class="same"><span class="icon">✓</span><span class="path">${escapeHtml(p)}</span> <span class="muted">unchanged</span></li>`)
+    .join('');
   const warnings = result.warnings.map((w) => `<p class="warn">${escapeHtml(w)}</p>`).join('');
   return `<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8">
@@ -44,6 +47,7 @@ h1{font-size:1.2em;margin:0 0 4px}.muted{color:var(--vscode-descriptionForegroun
 ul{list-style:none;padding:0;margin:0}li{padding:6px 0;border-bottom:1px solid var(--vscode-panel-border)}
 .icon{display:inline-block;width:1.4em}.path{font-family:var(--vscode-editor-font-family);font-weight:600}
 .vals{margin:2px 0 0 1.4em;font-family:var(--vscode-editor-font-family);word-break:break-all}
+ul.unchanged{margin-top:8px}.same{color:var(--vscode-descriptionForeground)}
 ins{text-decoration:none;color:var(--vscode-gitDecoration-addedResourceForeground)}
 del{color:var(--vscode-gitDecoration-deletedResourceForeground)}
 .badge{font-size:.75em;padding:0 6px;border-radius:8px;border:1px solid var(--vscode-panel-border);text-transform:uppercase}
@@ -70,7 +74,7 @@ ${warnings}
 <button data-cmd="copyMarkdown">Copy as Markdown</button>
 <button data-cmd="exportMarkdown">Export Markdown…</button>
 </div>
-${total === 0 ? '<p>No differences found.</p>' : `<ul>${shown}</ul>${more}`}
+${total === 0 ? '<p>No differences found.</p>' : `<ul>${shown}</ul>${more}${same ? `<ul class="unchanged">${same}</ul>` : ''}`}
 ${result.impact ? `<p class="muted">Potential impact (estimate): <b>${escapeHtml(result.impact)}</b></p>` : ''}
 <script nonce="${nonce}">
 const vscode = acquireVsCodeApi();

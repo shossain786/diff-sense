@@ -1,7 +1,7 @@
 import { parse } from 'java-parser';
 import { matchesAny, compileGlobs } from './glob.js';
 import { ParseError } from './json.js';
-import { applyQaPack, looksLikeTest } from './qa.js';
+import { applyQaPack, categoryOf, looksLikeTest, QA_LABEL, type Category } from './qa.js';
 import { computeStats } from './stats.js';
 import type { Change, ComparisonResult, CompareOptions, FileInput, Impact } from './types.js';
 
@@ -463,6 +463,34 @@ function diffModels(a: JModel, b: JModel): Change[] {
   return out;
 }
 
+/** "Assertion unchanged" style entries: a QA concern present on both sides that did not change. */
+function qaUnchanged(a: JModel, b: JModel, changes: Change[]): Change[] {
+  const out: Change[] = [];
+  const cats: Category[] = ['locator', 'wait', 'assertion'];
+  for (const [q, ta] of a.types) {
+    const tb = b.types.get(q);
+    if (!tb) continue;
+    for (const [key, ma] of ta.methods) {
+      const mb = tb.methods.get(key);
+      if (!mb) continue;
+      for (const cat of cats) {
+        const shows = (m: JMethod) =>
+          m.facts
+            .filter((f) => f.base.startsWith('call ') && categoryOf(f.base.slice(5)) === cat)
+            .map((f) => f.show)
+            .sort();
+        const l = shows(ma);
+        const r = shows(mb);
+        const path = `${q}.${key} › ${QA_LABEL[cat]}`;
+        if (l.length > 0 && l.join('\n') === r.join('\n') && !changes.some((c) => c.path === path)) {
+          out.push({ path, kind: 'unchanged', before: l.join('; '), after: r.join('; '), evidence: 'fact' });
+        }
+      }
+    }
+  }
+  return out;
+}
+
 export function compareJava(
   left: FileInput,
   right: FileInput,
@@ -472,7 +500,7 @@ export function compareJava(
   const b = buildModel(right);
   let changes = diffModels(a, b);
   const qa = options.qaMode ?? looksLikeTest([...a.imports, ...b.imports]);
-  if (qa) changes = applyQaPack(changes);
+  if (qa) changes = [...applyQaPack(changes), ...qaUnchanged(a, b, changes)];
   if (options.ignorePaths?.length) {
     const ig = compileGlobs(options.ignorePaths);
     changes = changes.filter((c) => !matchesAny(c.path, ig));
