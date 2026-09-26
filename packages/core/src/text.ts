@@ -1,7 +1,8 @@
 import { computeStats } from './stats.js';
 import type { Change, ComparisonResult, CompareOptions, FileInput } from './types.js';
 
-const MAX_DP_CELLS = 40_000_000;
+/** Give up aligning past this many edits (memory grows with edits²). */
+const MAX_EDITS = 6000;
 
 type Op = { t: 'eq' | 'del' | 'add'; line: string; l: number; r: number };
 
@@ -21,7 +22,72 @@ function splitLines(content: string): string[] {
   return lines;
 }
 
-/** Line-level LCS diff. Path of a change is `L<n>` (1-based line number). */
+
+/**
+ * Myers O(ND) shortest edit script. Returns ops as [type, i, j] where i/j are
+ * indexes into `a`/`b` (for `add`, i is unused; for `del`, j is unused), or
+ * null when the edit distance exceeds MAX_EDITS.
+ */
+function myers(a: string[], b: string[]): ['eq' | 'del' | 'add', number, number][] | null {
+  const n = a.length;
+  const m = b.length;
+  if (n === 0 && m === 0) return [];
+  const max = Math.min(n + m, MAX_EDITS);
+  const off = max + 1;
+  const v = new Int32Array(2 * max + 3);
+  const trace: Int32Array[] = [];
+  let found = -1;
+  for (let d = 0; d <= max && found < 0; d++) {
+    trace.push(v.slice(off - d - 1, off + d + 2));
+    for (let k = -d; k <= d; k += 2) {
+      let x =
+        k === -d || (k !== d && v[off + k - 1]! < v[off + k + 1]!) ? v[off + k + 1]! : v[off + k - 1]! + 1;
+      let y = x - k;
+      while (x < n && y < m && a[x] === b[y]) {
+        x++;
+        y++;
+      }
+      v[off + k] = x;
+      if (x >= n && y >= m) {
+        found = d;
+        break;
+      }
+    }
+  }
+  if (found < 0) return null;
+
+  const ops: ['eq' | 'del' | 'add', number, number][] = [];
+  let x = n;
+  let y = m;
+  for (let d = found; d > 0; d--) {
+    const t = trace[d]!; // snapshot of v before round d, indexed from k = -(d) - 1
+    const at = (k: number) => t[k + d + 1]!;
+    const k = x - y;
+    const prevK = k === -d || (k !== d && at(k - 1) < at(k + 1)) ? k + 1 : k - 1;
+    const prevX = at(prevK);
+    const prevY = prevX - prevK;
+    while (x > prevX && y > prevY) {
+      x--;
+      y--;
+      ops.push(['eq', x, y]);
+    }
+    if (x === prevX) {
+      y--;
+      ops.push(['add', x, y]);
+    } else {
+      x--;
+      ops.push(['del', x, y]);
+    }
+  }
+  while (x > 0 && y > 0) {
+    x--;
+    y--;
+    ops.push(['eq', x, y]);
+  }
+  return ops.reverse();
+}
+
+/** Line-level diff (Myers). Path of a change is `L<n>` (1-based line number). */
 export function compareText(
   left: FileInput,
   right: FileInput,
@@ -47,38 +113,16 @@ export function compareText(
   const ops: Op[] = [];
   for (let i = 0; i < start; i++) ops.push({ t: 'eq', line: a[i]!, l: i + 1, r: i + 1 });
 
-  const n = endA - start;
-  const m = endB - start;
-  if (n * m > MAX_DP_CELLS) {
-    warnings.push('Files too large for line alignment; middle section reported as replaced');
+  const mid = myers(na.slice(start, endA), nb.slice(start, endB));
+  if (mid === null) {
+    warnings.push('Files differ too much for line alignment; middle section reported as replaced');
     for (let i = start; i < endA; i++) ops.push({ t: 'del', line: a[i]!, l: i + 1, r: 0 });
     for (let j = start; j < endB; j++) ops.push({ t: 'add', line: b[j]!, l: 0, r: j + 1 });
   } else {
-    // lcs[i][j] = LCS length of na[start+i..endA) and nb[start+j..endB)
-    const lcs: Uint32Array[] = [];
-    for (let i = 0; i <= n; i++) lcs.push(new Uint32Array(m + 1));
-    for (let i = n - 1; i >= 0; i--) {
-      for (let j = m - 1; j >= 0; j--) {
-        lcs[i]![j] =
-          na[start + i] === nb[start + j]
-            ? lcs[i + 1]![j + 1]! + 1
-            : Math.max(lcs[i + 1]![j]!, lcs[i]![j + 1]!);
-      }
-    }
-    let i = 0;
-    let j = 0;
-    while (i < n || j < m) {
-      if (i < n && j < m && na[start + i] === nb[start + j]) {
-        ops.push({ t: 'eq', line: a[start + i]!, l: start + i + 1, r: start + j + 1 });
-        i++;
-        j++;
-      } else if (i < n && (j >= m || lcs[i + 1]![j]! >= lcs[i]![j + 1]!)) {
-        ops.push({ t: 'del', line: a[start + i]!, l: start + i + 1, r: 0 });
-        i++;
-      } else {
-        ops.push({ t: 'add', line: b[start + j]!, l: 0, r: start + j + 1 });
-        j++;
-      }
+    for (const [t, i, j] of mid) {
+      if (t === 'eq') ops.push({ t, line: a[start + i]!, l: start + i + 1, r: start + j + 1 });
+      else if (t === 'del') ops.push({ t, line: a[start + i]!, l: start + i + 1, r: 0 });
+      else ops.push({ t, line: b[start + j]!, l: 0, r: start + j + 1 });
     }
   }
   for (let k = 0; endA + k < na.length; k++) {

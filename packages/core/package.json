@@ -8,5 +8,9 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.11.1",
+    "yaml": "^2.9.1"
   }
 }

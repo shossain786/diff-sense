@@ -1,6 +1,8 @@
 import { detectFormat } from './detect.js';
 import { compareJson, ParseError } from './json.js';
 import { compareText } from './text.js';
+import { compareXml } from './xml.js';
+import { compareYaml } from './yaml.js';
 import type { CompareOptions, ComparisonResult, FileInput } from './types.js';
 
 /**
@@ -15,10 +17,12 @@ export function compare(
   const format = options.format ?? detectFormat(left.name);
   try {
     if (format === 'json') return compareJson(left, right, options);
+    if (format === 'xml') return compareXml(left, right, options);
+    if (format === 'yaml') return compareYaml(left, right, options);
   } catch (e) {
     if (!(e instanceof ParseError)) throw e;
     return compareText(left, right, options, 'text', [
-      `Invalid JSON, fell back to text comparison (${e.message})`,
+      `Invalid ${format.toUpperCase()}, fell back to text comparison (${e.message})`,
     ]);
   }
   const warnings =

@@ -40,20 +40,3 @@ describe('compare', () => {
     expect(r.left).toBe('a.json');
   });
 });
-
-// Golden expectations for Phase 1 comparators. Enabled as each lands.
-describe.skip('golden fixtures (Phase 1)', () => {
-  it.each([
-    ['xml', 'user-a.xml', 'user-b.xml'],
-    ['yaml', 'config-a.yaml', 'config-b.yaml'],
-  ])('%s', (dir, a, b) => {
-    const r = compare(
-      { name: a, content: fx(`${dir}/${a}`) },
-      { name: b, content: fx(`${dir}/${b}`) },
-    );
-    const expected = JSON.parse(fx(`${dir}/expected.json`));
-    expect(
-      r.changes.map(({ path, kind, before, after }) => ({ path, kind, before, after })),
-    ).toEqual(expected);
-  });
-});

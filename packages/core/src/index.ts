@@ -4,3 +4,7 @@ export { compareJson, diffValues } from './json.js';
 export { compareText } from './text.js';
 export { detectFormat } from './detect.js';
 export { computeStats } from './stats.js';
+export { compareYaml } from './yaml.js';
+export { compareXml } from './xml.js';
+export * from './config.js';
+export { renderSummary, formatValue } from './summary.js';

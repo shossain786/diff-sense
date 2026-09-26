@@ -30,8 +30,40 @@ describe('text comparison', () => {
     expect(t('a\r\nb\r\n', 'a\nb\n').changes).toEqual([]);
   });
   it('non-implemented structural formats fall back with a warning', () => {
-    const r = compare({ name: 'a.xml', content: '<a/>' }, { name: 'b.xml', content: '<b/>' });
-    expect(r.warnings[0]).toMatch(/No structural comparator for xml/);
+    const r = compare({ name: 'a.java', content: '<a/>' }, { name: 'b.java', content: '<b/>' });
+    expect(r.warnings[0]).toMatch(/No structural comparator for java/);
     expect(r.changes).toHaveLength(1);
+  });
+});
+
+describe('text alignment (Myers)', () => {
+  const N = 20000;
+  const gen = (d: number) =>
+    Array.from({ length: N }, (_, i) => 'line ' + (i % 500 === 0 ? `${i}x${d}` : i)).join('\n');
+  it('scales with the number of edits, not file size', () => {
+    const t0 = Date.now();
+    const r = t(gen(0), gen(1));
+    expect(r.warnings).toEqual([]);
+    expect(r.stats).toEqual({ added: 0, removed: 0, modified: 40, unchanged: N - 40 });
+    expect(Date.now() - t0).toBeLessThan(2000);
+  });
+  it('is a valid edit script for shuffled/edited input', () => {
+    const rnd = (seed: number) => () => (seed = (seed * 1664525 + 1013904223) % 2 ** 32) / 2 ** 32;
+    const r = rnd(7);
+    for (let round = 0; round < 50; round++) {
+      const a = Array.from({ length: 30 }, () => String(Math.floor(r() * 6)));
+      const b = Array.from({ length: 30 }, () => String(Math.floor(r() * 6)));
+      const res = t(a.join('\n'), b.join('\n'));
+      const { added, removed, modified, unchanged } = res.stats;
+      expect(unchanged + removed + modified).toBe(a.length);
+      expect(unchanged + added + modified).toBe(b.length);
+    }
+  });
+  it('gives up gracefully on totally different large inputs', () => {
+    const a = Array.from({ length: 5000 }, (_, i) => `a${i}`).join('\n');
+    const b = Array.from({ length: 5000 }, (_, i) => `b${i}`).join('\n');
+    const r = t(a, b);
+    expect(r.warnings[0]).toMatch(/differ too much/);
+    expect(r.stats.modified).toBe(5000);
   });
 });
