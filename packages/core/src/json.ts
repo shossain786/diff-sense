@@ -156,7 +156,7 @@ export class ParseError extends Error {}
 
 export function parseJson(input: FileInput): Json {
   try {
-    return JSON.parse(input.content);
+    return JSON.parse(input.content.replace(/^\uFEFF/, '')); // editors on Windows often save a BOM
   } catch (e) {
     throw new ParseError(`${input.name}: ${(e as Error).message}`);
   }

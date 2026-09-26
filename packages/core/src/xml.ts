@@ -14,6 +14,7 @@ const parser = new XMLParser({
   parseTagValue: false,
   parseAttributeValue: false,
   ignoreDeclaration: false,
+  htmlEntities: true, // also decodes numeric character references such as &#65;
 });
 
 const stripPrefix = (name: string) => name.slice(name.indexOf(':') + 1);
@@ -26,9 +27,10 @@ const stripPrefix = (name: string) => name.slice(name.indexOf(':') + 1);
  * Comments are ignored; CDATA is treated as text.
  */
 export function parseXml(input: FileInput, options: CompareOptions): unknown {
-  const valid = XMLValidator.validate(input.content);
+  const content = input.content.replace(/^\uFEFF/, '');
+  const valid = XMLValidator.validate(content);
   if (valid !== true) throw new ParseError(`${input.name}: ${valid.err.msg}`);
-  const tree = parser.parse(input.content) as Node[];
+  const tree = parser.parse(content) as Node[];
 
   const skipAttrs = new Set(options.ignoreAttributes ?? []);
   const name = (n: string) => (options.ignoreNamespaces ? stripPrefix(n) : n);

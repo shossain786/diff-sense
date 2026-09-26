@@ -8,7 +8,7 @@ import type { ComparisonResult, CompareOptions, FileInput } from './types.js';
  * documents (`---`) becomes an array of documents, so paths read `[0].key`.
  */
 export function parseYaml(input: FileInput): unknown {
-  const docs = parseAllDocuments(input.content, { merge: true });
+  const docs = parseAllDocuments(input.content.replace(/^\uFEFF/, ''), { merge: true });
   for (const d of docs) {
     if (d.errors.length > 0) {
       throw new ParseError(`${input.name}: ${d.errors[0]!.message.split('\n')[0]}`);

@@ -1,0 +1,10 @@
+<idea-plugin>
+    <id>com.razatech.diffsense</id>
+    <name>DiffSense Semantic Compare</name>
+    <vendor>RazaTech</vendor>
+    <description><![CDATA[
+        Compare files and understand what changed. Structure-aware comparison for JSON, YAML, XML and
+        API responses, with impact estimates. Fully local: no network access, no telemetry.
+    ]]></description>
+    <depends>com.intellij.modules.platform</depends>
+</idea-plugin>

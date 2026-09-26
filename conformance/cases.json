@@ -1,0 +1,4343 @@
+[
+ {
+  "name": "json/prd-example",
+  "left": {
+   "name": "a.json",
+   "content": "{\n  \"timeout\": 30000,\n  \"retryCount\": 3,\n  \"enabled\": true\n}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\n  \"timeout\": 45000,\n  \"retryCount\": 5,\n  \"enabled\": true\n}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 1
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "timeout",
+     "kind": "modified",
+     "before": 30000,
+     "after": 45000,
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    },
+    {
+     "path": "retryCount",
+     "kind": "modified",
+     "before": 3,
+     "after": 5,
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    },
+    {
+     "path": "enabled",
+     "kind": "unchanged",
+     "before": true,
+     "after": true,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/identical",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":[1,{\"b\":2}],\"c\":\"x\"}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"a\":[1,{\"b\":2}],\"c\":\"x\"}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a[0]",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "a[1].b",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    },
+    {
+     "path": "c",
+     "kind": "unchanged",
+     "before": "x",
+     "after": "x",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/add-remove-modify",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":1,\"n\":{\"x\":1}}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"b\":2,\"n\":{\"x\":2}}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "removed",
+     "before": 1,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "n.x",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "b",
+     "kind": "added",
+     "after": 2,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/type-changes",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":1,\"o\":{},\"l\":[1]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"a\":\"1\",\"o\":[],\"l\":{\"k\":1}}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 3,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "modified",
+     "before": 1,
+     "after": "1",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "o",
+     "kind": "modified",
+     "before": {},
+     "after": [],
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l",
+     "kind": "modified",
+     "before": [
+      1
+     ],
+     "after": {
+      "k": 1
+     },
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/array-length",
+  "left": {
+   "name": "a.json",
+   "content": "{\"l\":[1,2,3]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"l\":[1]}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 2,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "l[0]",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "l[1]",
+     "kind": "removed",
+     "before": 2,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l[2]",
+     "kind": "removed",
+     "before": 3,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/array-grow",
+  "left": {
+   "name": "a.json",
+   "content": "{\"l\":[1,2]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"l\":[1,2,3]}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "l[0]",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "l[1]",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    },
+    {
+     "path": "l[2]",
+     "kind": "added",
+     "after": 3,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/nested-arrays-of-objects",
+  "left": {
+   "name": "a.json",
+   "content": "{\"u\":[{\"id\":1,\"n\":\"a\"},{\"id\":2,\"n\":\"b\"}]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"u\":[{\"id\":1,\"n\":\"a\"},{\"id\":2,\"n\":\"c\"},{\"id\":3,\"n\":\"d\"}]}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 3
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "u[0].id",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "u[0].n",
+     "kind": "unchanged",
+     "before": "a",
+     "after": "a",
+     "evidence": "fact"
+    },
+    {
+     "path": "u[1].id",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    },
+    {
+     "path": "u[1].n",
+     "kind": "modified",
+     "before": "b",
+     "after": "c",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "u[2]",
+     "kind": "added",
+     "after": {
+      "id": 3,
+      "n": "d"
+     },
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/key-order-ignored",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":1,\"b\":2}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"b\":2,\"a\":1}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "b",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/key-order-reported",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":1,\"b\":2}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"b\":2,\"a\":1}"
+  },
+  "options": {
+   "ignoreOrdering": false
+  },
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 2
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "b",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    },
+    {
+     "path": "$",
+     "kind": "modified",
+     "before": "key order: a, b",
+     "after": "key order: b, a",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/array-order-default",
+  "left": {
+   "name": "a.json",
+   "content": "{\"t\":[1,2,3]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"t\":[3,1,2]}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 3,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "t[0]",
+     "kind": "modified",
+     "before": 1,
+     "after": 3,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "t[1]",
+     "kind": "modified",
+     "before": 2,
+     "after": 1,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "t[2]",
+     "kind": "modified",
+     "before": 3,
+     "after": 2,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/array-order-ignored",
+  "left": {
+   "name": "a.json",
+   "content": "{\"t\":[1,2,3]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"t\":[3,1,2]}"
+  },
+  "options": {
+   "ignoreArrayOrder": true
+  },
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "t[0]",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "t[1]",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    },
+    {
+     "path": "t[2]",
+     "kind": "unchanged",
+     "before": 3,
+     "after": 3,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/array-order-ignored-extra",
+  "left": {
+   "name": "a.json",
+   "content": "{\"t\":[1,2]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"t\":[2,1,9]}"
+  },
+  "options": {
+   "ignoreArrayOrder": true
+  },
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "t[0]",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "t[1]",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    },
+    {
+     "path": "t[2]",
+     "kind": "added",
+     "after": 9,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/array-order-objects",
+  "left": {
+   "name": "a.json",
+   "content": "{\"t\":[{\"a\":1},{\"a\":2}]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"t\":[{\"a\":2},{\"a\":3}]}"
+  },
+  "options": {
+   "ignoreArrayOrder": true
+  },
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "t[1].a",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    },
+    {
+     "path": "t[0].a",
+     "kind": "modified",
+     "before": 1,
+     "after": 3,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/ignore-path-object",
+  "left": {
+   "name": "a.json",
+   "content": "{\"id\":1,\"meta\":{\"ts\":1,\"by\":\"x\"},\"l\":[{\"ts\":1}]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"id\":1,\"meta\":{\"ts\":2,\"by\":\"y\"},\"l\":[{\"ts\":9}]}"
+  },
+  "options": {
+   "ignorePaths": [
+    "meta"
+   ]
+  },
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "id",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "l[0].ts",
+     "kind": "modified",
+     "before": 1,
+     "after": 9,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/ignore-path-star",
+  "left": {
+   "name": "a.json",
+   "content": "{\"id\":1,\"meta\":{\"ts\":1,\"by\":\"x\"},\"l\":[{\"ts\":1}]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"id\":1,\"meta\":{\"ts\":2,\"by\":\"y\"},\"l\":[{\"ts\":9}]}"
+  },
+  "options": {
+   "ignorePaths": [
+    "meta.*",
+    "l[*].ts"
+   ]
+  },
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "id",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/ignore-path-globstar",
+  "left": {
+   "name": "a.json",
+   "content": "{\"id\":1,\"meta\":{\"ts\":1,\"by\":\"x\"},\"l\":[{\"ts\":1}]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"id\":1,\"meta\":{\"ts\":2,\"by\":\"y\"},\"l\":[{\"ts\":9}]}"
+  },
+  "options": {
+   "ignorePaths": [
+    "**.ts"
+   ]
+  },
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "id",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "meta.by",
+     "kind": "modified",
+     "before": "x",
+     "after": "y",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/case-ws-default",
+  "left": {
+   "name": "a.json",
+   "content": "{\"s\":\"Hello  World\"}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"s\":\"hello world\"}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "s",
+     "kind": "modified",
+     "before": "Hello  World",
+     "after": "hello world",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/case-ws-ignored",
+  "left": {
+   "name": "a.json",
+   "content": "{\"s\":\"Hello  World\"}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"s\":\"hello world\"}"
+  },
+  "options": {
+   "ignoreCase": true,
+   "ignoreWhitespace": true
+  },
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "s",
+     "kind": "unchanged",
+     "before": "Hello  World",
+     "after": "hello world",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/numeric-strings",
+  "left": {
+   "name": "a.json",
+   "content": "{\"n\":\"30\"}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"n\":30}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "n",
+     "kind": "modified",
+     "before": "30",
+     "after": 30,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/numeric-equality",
+  "left": {
+   "name": "a.json",
+   "content": "{\"n\":\"30.0\",\"m\":1.5}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"n\":30,\"m\":1.5}"
+  },
+  "options": {
+   "numericEquality": true
+  },
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "n",
+     "kind": "unchanged",
+     "before": "30.0",
+     "after": 30,
+     "evidence": "fact"
+    },
+    {
+     "path": "m",
+     "kind": "unchanged",
+     "before": 1.5,
+     "after": 1.5,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/number-forms",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":30,\"b\":1e2,\"c\":0.10}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"a\":30.0,\"b\":100,\"c\":0.1}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": 30,
+     "after": 30,
+     "evidence": "fact"
+    },
+    {
+     "path": "b",
+     "kind": "unchanged",
+     "before": 100,
+     "after": 100,
+     "evidence": "fact"
+    },
+    {
+     "path": "c",
+     "kind": "unchanged",
+     "before": 0.1,
+     "after": 0.1,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/nulls-booleans",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":null,\"b\":true,\"c\":false}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"a\":0,\"b\":false,\"c\":false}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "modified",
+     "before": null,
+     "after": 0,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "b",
+     "kind": "modified",
+     "before": true,
+     "after": false,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "c",
+     "kind": "unchanged",
+     "before": false,
+     "after": false,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/empty-containers",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":{},\"b\":[]}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"a\":{\"x\":1},\"b\":[1]}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 2,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.x",
+     "kind": "added",
+     "after": 1,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "b[0]",
+     "kind": "added",
+     "after": 1,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/unicode-escapes",
+  "left": {
+   "name": "a.json",
+   "content": "{\"s\":\"caf\\u00e9 \\ud83d\\ude00\"}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"s\":\"café 😀\"}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "s",
+     "kind": "unchanged",
+     "before": "café 😀",
+     "after": "café 😀",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/special-keys",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a.b\":1,\"c d\":2}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"a.b\":2,\"c d\":2}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.b",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "c d",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/root-scalar",
+  "left": {
+   "name": "a.json",
+   "content": "1"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "2"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "$",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/root-array",
+  "left": {
+   "name": "a.json",
+   "content": "[1,2]"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "[1,3]"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "[0]",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "[1]",
+     "kind": "modified",
+     "before": 2,
+     "after": 3,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/long-value-truncation",
+  "left": {
+   "name": "a.json",
+   "content": "{\"k\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"k\":\"yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy\"}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "k",
+     "kind": "modified",
+     "before": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "after": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/object-value-display",
+  "left": {
+   "name": "a.json",
+   "content": "{\"o\":{\"a\":1}}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"o\":{\"a\":1,\"b\":[1,\"two\",null]}}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "o.a",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "o.b",
+     "kind": "added",
+     "after": [
+      1,
+      "two",
+      null
+     ],
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/impact-keywords",
+  "left": {
+   "name": "a.json",
+   "content": "{\"timeout\":30,\"baseUrl\":\"a\",\"title\":\"x\",\"apiKey\":\"1\",\"same\":1}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"timeout\":45,\"baseUrl\":\"b\",\"title\":\"y\",\"apiKey\":\"2\",\"same\":1}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 4,
+    "unchanged": 1
+   },
+   "impact": "critical",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "timeout",
+     "kind": "modified",
+     "before": 30,
+     "after": 45,
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    },
+    {
+     "path": "baseUrl",
+     "kind": "modified",
+     "before": "a",
+     "after": "b",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Name suggests a connection target or security setting; requests may reach a different service or be handled differently."
+    },
+    {
+     "path": "title",
+     "kind": "modified",
+     "before": "x",
+     "after": "y",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "apiKey",
+     "kind": "modified",
+     "before": "1",
+     "after": "2",
+     "evidence": "fact",
+     "impact": "critical",
+     "reason": "Name suggests credentials or secrets; a change may break authentication or expose access."
+    },
+    {
+     "path": "same",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/impact-added-removed",
+  "left": {
+   "name": "a.json",
+   "content": "{\"password\":\"p\",\"port\":1}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"token\":\"t\",\"port\":1}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "impact": "critical",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "password",
+     "kind": "removed",
+     "before": "p",
+     "evidence": "fact",
+     "impact": "critical",
+     "reason": "Name suggests credentials or secrets; a change may break authentication or expose access."
+    },
+    {
+     "path": "port",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "token",
+     "kind": "added",
+     "after": "t",
+     "evidence": "fact",
+     "impact": "critical",
+     "reason": "Name suggests credentials or secrets; a change may break authentication or expose access."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/invalid-fallback",
+  "left": {
+   "name": "a.json",
+   "content": "{oops"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{}"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "warnings": [
+    "Invalid JSON, fell back to text comparison (…)"
+   ],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "modified",
+     "before": "{oops",
+     "after": "{}",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/invalid-right",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":1}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"a\":1,}"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "warnings": [
+    "Invalid JSON, fell back to text comparison (…)"
+   ],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "modified",
+     "before": "{\"a\":1}",
+     "after": "{\"a\":1,}",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/bom",
+  "left": {
+   "name": "a.json",
+   "content": "﻿{\"a\":1}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"a\":2}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "json/bom-both",
+  "left": {
+   "name": "a.json",
+   "content": "﻿{\"a\":1}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "﻿{\"a\":1}"
+  },
+  "options": {},
+  "expected": {
+   "format": "json",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/prd-example",
+  "left": {
+   "name": "a.yaml",
+   "content": "timeout: 30\nretries: 3\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "timeout: 45\nretries: 5\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 0
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "timeout",
+     "kind": "modified",
+     "before": 30,
+     "after": 45,
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    },
+    {
+     "path": "retries",
+     "kind": "modified",
+     "before": 3,
+     "after": 5,
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/comments-order",
+  "left": {
+   "name": "a.yaml",
+   "content": "# c\na: 1\nb: [1, 2]\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "b:\n  - 1\n  - 2\na: 1 # note\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "b[0]",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "b[1]",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/anchors-merge",
+  "left": {
+   "name": "a.yaml",
+   "content": "base: &b {x: 1}\nsvc:\n  <<: *b\n  y: 2\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "base: {x: 1}\nsvc: {x: 9, y: 2}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 2
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "base.x",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "svc.x",
+     "kind": "modified",
+     "before": 1,
+     "after": 9,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "svc.y",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/anchors-merge-equal",
+  "left": {
+   "name": "a.yaml",
+   "content": "base: &b {x: 1}\nsvc:\n  <<: *b\n  y: 2\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "base: {x: 1}\nsvc: {x: 1, y: 2}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "base.x",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "svc.x",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "svc.y",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/multi-document",
+  "left": {
+   "name": "a.yaml",
+   "content": "a: 1\n---\nb: 2\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "a: 1\n---\nb: 3\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "[0].a",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "[1].b",
+     "kind": "modified",
+     "before": 2,
+     "after": 3,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/lists",
+  "left": {
+   "name": "a.yaml",
+   "content": "s:\n  - {n: a}\n  - {n: b}\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "s:\n  - {n: a}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "s[0].n",
+     "kind": "unchanged",
+     "before": "a",
+     "after": "a",
+     "evidence": "fact"
+    },
+    {
+     "path": "s[1]",
+     "kind": "removed",
+     "before": {
+      "n": "b"
+     },
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/array-order-ignored",
+  "left": {
+   "name": "a.yaml",
+   "content": "t: [1,2]\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "t: [2,1]\n"
+  },
+  "options": {
+   "ignoreArrayOrder": true
+  },
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "t[0]",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "t[1]",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/ignore-path",
+  "left": {
+   "name": "a.yaml",
+   "content": "a: 1\nts: 5\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "a: 1\nts: 6\n"
+  },
+  "options": {
+   "ignorePaths": [
+    "ts"
+   ]
+  },
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/empty-docs",
+  "left": {
+   "name": "a.yaml",
+   "content": ""
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "# only a comment\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "$",
+     "kind": "unchanged",
+     "before": null,
+     "after": null,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/scalar-types",
+  "left": {
+   "name": "a.yaml",
+   "content": "a: 1\nb: \"1\"\nc: true\nd: null\ne: 1.5\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "a: \"1\"\nb: 1\nc: \"true\"\nd: ~\ne: 1.50\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 3,
+    "unchanged": 2
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "modified",
+     "before": 1,
+     "after": "1",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "b",
+     "kind": "modified",
+     "before": "1",
+     "after": 1,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "c",
+     "kind": "modified",
+     "before": true,
+     "after": "true",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "d",
+     "kind": "unchanged",
+     "before": null,
+     "after": null,
+     "evidence": "fact"
+    },
+    {
+     "path": "e",
+     "kind": "unchanged",
+     "before": 1.5,
+     "after": 1.5,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/yes-no-strings",
+  "left": {
+   "name": "a.yaml",
+   "content": "a: yes\nb: no\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "a: true\nb: no\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "modified",
+     "before": "yes",
+     "after": true,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "b",
+     "kind": "unchanged",
+     "before": "no",
+     "after": "no",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/multiline-strings",
+  "left": {
+   "name": "a.yaml",
+   "content": "m: |\n  line1\n  line2\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "m: |\n  line1\n  lineX\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "m",
+     "kind": "modified",
+     "before": "line1\nline2\n",
+     "after": "line1\nlineX\n",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/nested",
+  "left": {
+   "name": "a.yml",
+   "content": "a:\n  b:\n    c: 1\n  d: [1, {e: 2}]\n"
+  },
+  "right": {
+   "name": "b.yml",
+   "content": "a:\n  b:\n    c: 2\n  d: [1, {e: 3}, 4]\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.b.c",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "a.d[0]",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "a.d[1].e",
+     "kind": "modified",
+     "before": 2,
+     "after": 3,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "a.d[2]",
+     "kind": "added",
+     "after": 4,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/impact",
+  "left": {
+   "name": "a.yaml",
+   "content": "timeout: 30\nhost: a\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "timeout: 45\nhost: b\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 0
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "timeout",
+     "kind": "modified",
+     "before": 30,
+     "after": 45,
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    },
+    {
+     "path": "host",
+     "kind": "modified",
+     "before": "a",
+     "after": "b",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Name suggests a connection target or security setting; requests may reach a different service or be handled differently."
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/bom",
+  "left": {
+   "name": "a.yaml",
+   "content": "﻿a: 1\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "a: 2\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "yaml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "yaml/invalid-fallback",
+  "left": {
+   "name": "a.yaml",
+   "content": "a: [1, 2\n"
+  },
+  "right": {
+   "name": "b.yaml",
+   "content": "a: 1\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "warnings": [
+    "Invalid YAML, fell back to text comparison (…)"
+   ],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "modified",
+     "before": "a: [1, 2",
+     "after": "a: 1",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/prd-example",
+  "left": {
+   "name": "a.xml",
+   "content": "<user>\n    <name>John</name>\n    <age>30</age>\n</user>\n"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<user>\n    <name>John</name>\n    <age>31</age>\n</user>\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "user.name",
+     "kind": "unchanged",
+     "before": "John",
+     "after": "John",
+     "evidence": "fact"
+    },
+    {
+     "path": "user.age",
+     "kind": "modified",
+     "before": "30",
+     "after": "31",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/indent-comments",
+  "left": {
+   "name": "a.xml",
+   "content": "<a><b>1</b></a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a>\n  <!-- hi -->\n  <b>1</b>\n</a>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.b",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/attributes",
+  "left": {
+   "name": "a.xml",
+   "content": "<a x=\"1\"/>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a x=\"2\" z=\"3\"/>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.@x",
+     "kind": "modified",
+     "before": "1",
+     "after": "2",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "a.@z",
+     "kind": "added",
+     "after": "3",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/attribute-order",
+  "left": {
+   "name": "a.xml",
+   "content": "<a x=\"1\" y=\"2\"/>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a y=\"2\" x=\"1\"/>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.@x",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "a.@y",
+     "kind": "unchanged",
+     "before": "2",
+     "after": "2",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/repeated",
+  "left": {
+   "name": "a.xml",
+   "content": "<l><i>1</i><i>2</i></l>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<l><i>1</i><i>3</i><i>4</i></l>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "l.i[0]",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "l.i[1]",
+     "kind": "modified",
+     "before": "2",
+     "after": "3",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "l.i[2]",
+     "kind": "added",
+     "after": "4",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/repeated-unordered",
+  "left": {
+   "name": "a.xml",
+   "content": "<l><i>1</i><i>2</i></l>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<l><i>2</i><i>1</i></l>"
+  },
+  "options": {
+   "ignoreArrayOrder": true
+  },
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "l.i[0]",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "l.i[1]",
+     "kind": "unchanged",
+     "before": "2",
+     "after": "2",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/added-removed",
+  "left": {
+   "name": "a.xml",
+   "content": "<a><b/><c/></a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a><b/><d/></a>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.b",
+     "kind": "unchanged",
+     "before": "",
+     "after": "",
+     "evidence": "fact"
+    },
+    {
+     "path": "a.c",
+     "kind": "removed",
+     "before": "",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "a.d",
+     "kind": "added",
+     "after": "",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/mixed-content",
+  "left": {
+   "name": "a.xml",
+   "content": "<a k=\"1\">hi</a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a k=\"1\">bye</a>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.@k",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "a.#text",
+     "kind": "modified",
+     "before": "hi",
+     "after": "bye",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/cdata",
+  "left": {
+   "name": "a.xml",
+   "content": "<a><![CDATA[x<y]]></a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a>x&lt;y</a>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": "x<y",
+     "after": "x<y",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/entities",
+  "left": {
+   "name": "a.xml",
+   "content": "<a>Tom &amp; Jerry &#65;</a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a>Tom &amp; Jerry A</a>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": "Tom & Jerry A",
+     "after": "Tom & Jerry A",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/ignore-attributes",
+  "left": {
+   "name": "a.xml",
+   "content": "<a id=\"1\" v=\"x\"/>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a id=\"2\" v=\"x\"/>"
+  },
+  "options": {
+   "ignoreAttributes": [
+    "id"
+   ]
+  },
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.@v",
+     "kind": "unchanged",
+     "before": "x",
+     "after": "x",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/namespaces-default",
+  "left": {
+   "name": "a.xml",
+   "content": "<r xmlns:p=\"u\"><p:i>1</p:i></r>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<r xmlns:q=\"u\"><q:i>1</q:i></r>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 2,
+    "removed": 2,
+    "modified": 0,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "r.@xmlns:p",
+     "kind": "removed",
+     "before": "u",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "r.p:i",
+     "kind": "removed",
+     "before": "1",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "r.@xmlns:q",
+     "kind": "added",
+     "after": "u",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "r.q:i",
+     "kind": "added",
+     "after": "1",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/namespaces-ignored",
+  "left": {
+   "name": "a.xml",
+   "content": "<r xmlns:p=\"u\"><p:i>1</p:i></r>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<r xmlns:q=\"u\"><q:i>1</q:i></r>"
+  },
+  "options": {
+   "ignoreNamespaces": true
+  },
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "r.i",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/declaration-compared",
+  "left": {
+   "name": "a.xml",
+   "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><a/>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a/>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "?xml",
+     "kind": "removed",
+     "before": {
+      "@version": "1.0",
+      "@encoding": "UTF-8"
+     },
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": "",
+     "after": "",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/declaration-ignored",
+  "left": {
+   "name": "a.xml",
+   "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><a/>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a/>"
+  },
+  "options": {
+   "ignoreXmlDeclaration": true
+  },
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": "",
+     "after": "",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/whitespace-text",
+  "left": {
+   "name": "a.xml",
+   "content": "<a>x  y</a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a>x y</a>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "modified",
+     "before": "x  y",
+     "after": "x y",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/whitespace-ignored",
+  "left": {
+   "name": "a.xml",
+   "content": "<a>x  y</a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a>x y</a>"
+  },
+  "options": {
+   "ignoreWhitespace": true
+  },
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "unchanged",
+     "before": "x  y",
+     "after": "x y",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/empty-vs-text",
+  "left": {
+   "name": "a.xml",
+   "content": "<a><b/></a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a><b>t</b></a>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.b",
+     "kind": "modified",
+     "before": "",
+     "after": "t",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/nested-attrs-and-text",
+  "left": {
+   "name": "a.xml",
+   "content": "<a><b k=\"1\">t</b><c/></a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a><b k=\"2\">u</b><c/></a>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.b.@k",
+     "kind": "modified",
+     "before": "1",
+     "after": "2",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "a.b.#text",
+     "kind": "modified",
+     "before": "t",
+     "after": "u",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    },
+    {
+     "path": "a.c",
+     "kind": "unchanged",
+     "before": "",
+     "after": "",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/impact",
+  "left": {
+   "name": "a.xml",
+   "content": "<cfg><timeout>30</timeout><host>a</host></cfg>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<cfg><timeout>45</timeout><host>b</host></cfg>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 0
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "cfg.timeout",
+     "kind": "modified",
+     "before": "30",
+     "after": "45",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    },
+    {
+     "path": "cfg.host",
+     "kind": "modified",
+     "before": "a",
+     "after": "b",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Name suggests a connection target or security setting; requests may reach a different service or be handled differently."
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/bom",
+  "left": {
+   "name": "a.xml",
+   "content": "﻿<a>1</a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a>2</a>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a",
+     "kind": "modified",
+     "before": "1",
+     "after": "2",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/numeric-char-refs",
+  "left": {
+   "name": "a.xml",
+   "content": "<a k=\"&#65;\">&#x42;&#67;</a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a k=\"A\">BC</a>"
+  },
+  "options": {},
+  "expected": {
+   "format": "xml",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "a.@k",
+     "kind": "unchanged",
+     "before": "A",
+     "after": "A",
+     "evidence": "fact"
+    },
+    {
+     "path": "a.#text",
+     "kind": "unchanged",
+     "before": "BC",
+     "after": "BC",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "xml/malformed-fallback",
+  "left": {
+   "name": "a.xml",
+   "content": "<a><b></a>"
+  },
+  "right": {
+   "name": "b.xml",
+   "content": "<a/>"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "warnings": [
+    "Invalid XML, fell back to text comparison (…)"
+   ],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "modified",
+     "before": "<a><b></a>",
+     "after": "<a/>",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "text/one-line-modified",
+  "left": {
+   "name": "a.txt",
+   "content": "hello\nworld\n"
+  },
+  "right": {
+   "name": "b.txt",
+   "content": "hello\nthere\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "L2",
+     "kind": "modified",
+     "before": "world",
+     "after": "there",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "text/identical-empty",
+  "left": {
+   "name": "a.txt",
+   "content": ""
+  },
+  "right": {
+   "name": "b.txt",
+   "content": ""
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 0
+   },
+   "warnings": [],
+   "changes": []
+  }
+ },
+ {
+  "name": "text/trailing-newline",
+  "left": {
+   "name": "a.txt",
+   "content": "a\nb"
+  },
+  "right": {
+   "name": "b.txt",
+   "content": "a\nb\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": []
+  }
+ },
+ {
+  "name": "text/add-remove",
+  "left": {
+   "name": "a.txt",
+   "content": "a\nb\nc\n"
+  },
+  "right": {
+   "name": "b.txt",
+   "content": "a\nc\nd\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "L2",
+     "kind": "removed",
+     "before": "b",
+     "evidence": "fact"
+    },
+    {
+     "path": "L3",
+     "kind": "added",
+     "after": "d",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "text/crlf",
+  "left": {
+   "name": "a.txt",
+   "content": "a\r\nb\r\n"
+  },
+  "right": {
+   "name": "b.txt",
+   "content": "a\nb\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": []
+  }
+ },
+ {
+  "name": "text/ignore-ws",
+  "left": {
+   "name": "a.txt",
+   "content": "a  b\n"
+  },
+  "right": {
+   "name": "b.txt",
+   "content": " a b \n"
+  },
+  "options": {
+   "ignoreWhitespace": true
+  },
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": []
+  }
+ },
+ {
+  "name": "text/ignore-case",
+  "left": {
+   "name": "a.txt",
+   "content": "Hello\n"
+  },
+  "right": {
+   "name": "b.txt",
+   "content": "hello\n"
+  },
+  "options": {
+   "ignoreCase": true
+  },
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": []
+  }
+ },
+ {
+  "name": "text/markdown-ext",
+  "left": {
+   "name": "a.md",
+   "content": "# a\n"
+  },
+  "right": {
+   "name": "b.md",
+   "content": "# b\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "modified",
+     "before": "# a",
+     "after": "# b",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "text/many-edits",
+  "left": {
+   "name": "a.txt",
+   "content": "line 0\nline 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\nline 31\nline 32\nline 33\nline 34\nline 35\nline 36\nline 37\nline 38\nline 39\nline 40\nline 41\nline 42\nline 43\nline 44\nline 45\nline 46\nline 47\nline 48\nline 49\nline 50\nline 51\nline 52\nline 53\nline 54\nline 55\nline 56\nline 57\nline 58\nline 59"
+  },
+  "right": {
+   "name": "b.txt",
+   "content": "LINE 0\nline 1\nline 2\nline 3\nline 4\nline 5\nline 6\nLINE 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nLINE 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nLINE 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nLINE 28\nline 29\n\nline 32\nline 33\nline 34\nLINE 35\nline 36\nline 37\nline 38\nline 39\nline 40\nline 41\nLINE 42\nline 43\nline 44\nline 45\nline 46\nline 47\nline 48\nLINE 49\nline 50\nline 51\nline 52\nline 53\nline 54\nline 55\nLINE 56\nline 57\nline 58\nline 59"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 1,
+    "modified": 10,
+    "unchanged": 49
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "modified",
+     "before": "line 0",
+     "after": "LINE 0",
+     "evidence": "fact"
+    },
+    {
+     "path": "L8",
+     "kind": "modified",
+     "before": "line 7",
+     "after": "LINE 7",
+     "evidence": "fact"
+    },
+    {
+     "path": "L15",
+     "kind": "modified",
+     "before": "line 14",
+     "after": "LINE 14",
+     "evidence": "fact"
+    },
+    {
+     "path": "L22",
+     "kind": "modified",
+     "before": "line 21",
+     "after": "LINE 21",
+     "evidence": "fact"
+    },
+    {
+     "path": "L29",
+     "kind": "modified",
+     "before": "line 28",
+     "after": "LINE 28",
+     "evidence": "fact"
+    },
+    {
+     "path": "L31",
+     "kind": "modified",
+     "before": "line 30",
+     "after": "",
+     "evidence": "fact"
+    },
+    {
+     "path": "L32",
+     "kind": "removed",
+     "before": "line 31",
+     "evidence": "fact"
+    },
+    {
+     "path": "L36",
+     "kind": "modified",
+     "before": "line 35",
+     "after": "LINE 35",
+     "evidence": "fact"
+    },
+    {
+     "path": "L43",
+     "kind": "modified",
+     "before": "line 42",
+     "after": "LINE 42",
+     "evidence": "fact"
+    },
+    {
+     "path": "L50",
+     "kind": "modified",
+     "before": "line 49",
+     "after": "LINE 49",
+     "evidence": "fact"
+    },
+    {
+     "path": "L57",
+     "kind": "modified",
+     "before": "line 56",
+     "after": "LINE 56",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "text/reordered-blocks",
+  "left": {
+   "name": "a.txt",
+   "content": "a\nb\nc\nd\ne\n"
+  },
+  "right": {
+   "name": "b.txt",
+   "content": "d\ne\na\nb\nc\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 2,
+    "removed": 2,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "added",
+     "after": "d",
+     "evidence": "fact"
+    },
+    {
+     "path": "L2",
+     "kind": "added",
+     "after": "e",
+     "evidence": "fact"
+    },
+    {
+     "path": "L4",
+     "kind": "removed",
+     "before": "d",
+     "evidence": "fact"
+    },
+    {
+     "path": "L5",
+     "kind": "removed",
+     "before": "e",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "text/forced-format-json-as-text",
+  "left": {
+   "name": "a.json",
+   "content": "{\"a\":1}"
+  },
+  "right": {
+   "name": "b.json",
+   "content": "{\"a\":2}"
+  },
+  "options": {
+   "format": "text"
+  },
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "modified",
+     "before": "{\"a\":1}",
+     "after": "{\"a\":2}",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "text/blank-lines",
+  "left": {
+   "name": "a.txt",
+   "content": "\n\na\n\n"
+  },
+  "right": {
+   "name": "b.txt",
+   "content": "\na\n\n\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "L2",
+     "kind": "removed",
+     "before": "",
+     "evidence": "fact"
+    },
+    {
+     "path": "L3",
+     "kind": "added",
+     "after": "",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/prd-example",
+  "left": {
+   "name": "expected.json",
+   "content": "{\"status\":200,\"body\":{\"user\":{\"id\":123,\"name\":\"John\"},\"amount\":100,\"currency\":\"INR\"}}"
+  },
+  "right": {
+   "name": "actual.json",
+   "content": "{\"status\":200,\"body\":{\"user\":{\"id\":123,\"name\":\"John\"},\"amount\":120,\"currency\":\"INR\"}}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 4
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 200,
+     "after": 200,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.user.id",
+     "kind": "unchanged",
+     "before": 123,
+     "after": 123,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.user.name",
+     "kind": "unchanged",
+     "before": "John",
+     "after": "John",
+     "evidence": "fact"
+    },
+    {
+     "path": "body.amount",
+     "kind": "modified",
+     "before": 100,
+     "after": 120,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.currency",
+     "kind": "unchanged",
+     "before": "INR",
+     "after": "INR",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/pass",
+  "left": {
+   "name": "e.json",
+   "content": "{\"status\":200,\"headers\":{\"Content-Type\":\"application/json\",\"Date\":\"x\"},\"body\":{\"a\":1}}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"status\":200,\"headers\":{\"content-type\":\"application/json\",\"date\":\"y\",\"X-Extra\":\"1\"},\"body\":{\"a\":1}}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 200,
+     "after": 200,
+     "evidence": "fact"
+    },
+    {
+     "path": "headers.content-type",
+     "kind": "unchanged",
+     "before": "application/json",
+     "after": "application/json",
+     "evidence": "fact"
+    },
+    {
+     "path": "body.a",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/status-and-headers",
+  "left": {
+   "name": "e.json",
+   "content": "{\"status\":200,\"headers\":{\"content-type\":\"a\"},\"body\":{}}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"status\":500,\"headers\":{\"content-type\":\"b\"},\"body\":{}}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 0
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "modified",
+     "before": 200,
+     "after": 500,
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Status code differs; the response class (success vs error) may have changed."
+    },
+    {
+     "path": "headers.content-type",
+     "kind": "modified",
+     "before": "a",
+     "after": "b",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/missing-header",
+  "left": {
+   "name": "e.json",
+   "content": "{\"status\":200,\"headers\":{\"x-a\":\"1\"},\"body\":{}}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"status\":200,\"headers\":{},\"body\":{}}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 200,
+     "after": 200,
+     "evidence": "fact"
+    },
+    {
+     "path": "headers.x-a",
+     "kind": "removed",
+     "before": "1",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/missing-and-extra-fields",
+  "left": {
+   "name": "e.json",
+   "content": "{\"status\":200,\"body\":{\"user\":{\"id\":123,\"name\":\"John\"},\"amount\":100,\"currency\":\"INR\"}}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"status\":200,\"body\":{\"user\":{\"id\":123},\"amount\":100,\"extra\":true}}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 1,
+    "removed": 2,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 200,
+     "after": 200,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.user.id",
+     "kind": "unchanged",
+     "before": 123,
+     "after": 123,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.user.name",
+     "kind": "removed",
+     "before": "John",
+     "evidence": "fact"
+    },
+    {
+     "path": "body.amount",
+     "kind": "unchanged",
+     "before": 100,
+     "after": 100,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.currency",
+     "kind": "removed",
+     "before": "INR",
+     "evidence": "fact"
+    },
+    {
+     "path": "body.extra",
+     "kind": "added",
+     "after": true,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/ignore-extra",
+  "left": {
+   "name": "e.json",
+   "content": "{\"status\":200,\"body\":{\"user\":{\"id\":123,\"name\":\"John\"},\"amount\":100,\"currency\":\"INR\"}}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"status\":200,\"body\":{\"user\":{\"id\":123},\"amount\":100,\"extra\":true}}"
+  },
+  "options": {
+   "format": "api",
+   "ignoreExtraFields": true
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 2,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 200,
+     "after": 200,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.user.id",
+     "kind": "unchanged",
+     "before": 123,
+     "after": 123,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.user.name",
+     "kind": "removed",
+     "before": "John",
+     "evidence": "fact"
+    },
+    {
+     "path": "body.amount",
+     "kind": "unchanged",
+     "before": 100,
+     "after": 100,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.currency",
+     "kind": "removed",
+     "before": "INR",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/ignore-extra-and-paths",
+  "left": {
+   "name": "e.json",
+   "content": "{\"status\":200,\"body\":{\"user\":{\"id\":123,\"name\":\"John\"},\"amount\":100,\"currency\":\"INR\"}}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"status\":200,\"body\":{\"user\":{\"id\":123},\"amount\":100,\"extra\":true}}"
+  },
+  "options": {
+   "format": "api",
+   "ignoreExtraFields": true,
+   "ignorePaths": [
+    "currency",
+    "user.name"
+   ]
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 200,
+     "after": 200,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.user.id",
+     "kind": "unchanged",
+     "before": 123,
+     "after": 123,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.amount",
+     "kind": "unchanged",
+     "before": 100,
+     "after": 100,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/ignore-headers",
+  "left": {
+   "name": "e.json",
+   "content": "{\"status\":200,\"headers\":{\"x-a\":\"1\",\"x-b\":\"2\"},\"body\":{}}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"status\":200,\"headers\":{\"x-a\":\"9\",\"x-b\":\"2\"},\"body\":{}}"
+  },
+  "options": {
+   "format": "api",
+   "ignoreHeaders": [
+    "X-A"
+   ]
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 200,
+     "after": 200,
+     "evidence": "fact"
+    },
+    {
+     "path": "headers.x-b",
+     "kind": "unchanged",
+     "before": "2",
+     "after": "2",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/bodies-only",
+  "left": {
+   "name": "e.json",
+   "content": "{\"ids\":[1,2]}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"ids\":[2,1]}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 0
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "body.ids[0]",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.ids[1]",
+     "kind": "modified",
+     "before": 2,
+     "after": 1,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/bodies-only-unordered",
+  "left": {
+   "name": "e.json",
+   "content": "{\"ids\":[1,2]}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"ids\":[2,1]}"
+  },
+  "options": {
+   "format": "api",
+   "ignoreArrayOrder": true
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "body.ids[0]",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.ids[1]",
+     "kind": "unchanged",
+     "before": 2,
+     "after": 2,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/raw-http",
+  "left": {
+   "name": "e.http",
+   "content": "HTTP/1.1 201 Created\r\nContent-Type: application/json\r\nX-A: 1\r\n\r\n{\"id\":5}"
+  },
+  "right": {
+   "name": "a.http",
+   "content": "HTTP/1.1 201 Created\r\ncontent-type: application/json\r\nX-A: 2\r\n\r\n{\"id\":6}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 2
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 201,
+     "after": 201,
+     "evidence": "fact"
+    },
+    {
+     "path": "headers.content-type",
+     "kind": "unchanged",
+     "before": "application/json",
+     "after": "application/json",
+     "evidence": "fact"
+    },
+    {
+     "path": "headers.x-a",
+     "kind": "modified",
+     "before": "1",
+     "after": "2",
+     "evidence": "fact"
+    },
+    {
+     "path": "body.id",
+     "kind": "modified",
+     "before": 5,
+     "after": 6,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/raw-http-no-headers",
+  "left": {
+   "name": "e.txt",
+   "content": "HTTP/1.1 200 OK\n\nhello"
+  },
+  "right": {
+   "name": "a.txt",
+   "content": "HTTP/1.1 200 OK\n\nbye"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 200,
+     "after": 200,
+     "evidence": "fact"
+    },
+    {
+     "path": "body",
+     "kind": "modified",
+     "before": "hello",
+     "after": "bye",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/raw-http-vs-envelope",
+  "left": {
+   "name": "e.txt",
+   "content": "HTTP/1.1 200 OK\nContent-Type: text/plain\n\n{\"a\":1}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"statusCode\":200,\"headers\":{\"Content-Type\":\"text/plain\"},\"body\":\"{\\\"a\\\":1}\"}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 200,
+     "after": 200,
+     "evidence": "fact"
+    },
+    {
+     "path": "headers.content-type",
+     "kind": "unchanged",
+     "before": "text/plain",
+     "after": "text/plain",
+     "evidence": "fact"
+    },
+    {
+     "path": "body.a",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/status-one-side",
+  "left": {
+   "name": "e.json",
+   "content": "{\"status\":200,\"body\":{\"a\":1}}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"a\":1}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "warnings": [
+    "Status code is present in only one input, so it was not compared."
+   ],
+   "changes": [
+    {
+     "path": "body.a",
+     "kind": "unchanged",
+     "before": 1,
+     "after": 1,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/envelope-data-key",
+  "left": {
+   "name": "e.json",
+   "content": "{\"status\":200,\"data\":{\"a\":1}}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"status\":200,\"data\":{\"a\":2}}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "status",
+     "kind": "unchanged",
+     "before": 200,
+     "after": 200,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.a",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/text-bodies",
+  "left": {
+   "name": "e.txt",
+   "content": "plain text"
+  },
+  "right": {
+   "name": "a.txt",
+   "content": "plain text!"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "body",
+     "kind": "modified",
+     "before": "plain text",
+     "after": "plain text!",
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/string-status-not-envelope",
+  "left": {
+   "name": "e.json",
+   "content": "{\"status\":\"ok\",\"data\":1}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"status\":\"ok\",\"data\":2}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "body.status",
+     "kind": "unchanged",
+     "before": "ok",
+     "after": "ok",
+     "evidence": "fact"
+    },
+    {
+     "path": "body.data",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact"
+    }
+   ]
+  }
+ },
+ {
+  "name": "api/many-mismatches",
+  "left": {
+   "name": "e.json",
+   "content": "{\"a\":1,\"b\":1}"
+  },
+  "right": {
+   "name": "a.json",
+   "content": "{\"a\":2,\"b\":2}"
+  },
+  "options": {
+   "format": "api"
+  },
+  "expected": {
+   "format": "api",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 0
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "body.a",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact"
+    },
+    {
+     "path": "body.b",
+     "kind": "modified",
+     "before": 1,
+     "after": 2,
+     "evidence": "fact"
+    }
+   ]
+  }
+ }
+]
