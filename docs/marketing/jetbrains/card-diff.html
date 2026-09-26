@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0}
+body{width:1280px;height:855px;overflow:hidden;font-family:"Ubuntu","Noto Sans",sans-serif;color:#e8edf5;position:relative;
+ background:
+  radial-gradient(760px 420px at 12% -8%,#5b46d955,transparent 62%),
+  radial-gradient(760px 460px at 92% 4%,#2a6fdb55,transparent 60%),
+  linear-gradient(165deg,#0b1020,#141b31 58%,#0d1224);
+ display:flex;flex-direction:column;align-items:center;padding:38px 0 0}
+body:before{content:"";position:absolute;inset:0;background:
+  linear-gradient(#ffffff08 1px,transparent 1px) 0 0/56px 56px,linear-gradient(90deg,#ffffff08 1px,transparent 1px) 0 0/56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 0,transparent 70%);mask-image:radial-gradient(ellipse at 50% 30%,#000 0,transparent 70%)}
+.brand{display:flex;align-items:center;gap:18px;position:relative}
+.brand img{width:84px;height:84px;filter:drop-shadow(0 8px 28px #6d5cff99)}
+h1{font-size:60px;font-weight:700;letter-spacing:-1px;line-height:1}
+h1 span{background:linear-gradient(90deg,#4da3ff,#9b7bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:15px;letter-spacing:.32em;text-transform:uppercase;color:#93a4c6;margin-top:6px}
+.tag{font-size:27px;margin-top:14px;color:#d3dcef;position:relative}
+.chips{display:flex;gap:10px;margin-top:18px;position:relative}
+.chip{font-size:14.5px;padding:6px 14px;border:1px solid #3a4a72;border-radius:999px;color:#b3c2de;background:#ffffff0a}
+.chip.hi{border-color:#5b7cff;color:#dfe8ff;background:#4d6bff22}
+.shot{position:relative;margin-top:26px;width:1130px;border-radius:14px 14px 0 0;overflow:hidden;
+ border:1px solid #4a5a86;border-bottom:0;
+ box-shadow:0 0 0 1px #0008,0 40px 90px #000c,0 0 120px #4d6bff33}
+.shot img{display:block;width:100%}
+.shot:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#ffffff10,transparent 22%);pointer-events:none}
+</style></head><body>
+<div class="brand"><img src="../logo-512.png"><div><h1>Diff<span>Sense</span></h1><div class="sub">Semantic Compare for IntelliJ</div></div></div>
+<div class="tag">The native IntelliJ diff, plus a summary that explains it.</div>
+<div class="chips"><div class="chip">Impact with reasons</div><div class="chip">Swap sides</div><div class="chip">Copy or export Markdown</div><div class="chip">Ignore rules</div><div class="chip">100% local</div></div>
+<div class="shot"><img src="screenshot-java.png"></div>
+</body></html>

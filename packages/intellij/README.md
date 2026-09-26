@@ -1,5 +1,7 @@
 # DiffSense Semantic Compare for IntelliJ
 
+![DiffSense in IntelliJ](media/intellij-hero.png)
+
 **Compare files. Understand what changed.** This is the JetBrains IDE plugin. It uses the IDE's own diff viewer and adds a
 summary tool window that lists what changed, by structure, with impact estimates.
 

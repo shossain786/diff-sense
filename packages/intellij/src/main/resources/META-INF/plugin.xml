@@ -3,6 +3,7 @@
     <name>DiffSense Semantic Compare</name>
     <vendor>RazaTech</vendor>
     <description><![CDATA[
+        <p><img src="https://raw.githubusercontent.com/shossain786/diff-sense/master/packages/intellij/media/intellij-hero.png" width="800" alt="DiffSense Semantic Compare in IntelliJ: JSON diff with a summary tool window"/></p>
         <p><b>Compare files. Understand what changed.</b></p>
         <p>DiffSense adds a semantic layer on top of the IDE's own diff viewer. Instead of only showing which lines
         changed, it tells you <i>what</i> changed and whether it matters.</p>
@@ -18,6 +19,7 @@
         <p>Right-click one or two files in the Project view and choose <b>DiffSense | Compare with DiffSense</b>, or use
         the DiffSense actions in the Tools menu.</p>
         <p><b>Fully local:</b> no network access, no account, no telemetry. Your files never leave your machine.</p>
+        <p><img src="https://raw.githubusercontent.com/shossain786/diff-sense/master/packages/intellij/media/intellij-diff.png" width="800" alt="The IDE's own diff viewer plus the DiffSense summary"/></p>
         <p>Java semantic analysis and the test-automation rules from the VS Code extension are planned for a later release.</p>
     ]]></description>
     <change-notes><![CDATA[
