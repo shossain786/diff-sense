@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 — 2026-09-26
+
+- Marketplace display name is now "DiffSense Semantic Compare" (the name "DiffSense" was already taken). No functional changes.
+
 ## 0.1.1 — 2026-09-26
 
 - Marketplace page: hero image and refreshed README (no functional changes)
