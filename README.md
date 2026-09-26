@@ -10,6 +10,8 @@ See [docs/DiffSense_Product_Requirements.md](docs/DiffSense_Product_Requirements
 - `packages/core` — VS Code-independent comparison engine (pure functions)
 - `packages/cli` — thin CLI over the core (`diffsense compare a b`, `diffsense api expected actual`)
 - `packages/vscode` — the VS Code extension
+- `packages/intellij` — the IntelliJ plugin (Kotlin port of the engine; see its README)
+- `conformance` — shared test cases that keep the TypeScript and Kotlin engines identical
 
 ## Develop
 ```

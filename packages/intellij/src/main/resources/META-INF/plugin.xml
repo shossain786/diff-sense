@@ -3,8 +3,56 @@
     <name>DiffSense Semantic Compare</name>
     <vendor>RazaTech</vendor>
     <description><![CDATA[
-        Compare files and understand what changed. Structure-aware comparison for JSON, YAML, XML and
-        API responses, with impact estimates. Fully local: no network access, no telemetry.
+        <p><b>Compare files. Understand what changed.</b></p>
+        <p>DiffSense adds a semantic layer on top of the IDE's own diff viewer. Instead of only showing which lines
+        changed, it tells you <i>what</i> changed and whether it matters.</p>
+        <ul>
+            <li><b>JSON, YAML and XML</b> are compared by structure: reordered keys and reformatting are not changes,
+                and every changed value is listed with its path.</li>
+            <li><b>API responses:</b> compare an expected response with an actual one (raw HTTP, JSON envelope or bare body)
+                and get a pass/fail verdict with every check listed.</li>
+            <li><b>Impact estimates</b> (informational to critical) with the reason for each one.</li>
+            <li><b>Ignore rules</b> for paths, order, case and whitespace, in Settings or a project <code>.diffsense.json</code>.</li>
+            <li>Copy or export the summary as Markdown.</li>
+        </ul>
+        <p>Right-click one or two files in the Project view and choose <b>DiffSense | Compare with DiffSense</b>, or use
+        the DiffSense actions in the Tools menu.</p>
+        <p><b>Fully local:</b> no network access, no account, no telemetry. Your files never leave your machine.</p>
+        <p>Java semantic analysis and the test-automation rules from the VS Code extension are planned for a later release.</p>
     ]]></description>
+    <change-notes><![CDATA[
+        <b>0.1.0</b> First release: text, JSON, YAML, XML and API response comparison, impact estimates, Markdown export.
+    ]]></change-notes>
+
     <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable parentId="tools" instance="com.razatech.diffsense.ide.DiffSenseConfigurable"
+                                 id="com.razatech.diffsense.settings" displayName="DiffSense"/>
+        <toolWindow id="DiffSense" anchor="bottom" icon="/icons/diffsense.svg"
+                    factoryClass="com.razatech.diffsense.ide.DiffSenseToolWindowFactory"/>
+        <notificationGroup id="DiffSense" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="DiffSense.CompareFiles" class="com.razatech.diffsense.ide.CompareFilesAction"
+                text="Compare with DiffSense" description="Compare two files and explain what changed" icon="/icons/diffsense.svg">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
+        </action>
+
+        <group id="DiffSense.Group" text="DiffSense" popup="true" icon="/icons/diffsense.svg">
+            <action id="DiffSense.CompareFilesMenu" class="com.razatech.diffsense.ide.CompareFilesAction"
+                    text="Compare Files…" description="Compare two files and explain what changed"/>
+            <action id="DiffSense.CompareApiResponses" class="com.razatech.diffsense.ide.CompareApiResponsesAction"
+                    text="Compare API Responses (Expected vs Actual)…"
+                    description="Check an actual API response against an expected one, with a pass/fail verdict"/>
+            <action id="DiffSense.CompareClipboard" class="com.razatech.diffsense.ide.CompareClipboardAction"
+                    text="Compare with Clipboard" description="Compare the current file or selection with the clipboard"/>
+            <action id="DiffSense.CompareSelectedText" class="com.razatech.diffsense.ide.CompareSelectedTextAction"
+                    text="Compare Selected Text" description="Select text and run, then select other text and run again"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </group>
+    </actions>
 </idea-plugin>
