@@ -7,3 +7,5 @@ packages/intellij/.gradle
 packages/intellij/build
 packages/intellij/.intellijPlatform
 packages/intellij/.kotlin
+samples/.idea
+samples/*.iml

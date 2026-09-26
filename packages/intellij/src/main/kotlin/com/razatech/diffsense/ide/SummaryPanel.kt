@@ -87,9 +87,16 @@ class SummaryPanel(private val project: Project) : JPanel(BorderLayout()) {
     private val table = object : JBTable(changesModel) {
         override fun getToolTipText(event: MouseEvent): String? {
             val row = rowAtPoint(event.point)
-            if (row < 0) return null
+            val col = columnAtPoint(event.point)
+            if (row < 0 || col < 0) return null
             val c = changesModel.change(convertRowIndexToModel(row))
-            return c.reason ?: super.getToolTipText(event)
+            val cell = getValueAt(row, col)?.toString().orEmpty()
+            return when {
+                col == 4 && !changesModel.api -> c.reason
+                col >= 2 && cell.length > 40 -> cell
+                col == 1 && cell.length > 40 -> cell
+                else -> null
+            }
         }
     }
 
@@ -120,7 +127,8 @@ class SummaryPanel(private val project: Project) : JPanel(BorderLayout()) {
             setShowGrid(false)
             rowHeight = JBUI.scale(24)
             tableHeader.reorderingAllowed = false
-            autoResizeMode = JTable.AUTO_RESIZE_LAST_COLUMN
+            autoResizeMode = JTable.AUTO_RESIZE_ALL_COLUMNS
+            setFillsViewportHeight(true)
             setDefaultRenderer(Any::class.java, object : DefaultTableCellRenderer() {
                 override fun getTableCellRendererComponent(t: JTable, v: Any?, sel: Boolean, focus: Boolean, row: Int, col: Int): Component {
                     val comp = super.getTableCellRendererComponent(t, v, sel, false, row, col)
@@ -148,6 +156,7 @@ class SummaryPanel(private val project: Project) : JPanel(BorderLayout()) {
     }
 
     private fun showEmpty() {
+        title.isVisible = false
         subtitle.text = "Select two files, right-click and choose \"Compare with DiffSense\"."
         stats.text = ""
         notes.text = ""
@@ -160,7 +169,8 @@ class SummaryPanel(private val project: Project) : JPanel(BorderLayout()) {
         val r = a.result
         val api = r.format == Format.API
         showUnchanged.isVisible = !api
-        title.text = if (api) "API Response Comparison" else "DiffSense"
+        title.text = "API Response Comparison"
+        title.isVisible = api // the tool window already carries the "DiffSense" title
         if (api) {
             val bad = apiMismatches(r)
             subtitle.text = "Expected: ${a.left.name} · Actual: ${a.right.name}"
@@ -181,9 +191,13 @@ class SummaryPanel(private val project: Project) : JPanel(BorderLayout()) {
         changesModel.api = api
         changesModel.rows = if (api || showUnchanged.isSelected) a.result.changes else a.result.changes.filter { it.kind != ChangeKind.UNCHANGED }
         changesModel.fireTableStructureChanged()
+        // Symbol and impact columns are fixed; the rest share the width so the table always fills the tool window.
         table.columnModel.getColumn(0).apply { minWidth = JBUI.scale(28); maxWidth = JBUI.scale(28) }
-        table.columnModel.getColumn(1).preferredWidth = JBUI.scale(260)
-        if (!api && changesModel.columnCount > 4) table.columnModel.getColumn(4).apply { minWidth = JBUI.scale(80); maxWidth = JBUI.scale(90) }
+        table.columnModel.getColumn(1).preferredWidth = JBUI.scale(280)
+        table.columnModel.getColumn(2).preferredWidth = JBUI.scale(320)
+        table.columnModel.getColumn(3).preferredWidth = JBUI.scale(320)
+        if (!api) table.columnModel.getColumn(4).apply { minWidth = JBUI.scale(90); maxWidth = JBUI.scale(90) }
+        table.revalidate()
     }
 
     private fun exportMarkdown(a: Analysis) {
