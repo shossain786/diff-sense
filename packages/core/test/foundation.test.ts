@@ -30,7 +30,7 @@ describe('computeStats', () => {
   });
 });
 
-describe('compare (stub)', () => {
+describe('compare', () => {
   it('returns a well-formed result', () => {
     const r = compare(
       { name: 'a.json', content: fx('json/config-a.json') },
@@ -44,7 +44,6 @@ describe('compare (stub)', () => {
 // Golden expectations for Phase 1 comparators. Enabled as each lands.
 describe.skip('golden fixtures (Phase 1)', () => {
   it.each([
-    ['json', 'config-a.json', 'config-b.json'],
     ['xml', 'user-a.xml', 'user-b.xml'],
     ['yaml', 'config-a.yaml', 'config-b.yaml'],
   ])('%s', (dir, a, b) => {
