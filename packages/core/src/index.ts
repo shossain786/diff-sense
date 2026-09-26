@@ -7,4 +7,4 @@ export { computeStats } from './stats.js';
 export { compareYaml } from './yaml.js';
 export { compareXml } from './xml.js';
 export * from './config.js';
-export { renderSummary, formatValue } from './summary.js';
+export { renderSummary, renderMarkdown, formatValue } from './summary.js';

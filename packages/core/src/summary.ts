@@ -44,3 +44,35 @@ export function renderSummary(result: ResultLike): string {
 }
 
 type ResultLike = Pick<ComparisonResult, 'left' | 'right' | 'changes' | 'stats' | 'impact' | 'warnings'>;
+
+const mdCode = (v: string) => '`' + v.replace(/`/g, "'").replace(/\n/g, ' ') + '`';
+
+/** Markdown change summary, suitable for export or pasting into a PR. */
+export function renderMarkdown(result: ResultLike): string {
+  const { added, removed, modified, unchanged } = result.stats;
+  const out = [
+    '# DiffSense — Change Summary',
+    '',
+    `**Files:** ${mdCode(result.left)} ↔ ${mdCode(result.right)}`,
+    '',
+    '| Added | Removed | Modified | Unchanged |',
+    '|---:|---:|---:|---:|',
+    `| ${added} | ${removed} | ${modified} | ${unchanged} |`,
+    '',
+  ];
+  const changed = result.changes.filter((c) => c.kind !== 'unchanged');
+  if (changed.length === 0) out.push('No differences found.', '');
+  else {
+    out.push('## Changes', '');
+    for (const c of changed) {
+      if (c.kind === 'modified') {
+        out.push(`- ⚠ ${mdCode(c.path)}: ${mdCode(formatValue(c.before))} → ${mdCode(formatValue(c.after))}`);
+      } else if (c.kind === 'added') out.push(`- + ${mdCode(c.path)}: ${mdCode(formatValue(c.after))}`);
+      else out.push(`- − ${mdCode(c.path)}: ${mdCode(formatValue(c.before))}`);
+    }
+    out.push('');
+  }
+  if (result.impact) out.push(`**Potential impact (estimate):** ${result.impact}`, '');
+  for (const w of result.warnings) out.push(`> Note: ${w}`, '');
+  return out.join('\n').trimEnd() + '\n';
+}

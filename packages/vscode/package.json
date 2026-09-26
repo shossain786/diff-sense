@@ -1,0 +1,60 @@
+{
+  "name": "diffsense-vscode",
+  "displayName": "DiffSense",
+  "description": "Compare files. Understand what changed. Structure-aware summaries for JSON, XML, YAML and text, on top of VS Code's native diff.",
+  "version": "0.0.1",
+  "publisher": "shossain786",
+  "license": "MIT",
+  "private": true,
+  "repository": { "type": "git", "url": "https://github.com/shossain786/diff-sense.git" },
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      { "command": "diffsense.compareFiles", "title": "Compare Files", "category": "DiffSense" },
+      { "command": "diffsense.compareClipboard", "title": "Compare Clipboard", "category": "DiffSense" },
+      { "command": "diffsense.compareSelection", "title": "Compare Selected Text", "category": "DiffSense" },
+      { "command": "diffsense.analyzeCurrentDiff", "title": "Analyze Current Diff", "category": "DiffSense" },
+      { "command": "diffsense.explainChanges", "title": "Explain Changes", "category": "DiffSense" }
+    ],
+    "menus": {
+      "explorer/context": [
+        { "command": "diffsense.compareFiles", "when": "!explorerResourceIsFolder", "group": "3_compare@9" }
+      ],
+      "editor/context": [
+        { "command": "diffsense.compareSelection", "when": "editorHasSelection", "group": "3_compare@9" }
+      ],
+      "editor/title/context": [
+        { "command": "diffsense.compareFiles", "group": "3_compare@9" }
+      ]
+    },
+    "configuration": {
+      "title": "DiffSense",
+      "properties": {
+        "diffsense.ignoreWhitespace": { "type": "boolean", "default": false, "description": "Ignore whitespace differences." },
+        "diffsense.ignoreCase": { "type": "boolean", "default": false, "description": "Ignore letter case in values." },
+        "diffsense.ignoreArrayOrder": { "type": "boolean", "default": false, "description": "Treat arrays (and repeated XML elements) as unordered." },
+        "diffsense.numericEquality": { "type": "boolean", "default": false, "description": "Treat numerically equal values as equal (\"30\" == 30)." },
+        "diffsense.ignorePaths": { "type": "array", "items": { "type": "string" }, "default": [], "description": "Paths to ignore, e.g. metadata.*, **.timestamp, items[*].id." },
+        "diffsense.ignoreAttributes": { "type": "array", "items": { "type": "string" }, "default": [], "description": "XML attributes to ignore." },
+        "diffsense.ignoreNamespaces": { "type": "boolean", "default": false, "description": "XML: ignore namespace prefixes." },
+        "diffsense.ignoreXmlDeclaration": { "type": "boolean", "default": false, "description": "XML: ignore the <?xml ...?> declaration." },
+        "diffsense.maxFileSizeMB": { "type": "number", "default": 10, "minimum": 1, "description": "Refuse to analyze files larger than this." }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.25.0"
+  },
+  "dependencies": { "@diffsense/core": "*" }
+}

@@ -52,3 +52,17 @@ describe('summary', () => {
     expect(renderSummary(r)).toContain('No differences found.');
   });
 });
+
+describe('markdown', () => {
+  it('renders table and change list', async () => {
+    const { renderMarkdown } = await import('../src/index.js');
+    const r = compare(
+      { name: 'a.json', content: '{"t":1,"x":1}' },
+      { name: 'b.json', content: '{"t":2,"y":"q`z"}' },
+    );
+    const md = renderMarkdown(r);
+    expect(md).toContain('| 1 | 1 | 1 | 0 |');
+    expect(md).toContain('- ⚠ `t`: `1` → `2`');
+    expect(md).toContain("`q'z`");
+  });
+});
