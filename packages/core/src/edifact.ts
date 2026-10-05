@@ -113,7 +113,9 @@ function keyed(doc: EdifactDocument): Map<string, EdifactSegment> {
   let scope = '';
   for (const s of doc.segments) {
     const q = QUALIFIED.has(s.tag) ? s.elements[0]?.[0] : undefined;
-    let key = q ? `${s.tag}[${q}]` : s.tag;
+    // MEA repeats under one qualifier (AAE) and is told apart by the dimension (G, L, W, H).
+    const q2 = s.tag === 'MEA' ? s.elements[1]?.[0] : undefined;
+    let key = q ? `${s.tag}[${q2 ? `${q},${q2}` : q}]` : s.tag;
     if (SCOPE_CLOSE.has(s.tag)) scope = '';
     const full = SCOPE_OPEN.has(s.tag) ? key : scope + key;
     let unique = full;

@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import {
   compare,
   detectFormat,
+  formatContent,
   parseConfig,
   renderMarkdown,
   resolveOptions,
@@ -202,6 +203,24 @@ async function analyzeCurrentDiff(): Promise<void> {
   void vscode.window.showInformationMessage('DiffSense: open a diff editor first (or use "Compare Files").');
 }
 
+/** Reformats a file in the editor (one undo step): indented JSON/XML/YAML, or one EDIFACT segment per line. */
+async function formatFile(clicked?: vscode.Uri): Promise<void> {
+  try {
+    const doc = await vscode.workspace.openTextDocument(clicked ?? vscode.window.activeTextEditor?.document.uri ?? (() => { throw new Error('open a file to format first'); })());
+    const editor = vscode.window.visibleTextEditors.find((e) => e.document === doc);
+    const tab = editor?.options.tabSize;
+    const formatted = formatContent({ name: fileName(doc.uri), content: doc.getText() }, { indent: typeof tab === 'number' && tab > 0 ? tab : 2 });
+    if (formatted === doc.getText()) return void vscode.window.setStatusBarMessage('DiffSense: already formatted', 3000);
+    const edit = new vscode.WorkspaceEdit();
+    edit.replace(doc.uri, new vscode.Range(doc.positionAt(0), doc.positionAt(doc.getText().length)), formatted);
+    await vscode.workspace.applyEdit(edit);
+    if (!editor) await vscode.window.showTextDocument(doc, { preview: false });
+    void vscode.window.setStatusBarMessage(`DiffSense: formatted ${fileName(doc.uri)} (not saved)`, 4000);
+  } catch (e) {
+    void vscode.window.showErrorMessage(`DiffSense: ${(e as Error).message}`);
+  }
+}
+
 export function activate(context: vscode.ExtensionContext): void {
   context.subscriptions.push(
     vscode.workspace.registerTextDocumentContentProvider(SCHEME, virtualDocs),
@@ -209,6 +228,7 @@ export function activate(context: vscode.ExtensionContext): void {
     vscode.commands.registerCommand('diffsense.compareApiResponses', compareApiResponses),
     vscode.commands.registerCommand('diffsense.compareClipboard', compareClipboard),
     vscode.commands.registerCommand('diffsense.compareSelection', compareSelection),
+    vscode.commands.registerCommand('diffsense.formatFile', formatFile),
     vscode.commands.registerCommand('diffsense.analyzeCurrentDiff', analyzeCurrentDiff),
     vscode.commands.registerCommand('diffsense.explainChanges', () =>
       vscode.window.showInformationMessage('DiffSense: AI explanations are planned for a later release. The deterministic summary is available via "Analyze Current Diff".'),

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- New command "DiffSense: Format File" (also in the editor context menu for JSON, XML, YAML and EDIFACT files): re-indents the file, or splits EDIFACT into one segment per line. One undo step, not saved automatically; invalid files are reported and left untouched.
+- EDIFACT (`.edi`, `.edifact`) files are now compared structurally, with element-level changes and impact estimates.
+
 ## 0.1.3 — 2026-09-26
 
 - Marketplace page: added API-comparison and config-change images to the README

@@ -3,7 +3,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import {
   detectFormat,
   compare,
-  formatEdifact,
+  formatContent,
   compareChangeSet,
   IMPACT_ORDER,
   parseConfig,
@@ -20,7 +20,8 @@ const USAGE = `Usage: diffsense compare <fileA> <fileB> [options]
        diffsense git [<rev> | <base>..<head> | <base>...<head>] [options]
                                                        summarize a git change set
 
-       diffsense format <file> [--write]               EDIFACT: one segment per line (stdout, or in place)
+       diffsense format <file> [--write] [--indent <n>]
+                                                       reformat JSON/XML/YAML, or split EDIFACT into one segment per line
 
 git ranges: no argument = working tree vs HEAD; <rev> = <rev> vs working tree;
             A..B = A vs B; A...B = merge-base of A and B vs B (PR-style)
@@ -33,6 +34,7 @@ Options:
   --ignore-extra         api: ignore fields only present in the actual response
   --ignore-header <name> api: never compare this header (repeatable)
   --write                format: rewrite the file in place instead of printing
+  --indent <n>           format: spaces per level (default 2)
   --markdown             git: print a Markdown summary (PR / CI step summary)
   --fail-on <impact>     git: exit 1 if overall impact >= informational|low|medium|high|critical
 
@@ -51,6 +53,7 @@ let asJson = false;
 let configPath: string | undefined;
 let markdown = false;
 let write = false;
+let indent = 2;
 let failOn: Impact | undefined;
 for (let i = 0; i < args.length; i++) {
   const a = args[i]!;
@@ -63,6 +66,10 @@ for (let i = 0; i < args.length; i++) {
   else if (a === '--ignore') (flags.ignorePaths ??= []).push(args[++i] ?? fail('--ignore needs a value'));
   else if (a === '--markdown') markdown = true;
   else if (a === '--write') write = true;
+  else if (a === '--indent') {
+    indent = Number(args[++i]);
+    if (!Number.isInteger(indent) || indent < 1 || indent > 8) fail('--indent must be a whole number from 1 to 8');
+  }
   else if (a === '--fail-on') {
     const v = args[++i] ?? fail('--fail-on needs a value');
     if (!IMPACT_ORDER.includes(v as Impact)) fail(`--fail-on must be one of ${IMPACT_ORDER.join(', ')}`);
@@ -77,7 +84,7 @@ if (files[0] === 'format') {
   let content: string;
   try {
     content = readFileSync(path, 'utf8');
-    const out = formatEdifact({ name: path, content });
+    const out = formatContent({ name: path, content }, { indent });
     if (write) writeFileSync(path, out);
     else process.stdout.write(out);
   } catch (e) {

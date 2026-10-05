@@ -13,3 +13,4 @@ export { compareJava } from './java.js';
 export { compareApi, parseApiResponse, apiMismatches } from './api.js';
 export * from './changeset.js';
 export { compareEdifact, parseEdifact, formatEdifact, looksLikeEdifact } from './edifact.js';
+export { formatContent, FORMATTABLE, type FormatOptions } from './format.js';

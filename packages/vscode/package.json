@@ -56,6 +56,11 @@
         "category": "DiffSense"
       },
       {
+        "command": "diffsense.formatFile",
+        "title": "Format File (JSON, XML, YAML, EDIFACT)",
+        "category": "DiffSense"
+      },
+      {
         "command": "diffsense.analyzeCurrentDiff",
         "title": "Analyze Current Diff",
         "category": "DiffSense"
@@ -75,6 +80,11 @@
         }
       ],
       "editor/context": [
+        {
+          "command": "diffsense.formatFile",
+          "when": "resourceExtname =~ /^\\.(json|xml|ya?ml|edi|edifact)$/",
+          "group": "1_modification@9"
+        },
         {
           "command": "diffsense.compareSelection",
           "when": "editorHasSelection",

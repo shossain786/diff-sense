@@ -2,7 +2,22 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { compare, formatEdifact, parseEdifact, type CompareOptions } from '../src/index.js';
 
-const sample = readFileSync(new URL('../../../samples/ocean-booking.edi', import.meta.url), 'utf8');
+const sample = `UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'
+UNH+1+BOOKING:D:93A:UN'
+BGM+270+OB20261006+9'
+DTM+137:20261006:102'
+RFF+BN:OB20261006'
+NAD+BY+CARRIER01::172'
+NAD+CZ+CUSTOMER01::172'
+LOC+7+USLAX::5'
+LOC+11+SGSIN::5'
+EQD+CN+TEU123456+22G1'
+MEA+AAE+G+KGM:12000'
+FTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'
+UNT+12+1'
+UNZ+1+000000001'
+`;
+const full = readFileSync(new URL('../../../samples/ocean-booking.edi', import.meta.url), 'utf8');
 const oneLine = sample.replace(/\r?\n/g, '');
 const cmp = (a: string, b: string, o: CompareOptions = {}) =>
   compare({ name: 'a.edi', content: a }, { name: 'b.edi', content: b }, o);
@@ -51,7 +66,7 @@ describe('EDIFACT comparison', () => {
     const r = cmp(sample, sample.replace('USLAX', 'USOAK').replace('KGM:12000', 'KGM:13000').replace('+9\'', "+5'"));
     const by = Object.fromEntries(r.changes.filter((c) => c.kind !== 'unchanged').map((c) => [c.path, c]));
     expect(by['LOC[7].2.1']).toMatchObject({ kind: 'modified', before: 'USLAX', after: 'USOAK', impact: 'high' });
-    expect(by['MEA[AAE].3.2']).toMatchObject({ before: '12000', after: '13000', impact: 'medium' });
+    expect(by['MEA[AAE,G].3.2']).toMatchObject({ before: '12000', after: '13000', impact: 'medium' });
     expect(by['BGM.3']).toMatchObject({ before: '9', after: '5' });
     expect(r.impact).toBe('high');
   });
@@ -68,5 +83,18 @@ describe('EDIFACT comparison', () => {
   it('supports ignore paths', () => {
     const r = cmp(sample, sample.replace('+000000001\'', "+000000002'"), { ignorePaths: ['UN*.*'] });
     expect(r.stats.modified).toBe(0);
+  });
+});
+
+describe('the full sample booking', () => {
+  it('parses, formats idempotently and tells repeated MEA segments apart', () => {
+    const doc = parseEdifact({ name: 'a', content: full });
+    expect(doc.segments.length).toBeGreaterThan(30);
+    const flat = full.replace(/\r?\n/g, '');
+    expect(formatEdifact({ name: 'a', content: flat })).toBe(full);
+    const changed = full.replace('MEA+AAE+L+CM:600', 'MEA+AAE+L+CM:700');
+    const r = cmp(full, changed);
+    expect(r.changes.filter((c) => c.kind !== 'unchanged').map((c) => c.path)).toEqual(['MEA[AAE,L].3.2']);
+    expect(cmp(flat, full).stats.modified).toBe(0);
   });
 });
