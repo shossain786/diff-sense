@@ -1,6 +1,6 @@
 {
   "timeout": 60000,
-  "retryCount": 3,
+  "retryCount": 5,
   "enabled": true,
   "endpoint": "https://example.test/api"
 }
