@@ -30,6 +30,26 @@ Every comparison runs on your machine. No network calls, no telemetry, and that 
 - `packages/intellij` — the IntelliJ plugin (Kotlin port of the engine; see its README)
 - `conformance` — shared test cases that keep the TypeScript and Kotlin engines identical
 
+## GitHub Action
+
+Summarize what a pull request really changes, as a PR comment and a job summary, and optionally fail on high-impact changes. Everything runs on the runner; nothing is sent anywhere.
+
+```yaml
+on: pull_request
+permissions: { contents: read, pull-requests: write }
+jobs:
+  diffsense:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }   # needed to diff against the base
+      - uses: RazaTech/diff-sense@master
+        with:
+          fail-on: high            # optional: informational | low | medium | high | critical
+```
+
+Inputs: `range` (default: PR base...head), `fail-on`, `comment` (default `true`), `config`. Pull requests from forks get a read-only token, so set `comment: 'false'` there and use the job summary.
+
 ## Develop
 ```
 npm install

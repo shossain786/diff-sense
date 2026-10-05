@@ -1,0 +1,99 @@
+name: DiffSense Semantic Compare
+description: Summarize what a pull request really changes (structural JSON/YAML/XML, Java semantics, impact) and optionally fail the check on high-impact changes.
+author: RazaTech
+branding:
+  icon: git-pull-request
+  color: blue
+
+inputs:
+  range:
+    description: Git range to summarize. Defaults to the pull request base...head.
+    required: false
+    default: ''
+  fail-on:
+    description: Fail the step when the overall impact estimate reaches this level (informational, low, medium, high, critical). Empty never fails.
+    required: false
+    default: ''
+  comment:
+    description: Post (and update) a summary comment on the pull request.
+    required: false
+    default: 'true'
+  config:
+    description: Path to a .diffsense.json config file (default ./.diffsense.json if present).
+    required: false
+    default: ''
+  github-token:
+    description: Token used to post the comment. Needs pull-requests write permission.
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  summary-file:
+    description: Path of the generated Markdown summary.
+    value: ${{ steps.run.outputs.summary-file }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Build DiffSense
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        npm ci --ignore-scripts
+        npm run build -w @diffsense/core
+        npm run build -w @diffsense/cli
+
+    - name: Summarize changes
+      id: run
+      shell: bash
+      env:
+        INPUT_RANGE: ${{ inputs.range }}
+        INPUT_FAIL_ON: ${{ inputs.fail-on }}
+        INPUT_CONFIG: ${{ inputs.config }}
+        PR_BASE: ${{ github.event.pull_request.base.sha }}
+        PR_HEAD: ${{ github.event.pull_request.head.sha }}
+      run: |
+        range="$INPUT_RANGE"
+        if [ -z "$range" ] && [ -n "$PR_BASE" ]; then range="$PR_BASE...$PR_HEAD"; fi
+        if [ -z "$range" ]; then range="HEAD~1..HEAD"; fi
+        out="${RUNNER_TEMP}/diffsense-summary.md"
+        args=(git "$range" --markdown)
+        [ -n "$INPUT_CONFIG" ] && args+=(--config "$INPUT_CONFIG")
+        # Summary first, never failing; the threshold is applied afterwards so the comment is always posted.
+        node "${{ github.action_path }}/packages/cli/dist/index.js" "${args[@]}" > "$out"
+        cat "$out" >> "$GITHUB_STEP_SUMMARY"
+        echo "summary-file=$out" >> "$GITHUB_OUTPUT"
+        if [ -n "$INPUT_FAIL_ON" ]; then
+          set +e
+          node "${{ github.action_path }}/packages/cli/dist/index.js" git "$range" --fail-on "$INPUT_FAIL_ON" >/dev/null
+          if [ $? -eq 1 ]; then echo "met=true" >> "$GITHUB_OUTPUT"; fi
+        fi
+
+    - name: Comment on pull request
+      if: ${{ inputs.comment == 'true' && github.event.pull_request }}
+      uses: actions/github-script@v7
+      env:
+        SUMMARY_FILE: ${{ steps.run.outputs.summary-file }}
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const fs = require('fs');
+          const marker = '<!-- diffsense-summary -->';
+          const body = `${marker}\n${fs.readFileSync(process.env.SUMMARY_FILE, 'utf8')}`;
+          const { owner, repo } = context.repo;
+          const issue_number = context.payload.pull_request.number;
+          const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+          const existing = comments.find((c) => c.body && c.body.startsWith(marker));
+          if (existing) await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+          else await github.rest.issues.createComment({ owner, repo, issue_number, body });
+
+    - name: Enforce impact threshold
+      if: ${{ steps.run.outputs.met == 'true' }}
+      shell: bash
+      run: |
+        echo "::error::DiffSense: overall impact reached '${{ inputs.fail-on }}' or higher."
+        exit 1

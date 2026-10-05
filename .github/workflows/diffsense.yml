@@ -1,0 +1,14 @@
+name: DiffSense
+on: pull_request
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  summary:
+    # Fork PRs get a read-only token, so the comment step would fail there.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: ./
