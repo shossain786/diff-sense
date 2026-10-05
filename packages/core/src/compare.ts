@@ -1,5 +1,6 @@
 import { compareApi } from './api.js';
 import { detectFormat } from './detect.js';
+import { compareEdifact, looksLikeEdifact } from './edifact.js';
 import { compareJava } from './java.js';
 import { applyImpact } from './impact.js';
 import { compareJson, ParseError } from './json.js';
@@ -17,11 +18,13 @@ function compareRaw(
   right: FileInput,
   options: CompareOptions = {},
 ): ComparisonResult {
-  const format = options.format ?? detectFormat(left.name);
+  let format = options.format ?? detectFormat(left.name);
+  if (format === 'text' && !options.format && looksLikeEdifact(left.content) && looksLikeEdifact(right.content)) format = 'edifact';
   try {
     if (format === 'json') return compareJson(left, right, options);
     if (format === 'api') return compareApi(left, right, options);
     if (format === 'java') return compareJava(left, right, options);
+    if (format === 'edifact') return compareEdifact(left, right, options);
     if (format === 'xml') return compareXml(left, right, options);
     if (format === 'yaml') return compareYaml(left, right, options);
   } catch (e) {

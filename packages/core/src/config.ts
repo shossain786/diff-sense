@@ -21,7 +21,7 @@ const BOOLEANS = [
   'ignoreExtraFields',
 ] as const;
 const LISTS = ['ignorePaths', 'ignoreAttributes', 'ignoreHeaders'] as const;
-const FORMATS: Format[] = ['text', 'json', 'xml', 'yaml', 'java', 'api'];
+const FORMATS: Format[] = ['text', 'json', 'xml', 'yaml', 'java', 'api', 'edifact'];
 
 /** Validates untrusted option input; returns cleaned options and problems. */
 export function sanitizeOptions(raw: unknown, where = 'options'): { options: CompareOptions; errors: string[] } {

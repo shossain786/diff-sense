@@ -3,7 +3,7 @@
  * no `vscode` imports, no I/O, pure functions only.
  */
 
-export type Format = 'text' | 'json' | 'xml' | 'yaml' | 'java' | 'api';
+export type Format = 'text' | 'json' | 'xml' | 'yaml' | 'java' | 'api' | 'edifact';
 
 export type ChangeKind = 'added' | 'removed' | 'modified' | 'unchanged';
 

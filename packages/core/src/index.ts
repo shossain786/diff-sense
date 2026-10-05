@@ -12,3 +12,4 @@ export { applyImpact, classifyChange, maxImpact, IMPACT_ORDER } from './impact.j
 export { compareJava } from './java.js';
 export { compareApi, parseApiResponse, apiMismatches } from './api.js';
 export * from './changeset.js';
+export { compareEdifact, parseEdifact, formatEdifact, looksLikeEdifact } from './edifact.js';

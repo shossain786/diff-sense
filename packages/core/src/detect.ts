@@ -6,6 +6,8 @@ const BY_EXTENSION: Record<string, Format> = {
   yaml: 'yaml',
   yml: 'yaml',
   java: 'java',
+  edi: 'edifact',
+  edifact: 'edifact',
 };
 
 /** Detect format from the file name; falls back to plain text. */
