@@ -26,6 +26,7 @@ describe('compareChangeSet', () => {
     expect(t.indexOf('a.json')).toBeLessThan(t.indexOf('gone.txt'));
     expect(t).toContain('formatting only');
     expect(renderChangeSetMarkdown(r)).toContain('| `a.json` | modified |');
+    expect(renderChangeSetMarkdown(r)).toContain('<summary><code>a.json</code></summary>');
   });
   it('handles an empty change set', () => {
     expect(renderChangeSet(compareChangeSet([]))).toContain('No differences found.');

@@ -27,7 +27,7 @@ function parseRange(range: string | undefined, root: string): { from: Side; to: 
     const base = l || 'HEAD';
     const head = r || 'HEAD';
     const from = three > 0 ? git(['merge-base', base, head], root).toString().trim() : base;
-    return { from: { rev: from }, to: { rev: head }, label: range, diffArgs: [from, head] };
+    return { from: { rev: from }, to: { rev: head }, label: range.replace(/\b[0-9a-f]{40}\b/g, (h) => h.slice(0, 7)), diffArgs: [from, head] };
   }
   return { from: { rev: range }, to: { worktree: true }, label: `${range} ↔ working tree`, diffArgs: [range] };
 }

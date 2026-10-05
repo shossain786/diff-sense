@@ -148,6 +148,8 @@ export function renderChangeSet(r: ChangeSetResult): string {
   return out.join('\n').trimEnd() + '\n';
 }
 
+const html = (v: string) => v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
 const code = (v: string) => '`' + v.replace(/`/g, "'").replace(/\n/g, ' ').replace(/\|/g, '\\|') + '`';
 
 /** Markdown multi-file summary, suitable for a PR description or CI step summary. */
@@ -161,7 +163,7 @@ export function renderChangeSetMarkdown(r: ChangeSetResult): string {
     for (const f of ordered(r.files)) out.push(`| ${code(fileTitle(f))} | ${f.status} | ${fileNote(f)} | ${f.impact ?? '—'} |`);
     out.push('');
     for (const f of ordered(r.files).filter((x) => changedOf(x).length > 0)) {
-      out.push(`<details><summary>${code(f.path)}</summary>`, '');
+      out.push(`<details><summary><code>${html(f.path)}</code></summary>`, '');
       const changes = changedOf(f);
       for (const c of changes.slice(0, MAX_DETAILS * 4)) {
         if (c.kind === 'modified') out.push(`- ⚠ ${code(c.path)}: ${code(formatValue(c.before))} → ${code(formatValue(c.after))}`);
