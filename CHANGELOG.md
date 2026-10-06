@@ -3,7 +3,7 @@
 Changes to the CLI and the GitHub Action. The IDE packages keep their own changelogs
 ([VS Code](packages/vscode/CHANGELOG.md), [IntelliJ](packages/intellij/CHANGELOG.md)).
 
-## Unreleased
+## 0.2.0 — 2026-10-06
 
 - Folder comparison: `diffsense dir <left> <right>` summarizes two directories with the same engine as `git` (per-file structural changes, impact, Markdown, `--fail-on`). Files are paired by relative path; `--match name` also pairs leftovers that have a unique file name on both sides (for example `target/classes/` against `src/main/resources/`, shown as renames). `--exclude <glob>` skips paths; `.git` and `node_modules` are always skipped. Exit code 1 on any difference, or per `--fail-on`.
 - Core: `pairDirectories` (pure) feeds `compareChangeSet`.

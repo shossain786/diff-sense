@@ -43,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }   # needed to diff against the base
-      - uses: shossain786/diff-sense@master
+      - uses: shossain786/diff-sense@v0.2.0
         with:
           fail-on: high            # optional: informational | low | medium | high | critical
 ```

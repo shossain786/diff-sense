@@ -2,7 +2,7 @@
   "name": "diffsense-vscode",
   "displayName": "DiffSense Semantic Compare",
   "description": "Compare files. Understand what changed. Structure-aware summaries for JSON, XML, YAML and text, on top of VS Code's native diff.",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "publisher": "RazaTech",
   "icon": "media/icon.png",
   "galleryBanner": {
