@@ -1,0 +1,172 @@
+[
+ {
+  "name": "json/one-line",
+  "input": {
+   "name": "a.json",
+   "content": "{\"b\":[1,2,{\"c\":\"x,y:{z}\"}],\"1\":12345678901234567890,\"e\":{},\"f\":[],\"a\":\"q\\\"uote\"}"
+  },
+  "expected": "{\n  \"b\": [\n    1,\n    2,\n    {\n      \"c\": \"x,y:{z}\"\n    }\n  ],\n  \"1\": 12345678901234567890,\n  \"e\": {},\n  \"f\": [],\n  \"a\": \"q\\\"uote\"\n}\n"
+ },
+ {
+  "name": "json/pretty-already",
+  "input": {
+   "name": "a.json",
+   "content": "{\n  \"a\": 1,\n  \"b\": [\n    1,\n    2\n  ]\n}\n"
+  },
+  "expected": "{\n  \"a\": 1,\n  \"b\": [\n    1,\n    2\n  ]\n}\n"
+ },
+ {
+  "name": "json/indent-4",
+  "input": {
+   "name": "a.json",
+   "content": "[1,{\"a\":null}]"
+  },
+  "indent": 4,
+  "expected": "[\n    1,\n    {\n        \"a\": null\n    }\n]\n"
+ },
+ {
+  "name": "json/scalar",
+  "input": {
+   "name": "a.json",
+   "content": "  42  "
+  },
+  "expected": "42\n"
+ },
+ {
+  "name": "json/bom",
+  "input": {
+   "name": "a.json",
+   "content": "﻿{\"a\":true}"
+  },
+  "expected": "{\n  \"a\": true\n}\n"
+ },
+ {
+  "name": "json/unicode-escapes",
+  "input": {
+   "name": "a.json",
+   "content": "{\"k\":\"\\u00e9\\n\",\"emoji\":\"😀\"}"
+  },
+  "expected": "{\n  \"k\": \"\\u00e9\\n\",\n  \"emoji\": \"😀\"\n}\n"
+ },
+ {
+  "name": "json/empty-with-space",
+  "input": {
+   "name": "a.json",
+   "content": "{ \"a\": { }, \"b\": [ ] }"
+  },
+  "expected": "{\n  \"a\": {},\n  \"b\": []\n}\n"
+ },
+ {
+  "name": "json/invalid",
+  "input": {
+   "name": "a.json",
+   "content": "{\"a\":"
+  },
+  "error": true
+ },
+ {
+  "name": "xml/one-line",
+  "input": {
+   "name": "a.xml",
+   "content": "<?xml version=\"1.0\"?><r a=\"x>y\"><!-- c --><a x=\"1\">t</a><b><c/><d>  keep \n this </d></b><e></e></r>"
+  },
+  "expected": "<?xml version=\"1.0\"?>\n<r a=\"x>y\">\n  <!-- c -->\n  <a x=\"1\">t</a>\n  <b>\n    <c/>\n    <d>  keep \n this </d>\n  </b>\n  <e></e>\n</r>\n"
+ },
+ {
+  "name": "xml/already-pretty",
+  "input": {
+   "name": "a.xml",
+   "content": "<r>\n  <a>1</a>\n  <b>\n    <c/>\n  </b>\n</r>\n"
+  },
+  "expected": "<r>\n  <a>1</a>\n  <b>\n    <c/>\n  </b>\n</r>\n"
+ },
+ {
+  "name": "xml/indent-4",
+  "input": {
+   "name": "a.xml",
+   "content": "<r><a><b>1</b></a></r>"
+  },
+  "indent": 4,
+  "expected": "<r>\n    <a>\n        <b>1</b>\n    </a>\n</r>\n"
+ },
+ {
+  "name": "xml/cdata-and-pi",
+  "input": {
+   "name": "a.xml",
+   "content": "<r><?pi go?><a><![CDATA[<x>]]></a><b>text</b></r>"
+  },
+  "expected": "<r>\n  <?pi go?>\n  <a><![CDATA[<x>]]></a>\n  <b>text</b>\n</r>\n"
+ },
+ {
+  "name": "xml/mixed-content",
+  "input": {
+   "name": "a.xml",
+   "content": "<p>Hello <b>world</b>!</p>"
+  },
+  "expected": "<p>Hello <b>world</b>!</p>\n"
+ },
+ {
+  "name": "xml/invalid",
+  "input": {
+   "name": "a.xml",
+   "content": "<a><b></a>"
+  },
+  "error": true
+ },
+ {
+  "name": "edifact/one-line",
+  "input": {
+   "name": "a.edi",
+   "content": "UNB+X+A+B+1'FTX+AAI+++text'UNZ+1+1'"
+  },
+  "expected": "UNB+X+A+B+1'\nFTX+AAI+++text'\nUNZ+1+1'\n"
+ },
+ {
+  "name": "edifact/una",
+  "input": {
+   "name": "a.edi",
+   "content": "UNA:+.? *UNB+X+A+B+1*FTX+AAI*"
+  },
+  "expected": "UNA:+.? *\nUNB+X+A+B+1*\nFTX+AAI*\n"
+ },
+ {
+  "name": "edifact/by-content",
+  "input": {
+   "name": "a.txt",
+   "content": "UNB+X+A+B+1'FTX+AAI'"
+  },
+  "expected": "UNB+X+A+B+1'\nFTX+AAI'\n"
+ },
+ {
+  "name": "edifact/crlf",
+  "input": {
+   "name": "a.edi",
+   "content": "UNB+X+A+B+1'\r\nFTX+AAI'\r\n"
+  },
+  "expected": "UNB+X+A+B+1'\nFTX+AAI'\n"
+ },
+ {
+  "name": "edifact/invalid",
+  "input": {
+   "name": "a.edi",
+   "content": "UNB+X+A+B+1'FTX+AAI"
+  },
+  "error": true
+ },
+ {
+  "name": "unsupported/text",
+  "input": {
+   "name": "a.txt",
+   "content": "hello"
+  },
+  "error": true
+ },
+ {
+  "name": "unsupported/java",
+  "input": {
+   "name": "a.java",
+   "content": "class A {}"
+  },
+  "error": true
+ }
+]

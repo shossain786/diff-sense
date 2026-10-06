@@ -51,6 +51,11 @@ private fun readTree(content: String, name: String): XNode {
     return root ?: throw ParseError("$name: no root element")
 }
 
+/** Throws [ParseError] when [content] is not well-formed XML. */
+internal fun validateXml(content: String, name: String) {
+    readTree(content, name)
+}
+
 /**
  * Converts XML into a plain value tree so the shared structural differ can be reused: attributes become
  * `@name`, mixed text `#text`, repeated sibling elements a list, and a leaf element without attributes just

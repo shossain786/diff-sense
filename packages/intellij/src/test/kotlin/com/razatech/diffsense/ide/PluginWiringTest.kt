@@ -15,7 +15,7 @@ import com.razatech.diffsense.engine.Format
 class PluginWiringTest : BasePlatformTestCase() {
     fun testActionsAreRegistered() {
         val am = ActionManager.getInstance()
-        for (id in listOf("DiffSense.CompareFiles", "DiffSense.CompareFilesMenu", "DiffSense.CompareApiResponses", "DiffSense.CompareClipboard", "DiffSense.CompareSelectedText", "DiffSense.Group")) {
+        for (id in listOf("DiffSense.CompareFiles", "DiffSense.CompareFilesMenu", "DiffSense.CompareApiResponses", "DiffSense.CompareClipboard", "DiffSense.CompareSelectedText", "DiffSense.FormatFile", "DiffSense.Group")) {
             assertNotNull("action $id is not registered", am.getAction(id))
         }
         assertEquals("Compare with DiffSense", am.getAction("DiffSense.CompareFiles").templatePresentation.text)
@@ -113,5 +113,27 @@ class PluginWiringTest : BasePlatformTestCase() {
         )
         panel.update(Analysis(api, Side("e.json", ""), Side("a.json", ""), CompareOptions(format = Format.API)))
         assertTrue(panel.componentCount > 0)
+    }
+
+    fun testFormatFileSplitsEdifactAndIsOneUndoStep() {
+        myFixture.configureByText("booking.edi", "UNB+X+A+B+1'FTX+AAI'UNZ+1+1'")
+        myFixture.performEditorAction("DiffSense.FormatFile")
+        assertEquals("UNB+X+A+B+1'\nFTX+AAI'\nUNZ+1+1'\n", myFixture.editor.document.text)
+    }
+
+    fun testFormatFileLeavesInvalidFilesUntouched() {
+        myFixture.configureByText("broken.json", """{"a":""")
+        myFixture.performEditorAction("DiffSense.FormatFile")
+        assertEquals("""{"a":""", myFixture.editor.document.text)
+    }
+
+    fun testEdifactComparisonThroughTheRunner() {
+        val a = myFixture.addFileToProject("a.edi", "UNB+X+A+B+1'LOC+7+USLAX::5'UNZ+1+1'").virtualFile
+        val b = myFixture.addFileToProject("b.edi", "UNB+X+A+B+1'\nLOC+7+USOAK::5'\nUNZ+1+1'\n").virtualFile
+        DiffSenseRunner.run(project, { Side.of(a, 1 shl 20) to Side.of(b, 1 shl 20) }, openDiff = false)
+        val r = DiffSenseSession.getInstance(project).last!!.result
+        assertEquals(Format.EDIFACT, r.format)
+        assertEquals(listOf("LOC[7].2.1"), r.changes.filter { it.kind == ChangeKind.MODIFIED }.map { it.path })
+        assertEquals("high", r.impact?.id)
     }
 }

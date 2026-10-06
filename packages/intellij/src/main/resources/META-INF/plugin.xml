@@ -14,6 +14,8 @@
                 and get a pass/fail verdict with every check listed.</li>
             <li><b>Impact estimates</b> (informational to critical) with the reason for each one.</li>
             <li><b>Ignore rules</b> for paths, order, case and whitespace, in Settings or a project <code>.diffsense.json</code>.</li>
+            <li><b>EDIFACT</b> files are compared segment by segment (<code>NAD[BY]</code>, <code>LOC[7].2.1</code>), whether they arrive on one line or many.</li>
+            <li><b>Format File</b> re-indents JSON and XML and splits EDIFACT into one segment per line, without changing any value.</li>
             <li>Copy or export the summary as Markdown.</li>
         </ul>
         <p>Right-click one or two files in the Project view and choose <b>DiffSense | Compare with DiffSense</b>, or use
@@ -49,6 +51,9 @@
             <action id="DiffSense.CompareApiResponses" class="com.razatech.diffsense.ide.CompareApiResponsesAction"
                     text="Compare API Responses (Expected vs Actual)…"
                     description="Check an actual API response against an expected one, with a pass/fail verdict"/>
+            <action id="DiffSense.FormatFile" class="com.razatech.diffsense.ide.FormatFileAction"
+                    text="Format File (JSON, XML, EDIFACT)"
+                    description="Re-indent JSON or XML, or put each EDIFACT segment on its own line"/>
             <action id="DiffSense.CompareClipboard" class="com.razatech.diffsense.ide.CompareClipboardAction"
                     text="Compare with Clipboard" description="Compare the current file or selection with the clipboard"/>
             <action id="DiffSense.CompareSelectedText" class="com.razatech.diffsense.ide.CompareSelectedTextAction"

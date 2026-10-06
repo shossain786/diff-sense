@@ -6,11 +6,13 @@ fun detectFormat(name: String): Format = when (name.substringAfterLast('.').lowe
     "xml" -> Format.XML
     "yaml", "yml" -> Format.YAML
     "java" -> Format.JAVA
+    "edi", "edifact" -> Format.EDIFACT
     else -> Format.TEXT
 }
 
 private fun compareRaw(left: FileInput, right: FileInput, options: CompareOptions): ComparisonResult {
-    val format = options.format ?: detectFormat(left.name)
+    var format = options.format ?: detectFormat(left.name)
+    if (format == Format.TEXT && options.format == null && looksLikeEdifact(left.content) && looksLikeEdifact(right.content)) format = Format.EDIFACT
     try {
         when (format) {
             Format.JSON -> {
@@ -20,6 +22,7 @@ private fun compareRaw(left: FileInput, right: FileInput, options: CompareOption
             Format.YAML -> return compareYaml(left, right, options)
             Format.XML -> return compareXml(left, right, options)
             Format.API -> return compareApi(left, right, options)
+            Format.EDIFACT -> return compareEdifact(left, right, options)
             else -> {}
         }
     } catch (e: ParseError) {

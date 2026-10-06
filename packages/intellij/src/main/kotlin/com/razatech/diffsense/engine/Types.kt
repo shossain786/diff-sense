@@ -6,7 +6,7 @@ object Absent {
 }
 
 enum class Format(val id: String) {
-    TEXT("text"), JSON("json"), XML("xml"), YAML("yaml"), JAVA("java"), API("api");
+    TEXT("text"), JSON("json"), XML("xml"), YAML("yaml"), JAVA("java"), API("api"), EDIFACT("edifact");
 
     companion object {
         fun byId(id: String): Format? = entries.firstOrNull { it.id == id }

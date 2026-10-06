@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 // @ts-expect-error plain .mjs shared with the Kotlin engine's test suite
 import { normalize } from '../../../conformance/normalize.mjs';
-import { compare, renderMarkdown, renderSummary } from '../src/index.js';
+import { compare, formatContent, renderMarkdown, renderSummary } from '../src/index.js';
 
 interface Case {
   name: string;
@@ -27,5 +27,25 @@ describe('conformance cases', () => {
     expect(normalize(result)).toEqual(c.expected);
     expect(renderSummary(result)).toBe(c.summary);
     expect(renderMarkdown(result)).toBe(c.markdown);
+  });
+});
+
+interface FormatCase {
+  name: string;
+  input: { name: string; content: string };
+  indent?: number;
+  expected?: string;
+  error?: boolean;
+}
+
+const formatCases: FormatCase[] = JSON.parse(
+  readFileSync(new URL('../../../conformance/format-cases.json', import.meta.url), 'utf8'),
+);
+
+describe('format conformance cases', () => {
+  it('has cases', () => expect(formatCases.length).toBeGreaterThan(15));
+  it.each(formatCases.map((c) => [c.name, c] as const))('%s', (_name, c) => {
+    if (c.error) expect(() => formatContent(c.input, { indent: c.indent })).toThrow();
+    else expect(formatContent(c.input, { indent: c.indent })).toBe(c.expected);
   });
 });

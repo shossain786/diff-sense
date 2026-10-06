@@ -5073,5 +5073,5733 @@
   },
   "summary": "DiffSense — API Response Comparison\n\nExpected: e.json\nActual:   a.json\n\na:\n  1 → 2 ❌\n\nb:\n  1 → 2 ❌\n\nResult: FAIL — 2 mismatches\n",
   "markdown": "# DiffSense — API Response Comparison\n\n**Expected:** `e.json`  \n**Actual:** `a.json`\n\n**Result:** FAIL (2 mismatches)\n\n| Field | Expected | Actual | |\n|---|---|---|:-:|\n| `a` | `1` | `2` | ❌ |\n| `b` | `1` | `2` | ❌ |\n"
+ },
+ {
+  "name": "edifact/identical",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 45
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 45 |\n\nNo differences found.\n"
+ },
+ {
+  "name": "edifact/layout-ignored",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'UNH+1+BOOKING:D:93A:UN'BGM+270+OB20261006+9'DTM+137:20261006:102'RFF+BN:OB20261006'NAD+BY+CARRIER01::172'NAD+CZ+CUSTOMER01::172'LOC+7+USLAX::5'LOC+11+SGSIN::5'EQD+CN+TEU123456+22G1'MEA+AAE+G+KGM:12000'FTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'UNT+12+1'UNZ+1+000000001'"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 45
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 45 |\n\nNo differences found.\n"
+ },
+ {
+  "name": "edifact/crlf-layout",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\r\nUNH+1+BOOKING:D:93A:UN'\r\nBGM+270+OB20261006+9'\r\nDTM+137:20261006:102'\r\nRFF+BN:OB20261006'\r\nNAD+BY+CARRIER01::172'\r\nNAD+CZ+CUSTOMER01::172'\r\nLOC+7+USLAX::5'\r\nLOC+11+SGSIN::5'\r\nEQD+CN+TEU123456+22G1'\r\nMEA+AAE+G+KGM:12000'\r\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\r\nUNT+12+1'\r\nUNZ+1+000000001'\r\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 45
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 45 |\n\nNo differences found.\n"
+ },
+ {
+  "name": "edifact/element-changes",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+5'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USOAK::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:13000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 3,
+    "unchanged": 42
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "modified",
+     "before": "9",
+     "after": "5",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Document type or number changed."
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "modified",
+     "before": "USLAX",
+     "after": "USOAK",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "A location (port, place, country) changed; routing or delivery may differ."
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "modified",
+     "before": "12000",
+     "after": "13000",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "A measurement (weight, volume...) changed."
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 3 items modified\n✓ 42 unchanged\n\nDetails:\n────────────────────────────\n⚠ BGM.3\n  9 → 5\n  Impact: MEDIUM\n\n⚠ LOC[7].2.1\n  USLAX → USOAK\n  Impact: HIGH\n\n⚠ MEA[AAE,G].3.2\n  12000 → 13000\n  Impact: MEDIUM\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 3 | 42 |\n\n## Changes\n\n- ⚠ `BGM.3`: `9` → `5`\n- ⚠ `LOC[7].2.1`: `USLAX` → `USOAK`\n- ⚠ `MEA[AAE,G].3.2`: `12000` → `13000`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "edifact/composite-add-remove",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01:X:172:9'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 2,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 44
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.2",
+     "kind": "added",
+     "after": "X",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "A party (buyer, carrier, consignee...) changed; the document may go to or concern a different business partner."
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.4",
+     "kind": "added",
+     "after": "9",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "A party (buyer, carrier, consignee...) changed; the document may go to or concern a different business partner."
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "removed",
+     "before": "12000",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "A measurement (weight, volume...) changed."
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n+ 2 items added\n- 1 item removed\n✓ 44 unchanged\n\nDetails:\n────────────────────────────\n+ NAD[BY].2.2\n  X\n  Impact: HIGH\n\n+ NAD[BY].2.4\n  9\n  Impact: HIGH\n\n- MEA[AAE,G].3.2\n  12000\n  Impact: MEDIUM\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 2 | 1 | 0 | 44 |\n\n## Changes\n\n- + `NAD[BY].2.2`: `X`\n- + `NAD[BY].2.4`: `9`\n- − `MEA[AAE,G].3.2`: `12000`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "edifact/envelope-only",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261007:0900+000000002'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000002'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 4,
+    "unchanged": 41
+   },
+   "impact": "informational",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "modified",
+     "before": "20261006",
+     "after": "20261007",
+     "evidence": "fact",
+     "impact": "informational",
+     "reason": "Envelope metadata or control total; normally differs on every transmission."
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "modified",
+     "before": "1200",
+     "after": "0900",
+     "evidence": "fact",
+     "impact": "informational",
+     "reason": "Envelope metadata or control total; normally differs on every transmission."
+    },
+    {
+     "path": "UNB.5",
+     "kind": "modified",
+     "before": "000000001",
+     "after": "000000002",
+     "evidence": "fact",
+     "impact": "informational",
+     "reason": "Envelope metadata or control total; normally differs on every transmission."
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "modified",
+     "before": "000000001",
+     "after": "000000002",
+     "evidence": "fact",
+     "impact": "informational",
+     "reason": "Envelope metadata or control total; normally differs on every transmission."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 4 items modified\n✓ 41 unchanged\n\nDetails:\n────────────────────────────\n⚠ UNB.4.1\n  20261006 → 20261007\n\n⚠ UNB.4.2\n  1200 → 0900\n\n⚠ UNB.5\n  000000001 → 000000002\n\n⚠ UNZ.2\n  000000001 → 000000002\n\nPotential impact (estimate): informational\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 4 | 41 |\n\n## Changes\n\n- ⚠ `UNB.4.1`: `20261006` → `20261007`\n- ⚠ `UNB.4.2`: `1200` → `0900`\n- ⚠ `UNB.5`: `000000001` → `000000002`\n- ⚠ `UNZ.2`: `000000001` → `000000002`\n\n**Potential impact (estimate):** informational\n"
+ },
+ {
+  "name": "edifact/sender-recipient",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+OTHER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 44
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "modified",
+     "before": "SENDER",
+     "after": "OTHER",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Interchange sender or recipient changed; routing may differ."
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n✓ 44 unchanged\n\nDetails:\n────────────────────────────\n⚠ UNB.2\n  SENDER → OTHER\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 44 |\n\n## Changes\n\n- ⚠ `UNB.2`: `SENDER` → `OTHER`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "edifact/segment-inserted",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+9+USLAX::5'LOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 45
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[9]",
+     "kind": "added",
+     "after": "LOC+9+USLAX::5",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Segment added. A location (port, place, country) changed; routing or delivery may differ."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n+ 1 item added\n✓ 45 unchanged\n\nDetails:\n────────────────────────────\n+ LOC[9]\n  LOC+9+USLAX::5\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 0 | 45 |\n\n## Changes\n\n- + `LOC[9]`: `LOC+9+USLAX::5`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "edifact/segment-removed",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\n\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 42
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ]",
+     "kind": "removed",
+     "before": "NAD+CZ+CUSTOMER01::172",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Segment removed. A party (buyer, carrier, consignee...) changed; the document may go to or concern a different business partner."
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n- 1 item removed\n✓ 42 unchanged\n\nDetails:\n────────────────────────────\n- NAD[CZ]\n  NAD+CZ+CUSTOMER01::172\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 1 | 0 | 42 |\n\n## Changes\n\n- − `NAD[CZ]`: `NAD+CZ+CUSTOMER01::172`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "edifact/repeated-mea",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+X+A+B+1'\nUNH+1+BOOKING'\nMEA+AAE+G+KGM:12000'\nMEA+AAE+L+CM:600'\nMEA+AAE+W+CM:240'\nUNT+5+1'\nUNZ+1+1'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+X+A+B+1'\nUNH+1+BOOKING'\nMEA+AAE+G+KGM:12000'\nMEA+AAE+L+CM:700'\nMEA+AAE+W+CM:240'\nUNT+5+1'\nUNZ+1+1'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 21
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1",
+     "kind": "unchanged",
+     "before": "X",
+     "after": "X",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "A",
+     "after": "A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "B",
+     "after": "B",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,L].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,L].2",
+     "kind": "unchanged",
+     "before": "L",
+     "after": "L",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,L].3.1",
+     "kind": "unchanged",
+     "before": "CM",
+     "after": "CM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,L].3.2",
+     "kind": "modified",
+     "before": "600",
+     "after": "700",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "A measurement (weight, volume...) changed."
+    },
+    {
+     "path": "MEA[AAE,W].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,W].2",
+     "kind": "unchanged",
+     "before": "W",
+     "after": "W",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,W].3.1",
+     "kind": "unchanged",
+     "before": "CM",
+     "after": "CM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,W].3.2",
+     "kind": "unchanged",
+     "before": "240",
+     "after": "240",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n✓ 21 unchanged\n\nDetails:\n────────────────────────────\n⚠ MEA[AAE,L].3.2\n  600 → 700\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 21 |\n\n## Changes\n\n- ⚠ `MEA[AAE,L].3.2`: `600` → `700`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "edifact/repeated-unqualified",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+X+A+B+1'UNH+1+ORDERS'XYZ+1'XYZ+2'UNT+4+1'UNZ+1+1'"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+X+A+B+1'UNH+1+ORDERS'XYZ+1'XYZ+3'UNT+4+1'UNZ+1+1'"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 11
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1",
+     "kind": "unchanged",
+     "before": "X",
+     "after": "X",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "A",
+     "after": "A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "B",
+     "after": "B",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2",
+     "kind": "unchanged",
+     "before": "ORDERS",
+     "after": "ORDERS",
+     "evidence": "fact"
+    },
+    {
+     "path": "XYZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "XYZ#2.1",
+     "kind": "modified",
+     "before": "2",
+     "after": "3",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known business meaning for this segment; likely descriptive."
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "4",
+     "after": "4",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n✓ 11 unchanged\n\nDetails:\n────────────────────────────\n⚠ XYZ#2.1\n  2 → 3\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 11 |\n\n## Changes\n\n- ⚠ `XYZ#2.1`: `2` → `3`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "edifact/line-items",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+X+A+B+1'\nUNH+1+ORDERS'\nLIN+1++AAA:EN'\nQTY+21:5'\nPRI+AAA:9.5'\nLIN+2++BBB:EN'\nQTY+21:7'\nPRI+AAA:1.5'\nUNS+S'\nUNT+9+1'\nUNZ+1+1'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+X+A+B+1'\nUNH+1+ORDERS'\nLIN+1++AAA:EN'\nQTY+21:6'\nPRI+AAA:9.5'\nLIN+2++BBB:EN'\nQTY+21:7'\nPRI+AAA:1.5'\nUNS+S'\nUNT+9+1'\nUNZ+1+1'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 24
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1",
+     "kind": "unchanged",
+     "before": "X",
+     "after": "X",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "A",
+     "after": "A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "B",
+     "after": "B",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2",
+     "kind": "unchanged",
+     "before": "ORDERS",
+     "after": "ORDERS",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1].1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1].3.1",
+     "kind": "unchanged",
+     "before": "AAA",
+     "after": "AAA",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1].3.2",
+     "kind": "unchanged",
+     "before": "EN",
+     "after": "EN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1]/QTY[21].1.1",
+     "kind": "unchanged",
+     "before": "21",
+     "after": "21",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1]/QTY[21].1.2",
+     "kind": "modified",
+     "before": "5",
+     "after": "6",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "A quantity changed."
+    },
+    {
+     "path": "LIN[1]/PRI[AAA].1.1",
+     "kind": "unchanged",
+     "before": "AAA",
+     "after": "AAA",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1]/PRI[AAA].1.2",
+     "kind": "unchanged",
+     "before": "9.5",
+     "after": "9.5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2].1",
+     "kind": "unchanged",
+     "before": "2",
+     "after": "2",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2].3.1",
+     "kind": "unchanged",
+     "before": "BBB",
+     "after": "BBB",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2].3.2",
+     "kind": "unchanged",
+     "before": "EN",
+     "after": "EN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2]/QTY[21].1.1",
+     "kind": "unchanged",
+     "before": "21",
+     "after": "21",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2]/QTY[21].1.2",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2]/PRI[AAA].1.1",
+     "kind": "unchanged",
+     "before": "AAA",
+     "after": "AAA",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2]/PRI[AAA].1.2",
+     "kind": "unchanged",
+     "before": "1.5",
+     "after": "1.5",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNS.1",
+     "kind": "unchanged",
+     "before": "S",
+     "after": "S",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n✓ 24 unchanged\n\nDetails:\n────────────────────────────\n⚠ LIN[1]/QTY[21].1.2\n  5 → 6\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 24 |\n\n## Changes\n\n- ⚠ `LIN[1]/QTY[21].1.2`: `5` → `6`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "edifact/line-item-added",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+X+A+B+1'\nUNH+1+ORDERS'\nLIN+1++AAA:EN'\nQTY+21:5'\nPRI+AAA:9.5'\nLIN+2++BBB:EN'\nQTY+21:7'\nPRI+AAA:1.5'\nUNS+S'\nUNT+9+1'\nUNZ+1+1'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+X+A+B+1'\nUNH+1+ORDERS'\nLIN+1++AAA:EN'\nQTY+21:5'\nPRI+AAA:9.5'\nLIN+2++BBB:EN'\nQTY+21:7'\nPRI+AAA:1.5'\nLIN+3++CCC:EN'QTY+21:1'UNS+S'\nUNT+9+1'\nUNZ+1+1'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 2,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 25
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1",
+     "kind": "unchanged",
+     "before": "X",
+     "after": "X",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "A",
+     "after": "A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "B",
+     "after": "B",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2",
+     "kind": "unchanged",
+     "before": "ORDERS",
+     "after": "ORDERS",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1].1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1].3.1",
+     "kind": "unchanged",
+     "before": "AAA",
+     "after": "AAA",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1].3.2",
+     "kind": "unchanged",
+     "before": "EN",
+     "after": "EN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1]/QTY[21].1.1",
+     "kind": "unchanged",
+     "before": "21",
+     "after": "21",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1]/QTY[21].1.2",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1]/PRI[AAA].1.1",
+     "kind": "unchanged",
+     "before": "AAA",
+     "after": "AAA",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[1]/PRI[AAA].1.2",
+     "kind": "unchanged",
+     "before": "9.5",
+     "after": "9.5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2].1",
+     "kind": "unchanged",
+     "before": "2",
+     "after": "2",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2].3.1",
+     "kind": "unchanged",
+     "before": "BBB",
+     "after": "BBB",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2].3.2",
+     "kind": "unchanged",
+     "before": "EN",
+     "after": "EN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2]/QTY[21].1.1",
+     "kind": "unchanged",
+     "before": "21",
+     "after": "21",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2]/QTY[21].1.2",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2]/PRI[AAA].1.1",
+     "kind": "unchanged",
+     "before": "AAA",
+     "after": "AAA",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[2]/PRI[AAA].1.2",
+     "kind": "unchanged",
+     "before": "1.5",
+     "after": "1.5",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNS.1",
+     "kind": "unchanged",
+     "before": "S",
+     "after": "S",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "LIN[3]",
+     "kind": "added",
+     "after": "LIN+3++CCC:EN",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Segment added. A line item changed."
+    },
+    {
+     "path": "LIN[3]/QTY[21]",
+     "kind": "added",
+     "after": "QTY+21:1",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Segment added. A quantity changed."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n+ 2 items added\n✓ 25 unchanged\n\nDetails:\n────────────────────────────\n+ LIN[3]\n  LIN+3++CCC:EN\n  Impact: MEDIUM\n\n+ LIN[3]/QTY[21]\n  QTY+21:1\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 2 | 0 | 0 | 25 |\n\n## Changes\n\n- + `LIN[3]`: `LIN+3++CCC:EN`\n- + `LIN[3]/QTY[21]`: `QTY+21:1`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "edifact/una-custom-delimiters",
+  "left": {
+   "name": "a.edi",
+   "content": "UNA:+.? *UNB+X+A+B+1*FTX+AAI+++it?*s 5?+5*"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNA:+.? *UNB+X+A+B+1*FTX+AAI+++it?*s 6?+5*"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 5
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1",
+     "kind": "unchanged",
+     "before": "X",
+     "after": "X",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "A",
+     "after": "A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "B",
+     "after": "B",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].4",
+     "kind": "modified",
+     "before": "it*s 5+5",
+     "after": "it*s 6+5",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Free text changed."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n⚠ FTX[AAI].4\n  it*s 5+5 → it*s 6+5\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 5 |\n\n## Changes\n\n- ⚠ `FTX[AAI].4`: `it*s 5+5` → `it*s 6+5`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "edifact/release-characters",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+X+A?+B+1'FTX+AAI+++it?'s 5?+5'"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+X+A?+B+1'FTX+AAI+++it?'s 5?+6'"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 4
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1",
+     "kind": "unchanged",
+     "before": "X",
+     "after": "X",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "A+B",
+     "after": "A+B",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].4",
+     "kind": "modified",
+     "before": "it's 5+5",
+     "after": "it's 5+6",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Free text changed."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n✓ 4 unchanged\n\nDetails:\n────────────────────────────\n⚠ FTX[AAI].4\n  it's 5+5 → it's 5+6\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 4 |\n\n## Changes\n\n- ⚠ `FTX[AAI].4`: `it's 5+5` → `it's 5+6`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "edifact/detected-by-content",
+  "left": {
+   "name": "a.txt",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'UNH+1+BOOKING:D:93A:UN'BGM+270+OB20261006+9'DTM+137:20261006:102'RFF+BN:OB20261006'NAD+BY+CARRIER01::172'NAD+CZ+CUSTOMER01::172'LOC+7+USLAX::5'LOC+11+SGSIN::5'EQD+CN+TEU123456+22G1'MEA+AAE+G+KGM:12000'FTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'UNT+12+1'UNZ+1+000000001'"
+  },
+  "right": {
+   "name": "b.txt",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USOAK::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 44
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "modified",
+     "before": "USLAX",
+     "after": "USOAK",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "A location (port, place, country) changed; routing or delivery may differ."
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.txt\nb.txt\n\nChanges:\n⚠ 1 item modified\n✓ 44 unchanged\n\nDetails:\n────────────────────────────\n⚠ LOC[7].2.1\n  USLAX → USOAK\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.txt` ↔ `b.txt`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 44 |\n\n## Changes\n\n- ⚠ `LOC[7].2.1`: `USLAX` → `USOAK`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "edifact/forced-text",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USOAK::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {
+   "format": "text"
+  },
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 13
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "L8",
+     "kind": "modified",
+     "before": "LOC+7+USLAX::5'",
+     "after": "LOC+7+USOAK::5'",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n✓ 13 unchanged\n\nDetails:\n────────────────────────────\n⚠ L8\n  LOC+7+USLAX::5' → LOC+7+USOAK::5'\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 13 |\n\n## Changes\n\n- ⚠ `L8`: `LOC+7+USLAX::5'` → `LOC+7+USOAK::5'`\n"
+ },
+ {
+  "name": "edifact/ignore-paths",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000002'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USOAK::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {
+   "ignorePaths": [
+    "UN*.*"
+   ]
+  },
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 36
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "modified",
+     "before": "USLAX",
+     "after": "USOAK",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "A location (port, place, country) changed; routing or delivery may differ."
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n✓ 36 unchanged\n\nDetails:\n────────────────────────────\n⚠ LOC[7].2.1\n  USLAX → USOAK\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 36 |\n\n## Changes\n\n- ⚠ `LOC[7].2.1`: `USLAX` → `USOAK`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "edifact/numeric-equality",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000.0'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {
+   "numericEquality": true
+  },
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 45
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000.0",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 45 |\n\nNo differences found.\n"
+ },
+ {
+  "name": "edifact/numeric-equality-off",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000.0'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 44
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "modified",
+     "before": "12000",
+     "after": "12000.0",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "A measurement (weight, volume...) changed."
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n✓ 44 unchanged\n\nDetails:\n────────────────────────────\n⚠ MEA[AAE,G].3.2\n  12000 → 12000.0\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 44 |\n\n## Changes\n\n- ⚠ `MEA[AAE,G].3.2`: `12000` → `12000.0`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "edifact/ignore-case-whitespace",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'\nUNH+1+BOOKING:D:93A:UN'\nBGM+270+OB20261006+9'\nDTM+137:20261006:102'\nRFF+BN:OB20261006'\nNAD+BY+CARRIER01::172'\nNAD+CZ+CUSTOMER01::172'\nLOC+7+USLAX::5'\nLOC+11+SGSIN::5'\nEQD+CN+TEU123456+22G1'\nMEA+AAE+G+KGM:12000'\nFTX+AAI++ocean   booking confirmed FOR EXPORT SHIPMENT'\nUNT+12+1'\nUNZ+1+000000001'\n"
+  },
+  "options": {
+   "ignoreCase": true,
+   "ignoreWhitespace": true
+  },
+  "expected": {
+   "format": "edifact",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 45
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "UNB.1.1",
+     "kind": "unchanged",
+     "before": "UNOA",
+     "after": "UNOA",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.1.2",
+     "kind": "unchanged",
+     "before": "3",
+     "after": "3",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.2",
+     "kind": "unchanged",
+     "before": "SENDER",
+     "after": "SENDER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.3",
+     "kind": "unchanged",
+     "before": "RECEIVER",
+     "after": "RECEIVER",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.1",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.4.2",
+     "kind": "unchanged",
+     "before": "1200",
+     "after": "1200",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNB.5",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.1",
+     "kind": "unchanged",
+     "before": "BOOKING",
+     "after": "BOOKING",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.2",
+     "kind": "unchanged",
+     "before": "D",
+     "after": "D",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.3",
+     "kind": "unchanged",
+     "before": "93A",
+     "after": "93A",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNH.2.4",
+     "kind": "unchanged",
+     "before": "UN",
+     "after": "UN",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.1",
+     "kind": "unchanged",
+     "before": "270",
+     "after": "270",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "BGM.3",
+     "kind": "unchanged",
+     "before": "9",
+     "after": "9",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.1",
+     "kind": "unchanged",
+     "before": "137",
+     "after": "137",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.2",
+     "kind": "unchanged",
+     "before": "20261006",
+     "after": "20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "DTM[137].1.3",
+     "kind": "unchanged",
+     "before": "102",
+     "after": "102",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.1",
+     "kind": "unchanged",
+     "before": "BN",
+     "after": "BN",
+     "evidence": "fact"
+    },
+    {
+     "path": "RFF[BN].1.2",
+     "kind": "unchanged",
+     "before": "OB20261006",
+     "after": "OB20261006",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].1",
+     "kind": "unchanged",
+     "before": "BY",
+     "after": "BY",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.1",
+     "kind": "unchanged",
+     "before": "CARRIER01",
+     "after": "CARRIER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[BY].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].1",
+     "kind": "unchanged",
+     "before": "CZ",
+     "after": "CZ",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.1",
+     "kind": "unchanged",
+     "before": "CUSTOMER01",
+     "after": "CUSTOMER01",
+     "evidence": "fact"
+    },
+    {
+     "path": "NAD[CZ].2.3",
+     "kind": "unchanged",
+     "before": "172",
+     "after": "172",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].1",
+     "kind": "unchanged",
+     "before": "7",
+     "after": "7",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.1",
+     "kind": "unchanged",
+     "before": "USLAX",
+     "after": "USLAX",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[7].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].1",
+     "kind": "unchanged",
+     "before": "11",
+     "after": "11",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.1",
+     "kind": "unchanged",
+     "before": "SGSIN",
+     "after": "SGSIN",
+     "evidence": "fact"
+    },
+    {
+     "path": "LOC[11].2.3",
+     "kind": "unchanged",
+     "before": "5",
+     "after": "5",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].1",
+     "kind": "unchanged",
+     "before": "CN",
+     "after": "CN",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].2",
+     "kind": "unchanged",
+     "before": "TEU123456",
+     "after": "TEU123456",
+     "evidence": "fact"
+    },
+    {
+     "path": "EQD[CN].3",
+     "kind": "unchanged",
+     "before": "22G1",
+     "after": "22G1",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].1",
+     "kind": "unchanged",
+     "before": "AAE",
+     "after": "AAE",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].2",
+     "kind": "unchanged",
+     "before": "G",
+     "after": "G",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.1",
+     "kind": "unchanged",
+     "before": "KGM",
+     "after": "KGM",
+     "evidence": "fact"
+    },
+    {
+     "path": "MEA[AAE,G].3.2",
+     "kind": "unchanged",
+     "before": "12000",
+     "after": "12000",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].1",
+     "kind": "unchanged",
+     "before": "AAI",
+     "after": "AAI",
+     "evidence": "fact"
+    },
+    {
+     "path": "FTX[AAI].3",
+     "kind": "unchanged",
+     "before": "OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT",
+     "after": "ocean   booking confirmed FOR EXPORT SHIPMENT",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.1",
+     "kind": "unchanged",
+     "before": "12",
+     "after": "12",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNT.2",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.1",
+     "kind": "unchanged",
+     "before": "1",
+     "after": "1",
+     "evidence": "fact"
+    },
+    {
+     "path": "UNZ.2",
+     "kind": "unchanged",
+     "before": "000000001",
+     "after": "000000001",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 45 |\n\nNo differences found.\n"
+ },
+ {
+  "name": "edifact/invalid-falls-back-to-text",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+X'BGM+1"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+X'BGM+2"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "warnings": [
+    "Invalid EDIFACT, fell back to text comparison (…)"
+   ],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "modified",
+     "before": "UNB+X'BGM+1",
+     "after": "UNB+X'BGM+2",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ L1\n  UNB+X'BGM+1 → UNB+X'BGM+2\n\nNote: Invalid EDIFACT, fell back to text comparison (a.edi: last segment is not terminated with ')\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `L1`: `UNB+X'BGM+1` → `UNB+X'BGM+2`\n\n> Note: Invalid EDIFACT, fell back to text comparison (a.edi: last segment is not terminated with ')\n"
+ },
+ {
+  "name": "edifact/bad-tag",
+  "left": {
+   "name": "a.edi",
+   "content": "UNB+X+A+B+1'lower+1'"
+  },
+  "right": {
+   "name": "b.edi",
+   "content": "UNB+X+A+B+1'lower+2'"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "warnings": [
+    "Invalid EDIFACT, fell back to text comparison (…)"
+   ],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "modified",
+     "before": "UNB+X+A+B+1'lower+1'",
+     "after": "UNB+X+A+B+1'lower+2'",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ L1\n  UNB+X+A+B+1'lower+1' → UNB+X+A+B+1'lower+2'\n\nNote: Invalid EDIFACT, fell back to text comparison (a.edi: \"lower\" is not a valid segment tag)\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `L1`: `UNB+X+A+B+1'lower+1'` → `UNB+X+A+B+1'lower+2'`\n\n> Note: Invalid EDIFACT, fell back to text comparison (a.edi: \"lower\" is not a valid segment tag)\n"
  }
 ]

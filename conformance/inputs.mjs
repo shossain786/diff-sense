@@ -4,6 +4,42 @@ const f = (name, content) => ({ name, content });
 const j = (v) => JSON.stringify(v);
 const c = (name, left, right, options = {}) => ({ name, left, right, options });
 
+const BOOKING = `UNB+UNOA:3+SENDER+RECEIVER+20261006:1200+000000001'
+UNH+1+BOOKING:D:93A:UN'
+BGM+270+OB20261006+9'
+DTM+137:20261006:102'
+RFF+BN:OB20261006'
+NAD+BY+CARRIER01::172'
+NAD+CZ+CUSTOMER01::172'
+LOC+7+USLAX::5'
+LOC+11+SGSIN::5'
+EQD+CN+TEU123456+22G1'
+MEA+AAE+G+KGM:12000'
+FTX+AAI++OCEAN BOOKING CONFIRMED FOR EXPORT SHIPMENT'
+UNT+12+1'
+UNZ+1+000000001'
+`;
+const BOOKING_MEA = `UNB+X+A+B+1'
+UNH+1+BOOKING'
+MEA+AAE+G+KGM:12000'
+MEA+AAE+L+CM:600'
+MEA+AAE+W+CM:240'
+UNT+5+1'
+UNZ+1+1'
+`;
+const LINES = `UNB+X+A+B+1'
+UNH+1+ORDERS'
+LIN+1++AAA:EN'
+QTY+21:5'
+PRI+AAA:9.5'
+LIN+2++BBB:EN'
+QTY+21:7'
+PRI+AAA:1.5'
+UNS+S'
+UNT+9+1'
+UNZ+1+1'
+`;
+
 export const cases = [
   // ---- JSON
   c('json/prd-example', f('a.json', '{\n  "timeout": 30000,\n  "retryCount": 3,\n  "enabled": true\n}'), f('b.json', '{\n  "timeout": 45000,\n  "retryCount": 5,\n  "enabled": true\n}')),
@@ -125,4 +161,29 @@ export const cases = [
   c('api/text-bodies', f('e.txt', 'plain text'), f('a.txt', 'plain text!'), { format: 'api' }),
   c('api/string-status-not-envelope', f('e.json', '{"status":"ok","data":1}'), f('a.json', '{"status":"ok","data":2}'), { format: 'api' }),
   c('api/many-mismatches', f('e.json', '{"a":1,"b":1}'), f('a.json', '{"a":2,"b":2}'), { format: 'api' }),
+
+  // ---- EDIFACT
+  c('edifact/identical', f('a.edi', BOOKING), f('b.edi', BOOKING)),
+  c('edifact/layout-ignored', f('a.edi', BOOKING.replace(/\n/g, '')), f('b.edi', BOOKING)),
+  c('edifact/crlf-layout', f('a.edi', BOOKING.replace(/\n/g, '\r\n')), f('b.edi', BOOKING)),
+  c('edifact/element-changes', f('a.edi', BOOKING), f('b.edi', BOOKING.replace('USLAX', 'USOAK').replace('KGM:12000', 'KGM:13000').replace("+9'", "+5'"))),
+  c('edifact/composite-add-remove', f('a.edi', BOOKING), f('b.edi', BOOKING.replace('KGM:12000', 'KGM').replace('CARRIER01::172', 'CARRIER01:X:172:9'))),
+  c('edifact/envelope-only', f('a.edi', BOOKING), f('b.edi', BOOKING.replace('20261006:1200+000000001', '20261007:0900+000000002').replace('UNZ+1+000000001', 'UNZ+1+000000002'))),
+  c('edifact/sender-recipient', f('a.edi', BOOKING), f('b.edi', BOOKING.replace('SENDER+RECEIVER', 'OTHER+RECEIVER'))),
+  c('edifact/segment-inserted', f('a.edi', BOOKING), f('b.edi', BOOKING.replace("LOC+7+USLAX::5'", "LOC+9+USLAX::5'LOC+7+USLAX::5'"))),
+  c('edifact/segment-removed', f('a.edi', BOOKING), f('b.edi', BOOKING.replace("NAD+CZ+CUSTOMER01::172'", ''))),
+  c('edifact/repeated-mea', f('a.edi', BOOKING_MEA), f('b.edi', BOOKING_MEA.replace('CM:600', 'CM:700'))),
+  c('edifact/repeated-unqualified', f('a.edi', "UNB+X+A+B+1'UNH+1+ORDERS'XYZ+1'XYZ+2'UNT+4+1'UNZ+1+1'"), f('b.edi', "UNB+X+A+B+1'UNH+1+ORDERS'XYZ+1'XYZ+3'UNT+4+1'UNZ+1+1'")),
+  c('edifact/line-items', f('a.edi', LINES), f('b.edi', LINES.replace('QTY+21:5', 'QTY+21:6'))),
+  c('edifact/line-item-added', f('a.edi', LINES), f('b.edi', LINES.replace("UNS+S'", "LIN+3++CCC:EN'QTY+21:1'UNS+S'"))),
+  c('edifact/una-custom-delimiters', f('a.edi', "UNA:+.? *UNB+X+A+B+1*FTX+AAI+++it?*s 5?+5*"), f('b.edi', "UNA:+.? *UNB+X+A+B+1*FTX+AAI+++it?*s 6?+5*")),
+  c('edifact/release-characters', f('a.edi', "UNB+X+A?+B+1'FTX+AAI+++it?'s 5?+5'"), f('b.edi', "UNB+X+A?+B+1'FTX+AAI+++it?'s 5?+6'")),
+  c('edifact/detected-by-content', f('a.txt', BOOKING.replace(/\n/g, '')), f('b.txt', BOOKING.replace('USLAX', 'USOAK'))),
+  c('edifact/forced-text', f('a.edi', BOOKING), f('b.edi', BOOKING.replace('USLAX', 'USOAK')), { format: 'text' }),
+  c('edifact/ignore-paths', f('a.edi', BOOKING), f('b.edi', BOOKING.replace('+000000001\'', "+000000002'").replace('USLAX', 'USOAK')), { ignorePaths: ['UN*.*'] }),
+  c('edifact/numeric-equality', f('a.edi', BOOKING), f('b.edi', BOOKING.replace('KGM:12000', 'KGM:12000.0')), { numericEquality: true }),
+  c('edifact/numeric-equality-off', f('a.edi', BOOKING), f('b.edi', BOOKING.replace('KGM:12000', 'KGM:12000.0'))),
+  c('edifact/ignore-case-whitespace', f('a.edi', BOOKING), f('b.edi', BOOKING.replace('OCEAN BOOKING CONFIRMED', 'ocean   booking confirmed')), { ignoreCase: true, ignoreWhitespace: true }),
+  c('edifact/invalid-falls-back-to-text', f('a.edi', "UNB+X'BGM+1"), f('b.edi', "UNB+X'BGM+2")),
+  c('edifact/bad-tag', f('a.edi', "UNB+X+A+B+1'lower+1'"), f('b.edi', "UNB+X+A+B+1'lower+2'")),
 ];

@@ -9,7 +9,11 @@ import com.intellij.openapi.ide.CopyPasteManager
 import com.intellij.openapi.project.DumbAwareAction
 import com.intellij.openapi.vfs.VirtualFile
 import com.razatech.diffsense.engine.CompareOptions
+import com.razatech.diffsense.engine.FileInput
 import com.razatech.diffsense.engine.Format
+import com.razatech.diffsense.engine.ParseError
+import com.razatech.diffsense.engine.formatContent
+import com.intellij.openapi.command.WriteCommandAction
 import java.awt.datatransfer.DataFlavor
 
 private fun selectedFiles(e: AnActionEvent): List<VirtualFile> =
@@ -91,5 +95,36 @@ class CompareSelectedTextAction : DumbAwareAction() {
         }
         session.pendingSelection = null
         DiffSenseRunner.run(project, { first to Side(name, text) })
+    }
+}
+
+/**
+ * Reformats the file open in the editor: indented JSON or XML, or one EDIFACT segment per line. One undo step,
+ * not saved automatically. Invalid files are reported and left untouched. (YAML is left to Code | Reformat Code.)
+ */
+class FormatFileAction : DumbAwareAction() {
+    override fun getActionUpdateThread() = ActionUpdateThread.EDT
+
+    override fun update(e: AnActionEvent) {
+        e.presentation.isEnabledAndVisible = e.project != null && e.getData(CommonDataKeys.EDITOR) != null
+    }
+
+    override fun actionPerformed(e: AnActionEvent) {
+        val project = e.project ?: return
+        val editor = e.getData(CommonDataKeys.EDITOR) ?: return
+        val name = e.getData(CommonDataKeys.VIRTUAL_FILE)?.name ?: "file.txt"
+        val doc = editor.document
+        val indent = editor.settings.getTabSize(project).coerceIn(1, 8)
+        val formatted = try {
+            formatContent(FileInput(name, doc.text), indent)
+        } catch (ex: ParseError) {
+            DiffSenseRunner.notify(project, ex.message ?: "Cannot format $name")
+            return
+        }
+        if (formatted == doc.text) {
+            DiffSenseRunner.notify(project, "$name is already formatted.")
+            return
+        }
+        WriteCommandAction.runWriteCommandAction(project, "DiffSense: Format File", null, { doc.setText(formatted) })
     }
 }
