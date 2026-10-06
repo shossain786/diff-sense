@@ -1,16 +1,21 @@
 import * as vscode from 'vscode';
 import {
   compare,
+  compareChangeSet,
+  pairDirectories,
+  renderChangeSetMarkdown,
   detectFormat,
   formatContent,
   parseConfig,
   renderMarkdown,
   resolveOptions,
   type CompareOptions,
+  type ChangeSetResult,
   type ComparisonResult,
+  type DirFile,
   type DiffSenseConfig,
 } from '@diffsense/core';
-import { randomBytes } from 'node:crypto';
+import { createHash, randomBytes } from 'node:crypto';
 import { renderPanelHtml } from './html.js';
 
 const SCHEME = 'diffsense';
@@ -221,10 +226,109 @@ async function formatFile(clicked?: vscode.Uri): Promise<void> {
   }
 }
 
+const MAX_DIR_FILES = 5000;
+const MAX_TEXT_BYTES = 10 * 1024 * 1024;
+
+/** Reads every file under [root] (skipping .git and node_modules) through VS Code's file system API. */
+async function readFolder(root: vscode.Uri): Promise<DirFile[]> {
+  const out: DirFile[] = [];
+  const walk = async (dir: vscode.Uri, rel: string): Promise<void> => {
+    for (const [name, type] of await vscode.workspace.fs.readDirectory(dir)) {
+      const path = rel === '' ? name : `${rel}/${name}`;
+      const uri = vscode.Uri.joinPath(dir, name);
+      if (type & vscode.FileType.Directory) {
+        if (name !== '.git' && name !== 'node_modules') await walk(uri, path);
+      } else if (type & vscode.FileType.File) {
+        if (out.length >= MAX_DIR_FILES) throw new Error(`${fileName(root)} has more than ${MAX_DIR_FILES} files; compare a smaller folder`);
+        const bytes = await vscode.workspace.fs.readFile(uri);
+        const binary = bytes.length > MAX_TEXT_BYTES || bytes.subarray(0, 8000).includes(0);
+        out.push({
+          path,
+          binary,
+          content: binary ? undefined : new TextDecoder().decode(bytes),
+          signature: createHash('sha1').update(bytes).digest('hex'),
+        });
+      }
+    }
+  };
+  await walk(root, '');
+  return out;
+}
+
+async function pickFolder(title: string, near?: vscode.Uri): Promise<vscode.Uri | undefined> {
+  const picked = await vscode.window.showOpenDialog({
+    canSelectFiles: false,
+    canSelectFolders: true,
+    canSelectMany: false,
+    openLabel: 'Compare',
+    title,
+    defaultUri: near ? vscode.Uri.joinPath(near, '..') : undefined,
+  });
+  return picked?.[0];
+}
+
+/** Summarizes two folders (left is "before", right is "after"), then lets you open any changed file pair. */
+async function compareFolders(clicked?: vscode.Uri, selected?: vscode.Uri[]): Promise<void> {
+  try {
+    const folders = selected && selected.length === 2 ? selected : undefined;
+    const left = folders?.[0] ?? clicked ?? (await pickFolder('Select the first folder'));
+    if (!left) return;
+    const right = folders?.[1] ?? (await pickFolder(`Compare ${fileName(left)} with…`, left));
+    if (!right) return;
+    const matchByName = (await vscode.window.showQuickPick(
+      [
+        { label: 'Match by relative path', description: 'a/b.json with a/b.json', byName: false },
+        { label: 'Also match by file name', description: 'e.g. target/classes/app.json with src/main/resources/app.json', byName: true },
+      ],
+      { title: 'How should files be paired?' },
+    ));
+    if (!matchByName) return;
+
+    const result = await vscode.window.withProgress(
+      { location: vscode.ProgressLocation.Notification, title: 'DiffSense: comparing folders…' },
+      async () => {
+        const [a, b] = [await readFolder(left), await readFolder(right)];
+        const paired = pairDirectories(a, b, { match: matchByName.byName ? 'name' : 'path' });
+        const config = await loadConfig();
+        const merged: DiffSenseConfig = { ...config, defaults: { ...settingsOptions(), ...config.defaults } };
+        return { set: compareChangeSet(paired.entries, merged, `${left.fsPath} ↔ ${right.fsPath}`), identical: paired.identical };
+      },
+    );
+    await showFolderSummary(result.set, result.identical, left, right);
+  } catch (e) {
+    void vscode.window.showErrorMessage(`DiffSense: ${(e as Error).message}`);
+  }
+}
+
+async function showFolderSummary(set: ChangeSetResult, identical: number, left: vscode.Uri, right: vscode.Uri): Promise<void> {
+  const md = `${renderChangeSetMarkdown(set)}\n${identical} identical file${identical === 1 ? '' : 's'} not shown.\n`;
+  const doc = await vscode.workspace.openTextDocument({ language: 'markdown', content: md });
+  await vscode.window.showTextDocument(doc, { viewColumn: vscode.ViewColumn.Beside, preserveFocus: true, preview: true });
+  if (set.files.length === 0) return void vscode.window.showInformationMessage('DiffSense: the folders have no differences.');
+
+  const rank = (i?: string) => ['informational', 'low', 'medium', 'high', 'critical'].indexOf(i ?? '');
+  const items = [...set.files]
+    .sort((x, y) => rank(y.impact) - rank(x.impact) || x.path.localeCompare(y.path))
+    .map((f) => ({
+      label: f.path,
+      description: `${f.status}${f.impact && f.impact !== 'informational' ? ` · ${f.impact}` : ''}`,
+      file: f,
+    }));
+  const pick = await vscode.window.showQuickPick(items, { title: `${set.stats.files} changed — open a file pair`, placeHolder: 'Pick a file to open its comparison' });
+  if (!pick) return;
+  const f = pick.file;
+  const leftFile = vscode.Uri.joinPath(left, f.oldPath ?? f.path);
+  const rightFile = vscode.Uri.joinPath(right, f.path);
+  if (f.status === 'added') await vscode.window.showTextDocument(rightFile);
+  else if (f.status === 'deleted') await vscode.window.showTextDocument(leftFile);
+  else await analyze(leftFile, rightFile, true);
+}
+
 export function activate(context: vscode.ExtensionContext): void {
   context.subscriptions.push(
     vscode.workspace.registerTextDocumentContentProvider(SCHEME, virtualDocs),
     vscode.commands.registerCommand('diffsense.compareFiles', (u?: vscode.Uri, s?: vscode.Uri[]) => compareFiles(u, s)),
+    vscode.commands.registerCommand('diffsense.compareFolders', (u?: vscode.Uri, sel?: vscode.Uri[]) => compareFolders(u, sel)),
     vscode.commands.registerCommand('diffsense.compareApiResponses', compareApiResponses),
     vscode.commands.registerCommand('diffsense.compareClipboard', compareClipboard),
     vscode.commands.registerCommand('diffsense.compareSelection', compareSelection),

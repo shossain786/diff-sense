@@ -6,6 +6,7 @@ import {
   formatContent,
   compareChangeSet,
   IMPACT_ORDER,
+  pairDirectories,
   parseConfig,
   renderChangeSet,
   renderChangeSetMarkdown,
@@ -13,6 +14,7 @@ import {
   resolveOptions,
 } from '@diffsense/core';
 import type { CompareOptions, Impact } from '@diffsense/core';
+import { readDirectory } from './dirs.js';
 import { collectChangeSet } from './git.js';
 
 const USAGE = `Usage: diffsense compare <fileA> <fileB> [options]
@@ -20,6 +22,7 @@ const USAGE = `Usage: diffsense compare <fileA> <fileB> [options]
        diffsense git [<rev> | <base>..<head> | <base>...<head>] [options]
                                                        summarize a git change set
 
+       diffsense dir <leftDir> <rightDir> [options]    summarize the differences between two folders
        diffsense format <file> [--write] [--indent <n>]
                                                        reformat JSON/XML/YAML, or split EDIFACT into one segment per line
 
@@ -35,11 +38,13 @@ Options:
   --ignore-header <name> api: never compare this header (repeatable)
   --write                format: rewrite the file in place instead of printing
   --indent <n>           format: spaces per level (default 2)
+  --match name           dir: also pair files with a unique file name in both folders (e.g. target/ vs src/resources/)
+  --exclude <glob>       dir: skip paths matching the glob, e.g. **/*.log (repeatable; .git and node_modules are always skipped)
   --markdown             git: print a Markdown summary (PR / CI step summary)
   --fail-on <impact>     git: exit 1 if overall impact >= informational|low|medium|high|critical
 
 Exit codes: 0 no differences / PASS, 1 differences / FAIL, 2 usage/error
-            (git: 0 unless --fail-on is set and met)`;
+            (git: 0 unless --fail-on is set and met; dir: 1 on any difference, or per --fail-on if set)`;
 
 function fail(msg: string): never {
   console.error(msg);
@@ -53,6 +58,8 @@ let asJson = false;
 let configPath: string | undefined;
 let markdown = false;
 let write = false;
+let matchByName = false;
+const excludes: string[] = [];
 let indent = 2;
 let failOn: Impact | undefined;
 for (let i = 0; i < args.length; i++) {
@@ -66,6 +73,10 @@ for (let i = 0; i < args.length; i++) {
   else if (a === '--ignore') (flags.ignorePaths ??= []).push(args[++i] ?? fail('--ignore needs a value'));
   else if (a === '--markdown') markdown = true;
   else if (a === '--write') write = true;
+  else if (a === '--match') {
+    if (args[++i] !== 'name') fail('--match only supports: name');
+    matchByName = true;
+  } else if (a === '--exclude') excludes.push(args[++i] ?? fail('--exclude needs a value'))
   else if (a === '--indent') {
     indent = Number(args[++i]);
     if (!Number.isInteger(indent) || indent < 1 || indent > 8) fail('--indent must be a whole number from 1 to 8');
@@ -93,7 +104,8 @@ if (files[0] === 'format') {
   process.exit(0);
 }
 const isGit = files[0] === 'git';
-if (isGit ? files.length > 2 : (files[0] !== 'compare' && files[0] !== 'api') || files.length !== 3) fail(USAGE);
+const isDir = files[0] === 'dir';
+if (isDir ? files.length !== 3 : isGit ? files.length > 2 : (files[0] !== 'compare' && files[0] !== 'api') || files.length !== 3) fail(USAGE);
 
 let config = {};
 const cfgFile = configPath ?? (existsSync('.diffsense.json') ? '.diffsense.json' : undefined);
@@ -103,6 +115,21 @@ if (cfgFile) {
   config = parsed.config;
 }
 
+if (isDir) {
+  const [, l, r] = files as [string, string, string];
+  let paired;
+  try {
+    paired = pairDirectories(readDirectory(l), readDirectory(r), { match: matchByName ? 'name' : 'path', exclude: excludes });
+  } catch (e) {
+    fail(`Cannot read directories: ${(e as Error).message}`);
+  }
+  const result = compareChangeSet(paired.entries, config, `${l} ↔ ${r}`);
+  const text = asJson ? JSON.stringify({ ...result, identical: paired.identical }, null, 2) : markdown ? renderChangeSetMarkdown(result) : renderChangeSet(result);
+  console.log(text.trimEnd());
+  if (!asJson) console.log(`${paired.identical} identical file${paired.identical === 1 ? '' : 's'} not shown.`);
+  const met = failOn ? !!result.impact && IMPACT_ORDER.indexOf(result.impact) >= IMPACT_ORDER.indexOf(failOn) : result.files.length > 0;
+  process.exit(met ? 1 : 0);
+}
 if (isGit) {
   let set;
   try {

@@ -14,3 +14,4 @@ export { compareApi, parseApiResponse, apiMismatches } from './api.js';
 export * from './changeset.js';
 export { compareEdifact, parseEdifact, formatEdifact, looksLikeEdifact } from './edifact.js';
 export { formatContent, FORMATTABLE, type FormatOptions } from './format.js';
+export { pairDirectories, compilePathGlob, type DirFile, type DirectoryOptions, type DirectoryComparison } from './dirs.js';

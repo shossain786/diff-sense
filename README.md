@@ -25,7 +25,7 @@ Every comparison runs on your machine. No network calls, no telemetry, and that 
 
 ## Layout
 - `packages/core` — VS Code-independent comparison engine (pure functions)
-- `packages/cli` — thin CLI over the core (`diffsense compare a b`, `diffsense api expected actual`, `diffsense git [range]` for a multi-file semantic summary of a commit, branch or working tree; add `--markdown` for PR text or `--fail-on high` for CI)
+- `packages/cli` — thin CLI over the core (`diffsense compare a b`, `diffsense api expected actual`, `diffsense dir a/ b/` for two folders, `diffsense format file` to reformat JSON/XML/YAML/EDIFACT, `diffsense git [range]` for a multi-file semantic summary of a commit, branch or working tree; add `--markdown` for PR text or `--fail-on high` for CI)
 - `packages/vscode` — the VS Code extension
 - `packages/intellij` — the IntelliJ plugin (Kotlin port of the engine; see its README)
 - `conformance` — shared test cases that keep the TypeScript and Kotlin engines identical

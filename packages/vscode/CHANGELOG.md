@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- New command "DiffSense: Compare Folders" (also in the Explorer context menu for folders): pairs files by relative path, or also by unique file name (for example `target/classes` against `src/main/resources`), shows a Markdown summary and lets you open any changed file pair.
 - New command "DiffSense: Format File" (also in the editor context menu for JSON, XML, YAML and EDIFACT files): re-indents the file, or splits EDIFACT into one segment per line. One undo step, not saved automatically; invalid files are reported and left untouched.
 - EDIFACT (`.edi`, `.edifact`) files are now compared structurally, with element-level changes and impact estimates.
 

@@ -56,6 +56,11 @@
         "category": "DiffSense"
       },
       {
+        "command": "diffsense.compareFolders",
+        "title": "Compare Folders",
+        "category": "DiffSense"
+      },
+      {
         "command": "diffsense.formatFile",
         "title": "Format File (JSON, XML, YAML, EDIFACT)",
         "category": "DiffSense"
@@ -73,6 +78,11 @@
     ],
     "menus": {
       "explorer/context": [
+        {
+          "command": "diffsense.compareFolders",
+          "when": "explorerResourceIsFolder",
+          "group": "3_compare@9"
+        },
         {
           "command": "diffsense.compareFiles",
           "when": "!explorerResourceIsFolder",
