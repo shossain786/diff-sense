@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Replaced the deprecated `ReadAction.computeCancellable` with the coroutine read action (reported by the Plugin Verifier against IntelliJ IDEA 2026.3 EAP).
 - EDIFACT (`.edi`, `.edifact`, or detected by content) is compared segment by segment, with element-level changes and impact estimates. One-line and one-segment-per-line files compare equal.
 - New action "DiffSense | Format File": re-indents JSON and XML, or splits EDIFACT into one segment per line. One undo step, not saved automatically; invalid files are left untouched. (For YAML use Code | Reformat Code.)
 

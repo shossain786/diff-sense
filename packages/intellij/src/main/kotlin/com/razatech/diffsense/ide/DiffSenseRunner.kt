@@ -6,7 +6,8 @@ import com.intellij.diff.requests.SimpleDiffRequest
 import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.application.ReadAction
+import com.intellij.openapi.application.readAction
+import com.intellij.openapi.progress.runBlockingCancellable
 import com.intellij.openapi.fileTypes.FileTypeManager
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
@@ -38,7 +39,7 @@ object DiffSenseRunner {
 
             override fun run(indicator: ProgressIndicator) {
                 try {
-                    val (left, right) = ReadAction.computeCancellable<Pair<Side, Side>, RuntimeException>(readSides)
+                    val (left, right) = runBlockingCancellable { readAction { readSides() } }
                     val config = loadConfig(project)
                     val format = forced.format ?: detectFormat(left.name)
                     val options = DiffSenseSettings.getInstance().toOptions()
