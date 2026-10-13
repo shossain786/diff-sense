@@ -43,7 +43,7 @@ The same engine also explains config (JSON, YAML, XML), API response and EDIFACT
 ## Install
 
 - **VS Code:** [DiffSense Semantic Compare on the Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=RazaTech.diffsense-vscode), or search for "DiffSense Semantic Compare" in the Extensions view.
-- **IntelliJ IDEA and other JetBrains IDEs:** submitted to the JetBrains Marketplace and awaiting review. Until it is published you can install the zip from [`packages/intellij`](packages/intellij) (build it with `./gradlew buildPlugin`) through Settings | Plugins | Install Plugin from Disk.
+- **IntelliJ IDEA and other JetBrains IDEs:** search for "DiffSense" in Settings | Plugins | Marketplace. To build it yourself, run `./gradlew buildPlugin` in [`packages/intellij`](packages/intellij) and use Install Plugin from Disk.
 
 See [docs/DiffSense_Product_Requirements.md](docs/DiffSense_Product_Requirements.md) for the product requirements.
 
