@@ -3,6 +3,14 @@
 Changes to the CLI and the GitHub Action. The IDE packages keep their own changelogs
 ([VS Code](packages/vscode/CHANGELOG.md), [IntelliJ](packages/intellij/CHANGELOG.md)).
 
+## 0.3.0 — 2026-10-13
+
+- Test-change summaries (Java): disabling a test no longer also reports the annotation's import, and the skip reason is shown (`@Disabled("Broken in Chrome 142")`); adding a reason to an already disabled test is low impact.
+- Locators declared as page-object fields (`new Query(By.name("q"))`) and `@FindBy`/`@FindAll`/`@FindBys` are reported as locator changes. A move to a position-based XPath is high impact, a move to a sturdier strategy is low.
+- Import version bumps (`.v138.` → `.v147.`) are reported once as a "version bump", and the body of an anonymous class is no longer listed as separate removed calls of the surrounding method.
+- `diffsense git`, `diffsense dir` and the GitHub Action report identical changes across sibling files once ("6 files with the same change") in both the text and Markdown output, and show the reason inline for high-impact items.
+- README leads with the Java test-impact workflow and a real-repository example.
+
 ## 0.2.0 — 2026-10-06
 
 - Folder comparison: `diffsense dir <left> <right>` summarizes two directories with the same engine as `git` (per-file structural changes, impact, Markdown, `--fail-on`). Files are paired by relative path; `--match name` also pairs leftovers that have a unique file name on both sides (for example `target/classes/` against `src/main/resources/`, shown as renames). `--exclude <glob>` skips paths; `.git` and `node_modules` are always skipped. Exit code 1 on any difference, or per `--fail-on`.

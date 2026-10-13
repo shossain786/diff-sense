@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0 — 2026-10-13
+
+- New command "DiffSense: Compare Files by Path": type or paste the source and destination paths (files or folders). Relative paths resolve against the workspace, `~` and quoted paths work, and each box validates that the path exists.
+- Java test diffs are quieter and more useful: disabling a test no longer also lists its import and shows the skip reason; locators declared as page-object fields and `@FindBy` are reported as locator changes (position-based XPath is high impact, a sturdier strategy is low); import version bumps and anonymous-class bodies collapse into one change each.
+- Folder and change-set summaries report identical changes across sibling files once.
+- README leads with the Java test-impact workflow.
+
 ## 0.2.0 — 2026-10-06
 
 - New command "DiffSense: Compare Folders" (also in the Explorer context menu for folders): pairs files by relative path, or also by unique file name (for example `target/classes` against `src/main/resources`), shows a Markdown summary and lets you open any changed file pair.
