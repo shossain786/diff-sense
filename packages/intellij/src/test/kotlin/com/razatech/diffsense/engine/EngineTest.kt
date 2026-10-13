@@ -101,10 +101,17 @@ class EngineTest {
     }
 
     @Test
-    fun javaFilesFallBackToTextWithAnExplanation() {
-        val r = cmp("A.java", "class A {}", "class B {}")
+    fun javaIsAnalysedSemantically() {
+        val r = cmp("A.java", "class A { int timeout = 1; }", "class A { int timeout = 2; }")
+        assertEquals(Format.JAVA, r.format)
+        assertEquals("A.timeout", r.changes.single().path)
+    }
+
+    @Test
+    fun invalidJavaFallsBackToTextWithAnExplanation() {
+        val r = cmp("A.java", "class A { void m( { } }", "class A { void m( { x } }")
         assertEquals(Format.TEXT, r.format)
-        assertTrue(r.warnings.single().contains("not available in the IntelliJ plugin yet"))
+        assertTrue(r.warnings.single().startsWith("Invalid JAVA, fell back to text comparison"))
     }
 
     @Test

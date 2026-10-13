@@ -3,6 +3,7 @@ package com.razatech.diffsense.ide
 import com.intellij.openapi.options.BoundSearchableConfigurable
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.bindIntText
+import com.intellij.ui.dsl.builder.bindItem
 import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
@@ -30,6 +31,13 @@ class DiffSenseConfigurable : BoundSearchableConfigurable("DiffSense", "com.raza
                 row { checkBox("Ignore fields that are only in the actual response").bindSelected(s::ignoreExtraFields) }
                 row("Ignored headers:") {
                     textArea().rows(3).bindText(s::ignoreHeaders).comment("One header name per line. Date, Server and request IDs are always ignored.")
+                }
+            }
+            group("Java") {
+                row("Test-automation rules:") {
+                    comboBox(listOf("auto", "on", "off"))
+                        .bindItem({ s.qaMode }, { s.qaMode = it ?: "auto" })
+                        .comment("Locator, wait and assertion changes. <code>auto</code> turns them on for files that import Selenium, JUnit, TestNG, Cucumber, Playwright or REST Assured.")
                 }
             }
             group("Ignored paths") {

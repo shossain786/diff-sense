@@ -1,5 +1,5 @@
 // Inputs for the cross-engine conformance suite (TypeScript core and Kotlin plugin engine).
-// Java and the QA pack are intentionally absent: the plugin's first release does not include them.
+import { javaCases } from './java-inputs.mjs';
 const f = (name, content) => ({ name, content });
 const j = (v) => JSON.stringify(v);
 const c = (name, left, right, options = {}) => ({ name, left, right, options });
@@ -186,4 +186,7 @@ export const cases = [
   c('edifact/ignore-case-whitespace', f('a.edi', BOOKING), f('b.edi', BOOKING.replace('OCEAN BOOKING CONFIRMED', 'ocean   booking confirmed')), { ignoreCase: true, ignoreWhitespace: true }),
   c('edifact/invalid-falls-back-to-text', f('a.edi', "UNB+X'BGM+1"), f('b.edi', "UNB+X'BGM+2")),
   c('edifact/bad-tag', f('a.edi', "UNB+X+A+B+1'lower+1'"), f('b.edi', "UNB+X+A+B+1'lower+2'")),
+
+  // ---- Java and the QA pack
+  ...javaCases,
 ];

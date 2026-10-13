@@ -23,6 +23,7 @@ private fun compareRaw(left: FileInput, right: FileInput, options: CompareOption
             Format.XML -> return compareXml(left, right, options)
             Format.API -> return compareApi(left, right, options)
             Format.EDIFACT -> return compareEdifact(left, right, options)
+            Format.JAVA -> return compareJava(left, right, options)
             else -> {}
         }
     } catch (e: ParseError) {
@@ -30,7 +31,6 @@ private fun compareRaw(left: FileInput, right: FileInput, options: CompareOption
     }
     val warnings = when (format) {
         Format.TEXT -> emptyList()
-        Format.JAVA -> listOf("Java semantic analysis is not available in the IntelliJ plugin yet; used text comparison")
         else -> listOf("No structural comparator for ${format.id} yet; used text comparison")
     }
     return compareText(left, right, options, Format.TEXT, warnings)

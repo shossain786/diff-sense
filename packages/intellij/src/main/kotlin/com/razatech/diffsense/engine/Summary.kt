@@ -25,6 +25,12 @@ private fun apiLine(c: Change): String {
     }
 }
 
+private val QA_UNCHANGED = Regex(" › (locator|wait strategy|assertion)$")
+
+/** Unchanged QA concerns (locator / wait strategy / assertion) worth calling out. */
+private fun qaUnchangedPaths(changes: List<Change>): List<String> =
+    changes.filter { it.kind == ChangeKind.UNCHANGED && QA_UNCHANGED.containsMatchIn(it.path) }.map { it.path }
+
 private fun join(lines: List<String>) = jsTrimEnd(lines.joinToString("\n")) + "\n"
 
 /** PRD section 15 expected-vs-actual report. */
@@ -53,6 +59,8 @@ fun renderSummary(r: ComparisonResult): String {
         if (unchanged > 0) out.add("✓ $unchanged unchanged")
         out.add(""); out.add("Details:"); out.add("────────────────────────────")
         for (c in r.changes.filter { it.kind != ChangeKind.UNCHANGED }) { out.add(line0(c) + impactLine(c)); out.add("") }
+        val same = qaUnchangedPaths(r.changes)
+        if (same.isNotEmpty()) { out.add("Unchanged:"); same.forEach { out.add("✓ $it") }; out.add("") }
     }
     if (r.impact != null) out.add("Potential impact (estimate): ${r.impact.id}")
     for (w in r.warnings) out.add("Note: $w")
@@ -109,6 +117,8 @@ fun renderMarkdown(r: ComparisonResult): String {
         }
         out.add("")
     }
+    val same = qaUnchangedPaths(r.changes)
+    if (same.isNotEmpty()) { out.add("## Unchanged"); out.add(""); same.forEach { out.add("- ✓ ${mdCode(it)}") }; out.add("") }
     if (r.impact != null) { out.add("**Potential impact (estimate):** ${r.impact.id}"); out.add("") }
     for (w in r.warnings) { out.add("> Note: $w"); out.add("") }
     return join(out)

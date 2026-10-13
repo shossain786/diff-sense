@@ -21,6 +21,7 @@ dependencies {
         testFramework(TestFrameworkType.Platform)
     }
     implementation("org.snakeyaml:snakeyaml-engine:2.9")
+    implementation("com.github.javaparser:javaparser-core:3.26.4")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.opentest4j:opentest4j:1.3.0")
 }

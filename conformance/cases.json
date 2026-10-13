@@ -10801,5 +10801,2924 @@
   },
   "summary": "DiffSense — Change Summary\n\nFiles:\na.edi\nb.edi\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ L1\n  UNB+X+A+B+1'lower+1' → UNB+X+A+B+1'lower+2'\n\nNote: Invalid EDIFACT, fell back to text comparison (a.edi: \"lower\" is not a valid segment tag)\n",
   "markdown": "# DiffSense — Change Summary\n\n**Files:** `a.edi` ↔ `b.edi`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `L1`: `UNB+X+A+B+1'lower+1'` → `UNB+X+A+B+1'lower+2'`\n\n> Note: Invalid EDIFACT, fell back to text comparison (a.edi: \"lower\" is not a valid segment tag)\n"
+ },
+ {
+  "name": "java/identical",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 6
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 6 |\n\nNo differences found.\n"
+ },
+ {
+  "name": "java/formatting-only",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n\tprivate static final int MAX_RETRIES = 3;\n\tprivate final Map<String, List<Integer>> cache = new HashMap<>();\n\tprotected String name;\n\n\tpublic OrderService(String name) {\n\t  this.name = name;\n\t}\n\n\t@Override\n\tpublic int submit(Order order, int... flags) throws IOException, TimeoutException {\n\t  if (order.total() > MAX_RETRIES) {\n\t    log.info(\"big order\");\n\t    throw new IllegalStateException(\"too big\");\n\t  }\n\t  try {\n\t    repo.save(order);\n\t  } catch (IOException e) {\n\t    return -1;\n\t  } finally {\n\t    cleanup();\n\t  }\n\t  return order.id();\n\t}\n\n\tprivate <T extends Comparable<T>> T pick(List<T> items) {\n\t  return items.get(0);\n\t}\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 6
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 6 |\n\nNo differences found.\n"
+ },
+ {
+  "name": "java/field-value",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 5;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 5
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "modified",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 5",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService.MAX_RETRIES\n  private static final int MAX_RETRIES = 3 → private static final int MAX_RETRIES = 5\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 5 |\n\n## Changes\n\n- ⚠ `OrderService.MAX_RETRIES`: `private static final int MAX_RETRIES = 3` → `private static final int MAX_RETRIES = 5`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/field-added-removed",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected long id;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 5
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "removed",
+     "before": "protected String name",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Field removed."
+    },
+    {
+     "path": "OrderService.id",
+     "kind": "added",
+     "after": "protected long id",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Field added."
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n- 1 item removed\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n- OrderService.name\n  protected String name\n  Impact: MEDIUM\n\n+ OrderService.id\n  protected long id\n  Impact: LOW\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 0 | 5 |\n\n## Changes\n\n- − `OrderService.name`: `protected String name`\n- + `OrderService.id`: `protected long id`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/field-type-change",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, Set<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 5
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "modified",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, Set<Integer>> cache = new HashMap<>()",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService.cache\n  private final Map<String, List<Integer>> cache = new HashMap<>() → private final Map<String, Set<Integer>> cache = new HashMap<>()\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 5 |\n\n## Changes\n\n- ⚠ `OrderService.cache`: `private final Map<String, List<Integer>> cache = new HashMap<>()` → `private final Map<String, Set<Integer>> cache = new HashMap<>()`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/method-signature",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public long submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 5
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "modified",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public long submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Method signature changed; callers may be affected."
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService.submit(Order,int...)\n  public int submit(Order order, int... flags) throws IOException, TimeoutException → public long submit(Order order, int... flags) throws IOException, TimeoutException\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 5 |\n\n## Changes\n\n- ⚠ `OrderService.submit(Order,int...)`: `public int submit(Order order, int... flags) throws IOException, TimeoutException` → `public long submit(Order order, int... flags) throws IOException, TimeoutException`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/method-params",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, String note) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 5
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,String)",
+     "kind": "modified",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, String note) throws IOException, TimeoutException",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Method signature changed; callers may be affected."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService.submit(Order,String)\n  public int submit(Order order, int... flags) throws IOException, TimeoutException → public int submit(Order order, String note) throws IOException, TimeoutException\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 5 |\n\n## Changes\n\n- ⚠ `OrderService.submit(Order,String)`: `public int submit(Order order, int... flags) throws IOException, TimeoutException` → `public int submit(Order order, String note) throws IOException, TimeoutException`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/method-removed",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 5
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "removed",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method removed; callers may break."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n- 1 item removed\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n- OrderService.pick(List<T>)\n  private <T extends Comparable<T>> T pick(List<T> items)\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 1 | 0 | 5 |\n\n## Changes\n\n- − `OrderService.pick(List<T>)`: `private <T extends Comparable<T>> T pick(List<T> items)`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/method-added",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n  public void extra() {\n    audit.record();\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 6
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.extra()",
+     "kind": "added",
+     "after": "public void extra()",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Method added."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n✓ 6 unchanged\n\nDetails:\n────────────────────────────\n+ OrderService.extra()\n  public void extra()\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 0 | 6 |\n\n## Changes\n\n- + `OrderService.extra()`: `public void extra()`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "java/throws-changed",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 5
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "modified",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Method signature changed; callers may be affected."
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService.submit(Order,int...)\n  public int submit(Order order, int... flags) throws IOException, TimeoutException → public int submit(Order order, int... flags) throws IOException\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 5 |\n\n## Changes\n\n- ⚠ `OrderService.submit(Order,int...)`: `public int submit(Order order, int... flags) throws IOException, TimeoutException` → `public int submit(Order order, int... flags) throws IOException`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/generic-method",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Number> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 5
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "modified",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Number> T pick(List<T> items)",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method signature changed; callers may be affected."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService.pick(List<T>)\n  private <T extends Comparable<T>> T pick(List<T> items) → private <T extends Number> T pick(List<T> items)\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 5 |\n\n## Changes\n\n- ⚠ `OrderService.pick(List<T>)`: `private <T extends Comparable<T>> T pick(List<T> items)` → `private <T extends Number> T pick(List<T> items)`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/class-header",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic final class OrderService extends Other implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 6
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService",
+     "kind": "modified",
+     "before": "public class OrderService extends Base implements Auditable, Closeable",
+     "after": "public final class OrderService extends Other implements Auditable, Closeable",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Type declaration (modifiers, supertypes or kind) changed."
+    },
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 6 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService\n  public class OrderService extends Base implements Auditable, Closeable → public final class OrderService extends Other implements Auditable, Closeable\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 6 |\n\n## Changes\n\n- ⚠ `OrderService`: `public class OrderService extends Base implements Auditable, Closeable` → `public final class OrderService extends Other implements Auditable, Closeable`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/class-annotation",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service(\"orders\")\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 6
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService › @Service",
+     "kind": "modified",
+     "before": "@Service",
+     "after": "@Service(\"orders\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Annotation arguments changed."
+    },
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 6 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService › @Service\n  @Service → @Service(\"orders\")\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 6 |\n\n## Changes\n\n- ⚠ `OrderService › @Service`: `@Service` → `@Service(\"orders\")`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/method-annotation-removed",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 5
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › @Override",
+     "kind": "removed",
+     "before": "@Override",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Annotation removed; framework behaviour may change."
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n- 1 item removed\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n- OrderService.submit(Order,int...) › @Override\n  @Override\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 1 | 0 | 5 |\n\n## Changes\n\n- − `OrderService.submit(Order,int...) › @Override`: `@Override`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/package-and-imports",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.orders;\n\nimport java.util.List;\nimport java.util.Set;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 1,
+    "unchanged": 6
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "package",
+     "kind": "modified",
+     "before": "com.acme.svc",
+     "after": "com.acme.orders",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Package changed; all references to this class are affected."
+    },
+    {
+     "path": "imports › java.util.Map",
+     "kind": "removed",
+     "before": "java.util.Map",
+     "evidence": "fact",
+     "impact": "informational",
+     "reason": "Import removed."
+    },
+    {
+     "path": "imports › java.util.Set",
+     "kind": "added",
+     "after": "java.util.Set",
+     "evidence": "fact",
+     "impact": "informational",
+     "reason": "Import added."
+    },
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...)",
+     "kind": "unchanged",
+     "before": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "after": "public int submit(Order order, int... flags) throws IOException, TimeoutException",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n- 1 item removed\n⚠ 1 item modified\n✓ 6 unchanged\n\nDetails:\n────────────────────────────\n⚠ package\n  com.acme.svc → com.acme.orders\n  Impact: HIGH\n\n- imports › java.util.Map\n  java.util.Map\n\n+ imports › java.util.Set\n  java.util.Set\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 1 | 6 |\n\n## Changes\n\n- ⚠ `package`: `com.acme.svc` → `com.acme.orders`\n- − `imports › java.util.Map`: `java.util.Map`\n- + `imports › java.util.Set`: `java.util.Set`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/condition-and-call",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() >= MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.saveAndFlush(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 1,
+    "unchanged": 5
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › if",
+     "kind": "modified",
+     "before": "if (order.total() > MAX_RETRIES)",
+     "after": "if (order.total() >= MAX_RETRIES)",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Control-flow condition changed; behaviour may differ."
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › call repo.save",
+     "kind": "removed",
+     "before": "repo.save(order)",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › call repo.saveAndFlush",
+     "kind": "added",
+     "after": "repo.saveAndFlush(order)",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n- 1 item removed\n⚠ 1 item modified\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService.submit(Order,int...) › if\n  if (order.total() > MAX_RETRIES) → if (order.total() >= MAX_RETRIES)\n  Impact: MEDIUM\n\n- OrderService.submit(Order,int...) › call repo.save\n  repo.save(order)\n  Impact: MEDIUM\n\n+ OrderService.submit(Order,int...) › call repo.saveAndFlush\n  repo.saveAndFlush(order)\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 1 | 5 |\n\n## Changes\n\n- ⚠ `OrderService.submit(Order,int...) › if`: `if (order.total() > MAX_RETRIES)` → `if (order.total() >= MAX_RETRIES)`\n- − `OrderService.submit(Order,int...) › call repo.save`: `repo.save(order)`\n- + `OrderService.submit(Order,int...) › call repo.saveAndFlush`: `repo.saveAndFlush(order)`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/exception-handling",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalArgumentException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (Exception e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 2,
+    "unchanged": 5
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › throw",
+     "kind": "modified",
+     "before": "throw new IllegalStateException(\"too big\")",
+     "after": "throw new IllegalArgumentException(\"too big\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Exception handling changed."
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › call new IllegalStateException",
+     "kind": "removed",
+     "before": "new IllegalStateException(\"too big\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › catch",
+     "kind": "modified",
+     "before": "catch (IOException e)",
+     "after": "catch (Exception e)",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Exception handling changed."
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › call new IllegalArgumentException",
+     "kind": "added",
+     "after": "new IllegalArgumentException(\"too big\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n- 1 item removed\n⚠ 2 items modified\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService.submit(Order,int...) › throw\n  throw new IllegalStateException(\"too big\") → throw new IllegalArgumentException(\"too big\")\n  Impact: MEDIUM\n\n- OrderService.submit(Order,int...) › call new IllegalStateException\n  new IllegalStateException(\"too big\")\n  Impact: MEDIUM\n\n⚠ OrderService.submit(Order,int...) › catch\n  catch (IOException e) → catch (Exception e)\n  Impact: MEDIUM\n\n+ OrderService.submit(Order,int...) › call new IllegalArgumentException\n  new IllegalArgumentException(\"too big\")\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 2 | 5 |\n\n## Changes\n\n- ⚠ `OrderService.submit(Order,int...) › throw`: `throw new IllegalStateException(\"too big\")` → `throw new IllegalArgumentException(\"too big\")`\n- − `OrderService.submit(Order,int...) › call new IllegalStateException`: `new IllegalStateException(\"too big\")`\n- ⚠ `OrderService.submit(Order,int...) › catch`: `catch (IOException e)` → `catch (Exception e)`\n- + `OrderService.submit(Order,int...) › call new IllegalArgumentException`: `new IllegalArgumentException(\"too big\")`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/return-and-logging",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.warn(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -2;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 1,
+    "unchanged": 5
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.MAX_RETRIES",
+     "kind": "unchanged",
+     "before": "private static final int MAX_RETRIES = 3",
+     "after": "private static final int MAX_RETRIES = 3",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › call log.info",
+     "kind": "removed",
+     "before": "log.info(\"big order\")",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Logging/output call changed."
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › return",
+     "kind": "modified",
+     "before": "return -1",
+     "after": "return -2",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Returned value changed."
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › call log.warn",
+     "kind": "added",
+     "after": "log.warn(\"big order\")",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Logging/output call changed."
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n- 1 item removed\n⚠ 1 item modified\n✓ 5 unchanged\n\nDetails:\n────────────────────────────\n- OrderService.submit(Order,int...) › call log.info\n  log.info(\"big order\")\n  Impact: LOW\n\n⚠ OrderService.submit(Order,int...) › return\n  return -1 → return -2\n  Impact: MEDIUM\n\n+ OrderService.submit(Order,int...) › call log.warn\n  log.warn(\"big order\")\n  Impact: LOW\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 1 | 5 |\n\n## Changes\n\n- − `OrderService.submit(Order,int...) › call log.info`: `log.info(\"big order\")`\n- ⚠ `OrderService.submit(Order,int...) › return`: `return -1` → `return -2`\n- + `OrderService.submit(Order,int...) › call log.warn`: `log.warn(\"big order\")`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/assignment-keyword-impact",
+  "left": {
+   "name": "A.java",
+   "content": "class C { void m() { timeout = 5; apiUrl = \"a\"; other = 1; } }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "class C { void m() { timeout = 9; apiUrl = \"b\"; other = 2; } }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 3,
+    "unchanged": 0
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "C.m() › assign timeout",
+     "kind": "modified",
+     "before": "timeout = 5",
+     "after": "timeout = 9",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    },
+    {
+     "path": "C.m() › assign apiUrl",
+     "kind": "modified",
+     "before": "apiUrl = \"a\"",
+     "after": "apiUrl = \"b\"",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Name suggests a connection target or security setting; requests may reach a different service or be handled differently."
+    },
+    {
+     "path": "C.m() › assign other",
+     "kind": "modified",
+     "before": "other = 1",
+     "after": "other = 2",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 3 items modified\n\nDetails:\n────────────────────────────\n⚠ C.m() › assign timeout\n  timeout = 5 → timeout = 9\n  Impact: MEDIUM\n\n⚠ C.m() › assign apiUrl\n  apiUrl = \"a\" → apiUrl = \"b\"\n  Impact: HIGH\n\n⚠ C.m() › assign other\n  other = 1 → other = 2\n  Impact: LOW\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 3 | 0 |\n\n## Changes\n\n- ⚠ `C.m() › assign timeout`: `timeout = 5` → `timeout = 9`\n- ⚠ `C.m() › assign apiUrl`: `apiUrl = \"a\"` → `apiUrl = \"b\"`\n- ⚠ `C.m() › assign other`: `other = 1` → `other = 2`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/overloads",
+  "left": {
+   "name": "A.java",
+   "content": "class C { void m(int a) {} void m(String a) {} }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "class C { void m(int a) { x(); } void m(String a) {} }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "C.m(int) › call x",
+     "kind": "added",
+     "after": "x()",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "C.m(String)",
+     "kind": "unchanged",
+     "before": "void m(String a)",
+     "after": "void m(String a)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n+ C.m(int) › call x\n  x()\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 0 | 1 |\n\n## Changes\n\n- + `C.m(int) › call x`: `x()`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/enum",
+  "left": {
+   "name": "A.java",
+   "content": "public enum Mode { FAST(\"f\"), SLOW(\"s\"); private final String code; Mode(String code) { this.code = code; } }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "public enum Mode { FAST(\"f\"), SLOW(\"slow\"), IDLE(\"i\"); private final String code; Mode(String code) { this.code = code; } }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 3
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "Mode.FAST",
+     "kind": "unchanged",
+     "before": "enum constant FAST(\"f\")",
+     "after": "enum constant FAST(\"f\")",
+     "evidence": "fact"
+    },
+    {
+     "path": "Mode.SLOW",
+     "kind": "modified",
+     "before": "enum constant SLOW(\"s\")",
+     "after": "enum constant SLOW(\"slow\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Name suggests a behaviour or tuning setting; runtime behaviour may differ."
+    },
+    {
+     "path": "Mode.code",
+     "kind": "unchanged",
+     "before": "private final String code",
+     "after": "private final String code",
+     "evidence": "fact"
+    },
+    {
+     "path": "Mode.IDLE",
+     "kind": "added",
+     "after": "enum constant IDLE(\"i\")",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Field added."
+    },
+    {
+     "path": "Mode.<init>(String)",
+     "kind": "unchanged",
+     "before": "Mode(String code)",
+     "after": "Mode(String code)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n⚠ 1 item modified\n✓ 3 unchanged\n\nDetails:\n────────────────────────────\n⚠ Mode.SLOW\n  enum constant SLOW(\"s\") → enum constant SLOW(\"slow\")\n  Impact: MEDIUM\n\n+ Mode.IDLE\n  enum constant IDLE(\"i\")\n  Impact: LOW\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 1 | 3 |\n\n## Changes\n\n- ⚠ `Mode.SLOW`: `enum constant SLOW(\"s\")` → `enum constant SLOW(\"slow\")`\n- + `Mode.IDLE`: `enum constant IDLE(\"i\")`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/interface",
+  "left": {
+   "name": "A.java",
+   "content": "public interface Repo { int count(); default void ping() { a(); } }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "public interface Repo { long count(); default void ping() { b(); } void drop(); }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 2,
+    "removed": 1,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "Repo.count()",
+     "kind": "modified",
+     "before": "int count()",
+     "after": "long count()",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method signature changed; callers may be affected."
+    },
+    {
+     "path": "Repo.ping() › call a",
+     "kind": "removed",
+     "before": "a()",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "Repo.ping() › call b",
+     "kind": "added",
+     "after": "b()",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "Repo.drop()",
+     "kind": "added",
+     "after": "void drop()",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Method added."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 2 items added\n- 1 item removed\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ Repo.count()\n  int count() → long count()\n  Impact: MEDIUM\n\n- Repo.ping() › call a\n  a()\n  Impact: MEDIUM\n\n+ Repo.ping() › call b\n  b()\n  Impact: MEDIUM\n\n+ Repo.drop()\n  void drop()\n  Impact: LOW\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 2 | 1 | 1 | 0 |\n\n## Changes\n\n- ⚠ `Repo.count()`: `int count()` → `long count()`\n- − `Repo.ping() › call a`: `a()`\n- + `Repo.ping() › call b`: `b()`\n- + `Repo.drop()`: `void drop()`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/record",
+  "left": {
+   "name": "A.java",
+   "content": "public record Point(int x, int y) implements Shape { }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "public record Point(int x, int y, int z) implements Shape { }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "Point",
+     "kind": "modified",
+     "before": "public record Point(int x, int y) implements Shape",
+     "after": "public record Point(int x, int y, int z) implements Shape",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Type declaration (modifiers, supertypes or kind) changed."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ Point\n  public record Point(int x, int y) implements Shape → public record Point(int x, int y, int z) implements Shape\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `Point`: `public record Point(int x, int y) implements Shape` → `public record Point(int x, int y, int z) implements Shape`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/nested-types",
+  "left": {
+   "name": "A.java",
+   "content": "class Outer { static class In { int a; } }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "class Outer { static class In { int a; int b; } class Extra {} }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 2,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 2
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "Outer",
+     "kind": "unchanged",
+     "before": "class Outer",
+     "after": "class Outer",
+     "evidence": "fact"
+    },
+    {
+     "path": "Outer.In.a",
+     "kind": "unchanged",
+     "before": "int a",
+     "after": "int a",
+     "evidence": "fact"
+    },
+    {
+     "path": "Outer.In.b",
+     "kind": "added",
+     "after": "int b",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Field added."
+    },
+    {
+     "path": "Outer.Extra",
+     "kind": "added",
+     "after": "class Extra",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Type added."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 2 items added\n✓ 2 unchanged\n\nDetails:\n────────────────────────────\n+ Outer.In.b\n  int b\n  Impact: LOW\n\n+ Outer.Extra\n  class Extra\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 2 | 0 | 0 | 2 |\n\n## Changes\n\n- + `Outer.In.b`: `int b`\n- + `Outer.Extra`: `class Extra`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "java/type-removed-added",
+  "left": {
+   "name": "A.java",
+   "content": "class A {}\nclass B {}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "class A {}\nclass C {}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 1
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "A",
+     "kind": "unchanged",
+     "before": "class A",
+     "after": "class A",
+     "evidence": "fact"
+    },
+    {
+     "path": "B",
+     "kind": "removed",
+     "before": "class B",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Type removed; dependants may break."
+    },
+    {
+     "path": "C",
+     "kind": "added",
+     "after": "class C",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Type added."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n- 1 item removed\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n- B\n  class B\n  Impact: MEDIUM\n\n+ C\n  class C\n  Impact: LOW\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 0 | 1 |\n\n## Changes\n\n- − `B`: `class B`\n- + `C`: `class C`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/ignore-paths",
+  "left": {
+   "name": "A.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 3;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"big order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "package com.acme.svc;\n\nimport java.util.List;\nimport java.util.Map;\n\n@Service\npublic class OrderService extends Base implements Auditable, Closeable {\n  private static final int MAX_RETRIES = 5;\n  private final Map<String, List<Integer>> cache = new HashMap<>();\n  protected String name;\n\n  public OrderService(String name) {\n    this.name = name;\n  }\n\n  @Override\n  public int submit(Order order, int... flags) throws IOException, TimeoutException {\n    if (order.total() > MAX_RETRIES) {\n      log.info(\"huge order\");\n      throw new IllegalStateException(\"too big\");\n    }\n    try {\n      repo.save(order);\n    } catch (IOException e) {\n      return -1;\n    } finally {\n      cleanup();\n    }\n    return order.id();\n  }\n\n  private <T extends Comparable<T>> T pick(List<T> items) {\n    return items.get(0);\n  }\n}\n"
+  },
+  "options": {
+   "ignorePaths": [
+    "**.MAX_RETRIES"
+   ]
+  },
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 4
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "OrderService.cache",
+     "kind": "unchanged",
+     "before": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "after": "private final Map<String, List<Integer>> cache = new HashMap<>()",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.name",
+     "kind": "unchanged",
+     "before": "protected String name",
+     "after": "protected String name",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.<init>(String)",
+     "kind": "unchanged",
+     "before": "public OrderService(String name)",
+     "after": "public OrderService(String name)",
+     "evidence": "fact"
+    },
+    {
+     "path": "OrderService.submit(Order,int...) › call log.info",
+     "kind": "modified",
+     "before": "log.info(\"big order\")",
+     "after": "log.info(\"huge order\")",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Logging/output call changed."
+    },
+    {
+     "path": "OrderService.pick(List<T>)",
+     "kind": "unchanged",
+     "before": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "after": "private <T extends Comparable<T>> T pick(List<T> items)",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 4 unchanged\n\nDetails:\n────────────────────────────\n⚠ OrderService.submit(Order,int...) › call log.info\n  log.info(\"big order\") → log.info(\"huge order\")\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 4 |\n\n## Changes\n\n- ⚠ `OrderService.submit(Order,int...) › call log.info`: `log.info(\"big order\")` → `log.info(\"huge order\")`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "java/invalid-falls-back-to-text",
+  "left": {
+   "name": "A.java",
+   "content": "class A { void m( { } }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "class A { void m( { x } }"
+  },
+  "options": {},
+  "expected": {
+   "format": "text",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "warnings": [
+    "Invalid JAVA, fell back to text comparison (…)"
+   ],
+   "changes": [
+    {
+     "path": "L1",
+     "kind": "modified",
+     "before": "class A { void m( { } }",
+     "after": "class A { void m( { x } }",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ L1\n  class A { void m( { } } → class A { void m( { x } }\n\nNote: Invalid JAVA, fell back to text comparison (A.java: Sad sad panda, parsing errors detected in line: 1, column: 19!)\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `L1`: `class A { void m( { } }` → `class A { void m( { x } }`\n\n> Note: Invalid JAVA, fell back to text comparison (A.java: Sad sad panda, parsing errors detected in line: 1, column: 19!)\n"
+ },
+ {
+  "name": "java/qa/locator-and-wait",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.cssSelector(\".login-button\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(20)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 2
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › locator",
+     "kind": "modified",
+     "before": "By.id(\"login\")",
+     "after": "By.cssSelector(\".login-button\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Locator changed; element lookup may behave differently and test stability may be affected. Moved from id to cssSelector, which is usually less stable."
+    },
+    {
+     "path": "LoginTest.login() › wait strategy",
+     "kind": "modified",
+     "before": "Duration.ofSeconds(10)",
+     "after": "Duration.ofSeconds(20)",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Wait strategy or duration changed; timing and test stability may be affected."
+    },
+    {
+     "path": "LoginTest.login() › assertion",
+     "kind": "unchanged",
+     "before": "assertEquals(\"Home\", driver.getTitle())",
+     "after": "assertEquals(\"Home\", driver.getTitle())",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 2 items modified\n✓ 2 unchanged\n\nDetails:\n────────────────────────────\n⚠ LoginTest.login() › locator\n  By.id(\"login\") → By.cssSelector(\".login-button\")\n  Impact: MEDIUM\n\n⚠ LoginTest.login() › wait strategy\n  Duration.ofSeconds(10) → Duration.ofSeconds(20)\n  Impact: MEDIUM\n\nUnchanged:\n✓ LoginTest.login() › assertion\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 2 | 2 |\n\n## Changes\n\n- ⚠ `LoginTest.login() › locator`: `By.id(\"login\")` → `By.cssSelector(\".login-button\")`\n- ⚠ `LoginTest.login() › wait strategy`: `Duration.ofSeconds(10)` → `Duration.ofSeconds(20)`\n\n## Unchanged\n\n- ✓ `LoginTest.login() › assertion`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/qa/identical-lists-unchanged",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 5
+   },
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login()",
+     "kind": "unchanged",
+     "before": "void login()",
+     "after": "void login()",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › locator",
+     "kind": "unchanged",
+     "before": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "after": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › wait strategy",
+     "kind": "unchanged",
+     "before": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "after": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › assertion",
+     "kind": "unchanged",
+     "before": "assertEquals(\"Home\", driver.getTitle())",
+     "after": "assertEquals(\"Home\", driver.getTitle())",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nNo differences found.\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 0 | 5 |\n\nNo differences found.\n\n## Unchanged\n\n- ✓ `LoginTest.login() › locator`\n- ✓ `LoginTest.login() › wait strategy`\n- ✓ `LoginTest.login() › assertion`\n"
+ },
+ {
+  "name": "java/qa/assertion-changed",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Dashboard\", driver.getTitle());\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 3
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › assertion",
+     "kind": "modified",
+     "before": "assertEquals(\"Home\", driver.getTitle())",
+     "after": "assertEquals(\"Dashboard\", driver.getTitle())",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Assertion changed; the test now checks a different outcome."
+    },
+    {
+     "path": "LoginTest.login() › locator",
+     "kind": "unchanged",
+     "before": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "after": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › wait strategy",
+     "kind": "unchanged",
+     "before": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "after": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 3 unchanged\n\nDetails:\n────────────────────────────\n⚠ LoginTest.login() › assertion\n  assertEquals(\"Home\", driver.getTitle()) → assertEquals(\"Dashboard\", driver.getTitle())\n  Impact: HIGH\n\nUnchanged:\n✓ LoginTest.login() › locator\n✓ LoginTest.login() › wait strategy\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 3 |\n\n## Changes\n\n- ⚠ `LoginTest.login() › assertion`: `assertEquals(\"Home\", driver.getTitle())` → `assertEquals(\"Dashboard\", driver.getTitle())`\n\n## Unchanged\n\n- ✓ `LoginTest.login() › locator`\n- ✓ `LoginTest.login() › wait strategy`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/qa/assertion-removed",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 2,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › assertion",
+     "kind": "removed",
+     "before": "assertEquals(\"Home\", driver.getTitle())",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Assertion removed; the test may no longer verify this behaviour."
+    },
+    {
+     "path": "LoginTest.login() › call driver.getTitle",
+     "kind": "removed",
+     "before": "driver.getTitle()",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "LoginTest.login() › locator",
+     "kind": "unchanged",
+     "before": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "after": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › wait strategy",
+     "kind": "unchanged",
+     "before": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "after": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n- 2 items removed\n✓ 3 unchanged\n\nDetails:\n────────────────────────────\n- LoginTest.login() › assertion\n  assertEquals(\"Home\", driver.getTitle())\n  Impact: HIGH\n\n- LoginTest.login() › call driver.getTitle\n  driver.getTitle()\n  Impact: MEDIUM\n\nUnchanged:\n✓ LoginTest.login() › locator\n✓ LoginTest.login() › wait strategy\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 2 | 0 | 3 |\n\n## Changes\n\n- − `LoginTest.login() › assertion`: `assertEquals(\"Home\", driver.getTitle())`\n- − `LoginTest.login() › call driver.getTitle`: `driver.getTitle()`\n\n## Unchanged\n\n- ✓ `LoginTest.login() › locator`\n- ✓ `LoginTest.login() › wait strategy`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/qa/locator-removed-page-object",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    loginPage.clickLogin();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 2,
+    "modified": 1,
+    "unchanged": 3
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › locator",
+     "kind": "removed",
+     "before": "By.id(\"login\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Locator no longer appears in this method; it may have moved elsewhere (for example into a page object)."
+    },
+    {
+     "path": "LoginTest.login() › implementation",
+     "kind": "modified",
+     "before": "Direct Selenium interaction",
+     "after": "Page Object abstraction",
+     "evidence": "inferred",
+     "impact": "medium",
+     "reason": "Possible intent: improved test abstraction (inferred, not observed). The Page Object implementation should be reviewed to confirm equivalent behaviour."
+    },
+    {
+     "path": "LoginTest.login() › call .click",
+     "kind": "removed",
+     "before": ".click()",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "LoginTest.login() › call loginPage.clickLogin",
+     "kind": "added",
+     "after": "loginPage.clickLogin()",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "LoginTest.login() › wait strategy",
+     "kind": "unchanged",
+     "before": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "after": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › assertion",
+     "kind": "unchanged",
+     "before": "assertEquals(\"Home\", driver.getTitle())",
+     "after": "assertEquals(\"Home\", driver.getTitle())",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n- 2 items removed\n⚠ 1 item modified\n✓ 3 unchanged\n\nDetails:\n────────────────────────────\n- LoginTest.login() › locator\n  By.id(\"login\")\n  Impact: MEDIUM\n\n⚠ LoginTest.login() › implementation\n  Direct Selenium interaction → Page Object abstraction\n  Impact: MEDIUM\n\n- LoginTest.login() › call .click\n  .click()\n  Impact: MEDIUM\n\n+ LoginTest.login() › call loginPage.clickLogin\n  loginPage.clickLogin()\n  Impact: MEDIUM\n\nUnchanged:\n✓ LoginTest.login() › wait strategy\n✓ LoginTest.login() › assertion\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 2 | 1 | 3 |\n\n## Changes\n\n- − `LoginTest.login() › locator`: `By.id(\"login\")`\n- ⚠ `LoginTest.login() › implementation`: `Direct Selenium interaction` → `Page Object abstraction`\n- − `LoginTest.login() › call .click`: `.click()`\n- + `LoginTest.login() › call loginPage.clickLogin`: `loginPage.clickLogin()`\n\n## Unchanged\n\n- ✓ `LoginTest.login() › wait strategy`\n- ✓ `LoginTest.login() › assertion`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/qa/test-annotation-removed",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  \n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 1,
+    "modified": 0,
+    "unchanged": 4
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › @Test",
+     "kind": "removed",
+     "before": "@Test",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Test lifecycle annotation removed; the method may no longer run as a test or fixture."
+    },
+    {
+     "path": "LoginTest.login() › locator",
+     "kind": "unchanged",
+     "before": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "after": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › wait strategy",
+     "kind": "unchanged",
+     "before": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "after": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › assertion",
+     "kind": "unchanged",
+     "before": "assertEquals(\"Home\", driver.getTitle())",
+     "after": "assertEquals(\"Home\", driver.getTitle())",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n- 1 item removed\n✓ 4 unchanged\n\nDetails:\n────────────────────────────\n- LoginTest.login() › @Test\n  @Test\n  Impact: HIGH\n\nUnchanged:\n✓ LoginTest.login() › locator\n✓ LoginTest.login() › wait strategy\n✓ LoginTest.login() › assertion\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 1 | 0 | 4 |\n\n## Changes\n\n- − `LoginTest.login() › @Test`: `@Test`\n\n## Unchanged\n\n- ✓ `LoginTest.login() › locator`\n- ✓ `LoginTest.login() › wait strategy`\n- ✓ `LoginTest.login() › assertion`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/qa/test-disabled",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test @Disabled\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 4
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › @Disabled",
+     "kind": "added",
+     "after": "@Disabled",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Test disabled; it will no longer run."
+    },
+    {
+     "path": "LoginTest.login() › locator",
+     "kind": "unchanged",
+     "before": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "after": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › wait strategy",
+     "kind": "unchanged",
+     "before": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "after": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › assertion",
+     "kind": "unchanged",
+     "before": "assertEquals(\"Home\", driver.getTitle())",
+     "after": "assertEquals(\"Home\", driver.getTitle())",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n✓ 4 unchanged\n\nDetails:\n────────────────────────────\n+ LoginTest.login() › @Disabled\n  @Disabled\n  Impact: HIGH\n\nUnchanged:\n✓ LoginTest.login() › locator\n✓ LoginTest.login() › wait strategy\n✓ LoginTest.login() › assertion\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 0 | 4 |\n\n## Changes\n\n- + `LoginTest.login() › @Disabled`: `@Disabled`\n\n## Unchanged\n\n- ✓ `LoginTest.login() › locator`\n- ✓ `LoginTest.login() › wait strategy`\n- ✓ `LoginTest.login() › assertion`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/qa/disabled-with-reason-and-import",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.Disabled;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test @Disabled(\"Broken in Chrome 142\")\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 4
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › @Disabled",
+     "kind": "added",
+     "after": "@Disabled(\"Broken in Chrome 142\")",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Test disabled; it will no longer run. Reason given: \"Broken in Chrome 142\"."
+    },
+    {
+     "path": "LoginTest.login() › locator",
+     "kind": "unchanged",
+     "before": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "after": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › wait strategy",
+     "kind": "unchanged",
+     "before": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "after": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › assertion",
+     "kind": "unchanged",
+     "before": "assertEquals(\"Home\", driver.getTitle())",
+     "after": "assertEquals(\"Home\", driver.getTitle())",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n✓ 4 unchanged\n\nDetails:\n────────────────────────────\n+ LoginTest.login() › @Disabled\n  @Disabled(\"Broken in Chrome 142\")\n  Impact: HIGH\n\nUnchanged:\n✓ LoginTest.login() › locator\n✓ LoginTest.login() › wait strategy\n✓ LoginTest.login() › assertion\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 0 | 4 |\n\n## Changes\n\n- + `LoginTest.login() › @Disabled`: `@Disabled(\"Broken in Chrome 142\")`\n\n## Unchanged\n\n- ✓ `LoginTest.login() › locator`\n- ✓ `LoginTest.login() › wait strategy`\n- ✓ `LoginTest.login() › assertion`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/qa/skip-reason-added",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test @Disabled\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test @Disabled(\"flaky on CI\")\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 4
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › @Disabled",
+     "kind": "modified",
+     "before": "@Disabled",
+     "after": "@Disabled(\"flaky on CI\")",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Skip reason documented (\"flaky on CI\"); the test remains disabled."
+    },
+    {
+     "path": "LoginTest.login() › locator",
+     "kind": "unchanged",
+     "before": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "after": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › wait strategy",
+     "kind": "unchanged",
+     "before": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "after": "Duration.ofSeconds(10); new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › assertion",
+     "kind": "unchanged",
+     "before": "assertEquals(\"Home\", driver.getTitle())",
+     "after": "assertEquals(\"Home\", driver.getTitle())",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 4 unchanged\n\nDetails:\n────────────────────────────\n⚠ LoginTest.login() › @Disabled\n  @Disabled → @Disabled(\"flaky on CI\")\n  Impact: LOW\n\nUnchanged:\n✓ LoginTest.login() › locator\n✓ LoginTest.login() › wait strategy\n✓ LoginTest.login() › assertion\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 4 |\n\n## Changes\n\n- ⚠ `LoginTest.login() › @Disabled`: `@Disabled` → `@Disabled(\"flaky on CI\")`\n\n## Unchanged\n\n- ✓ `LoginTest.login() › locator`\n- ✓ `LoginTest.login() › wait strategy`\n- ✓ `LoginTest.login() › assertion`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "java/qa/field-locator-positional-xpath",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nclass P { private Query q = new Query(By.id(\"q\")); }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nclass P { private Query q = new Query(By.xpath(\"/html/body/div[2]/input\")); }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "P.q › locator",
+     "kind": "modified",
+     "before": "By.id(\"q\")",
+     "after": "By.xpath(\"/html/body/div[2]/input\")",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Locator changed; element lookup may behave differently and test stability may be affected. The new locator is position-based and breaks on layout changes."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ P.q › locator\n  By.id(\"q\") → By.xpath(\"/html/body/div[2]/input\")\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `P.q › locator`: `By.id(\"q\")` → `By.xpath(\"/html/body/div[2]/input\")`\n\n**Potential impact (estimate):** high\n"
+ },
+ {
+  "name": "java/qa/field-locator-wrapper-only",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nclass P { Query q = new Query(By.name(\"q\")); }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nclass P { Query q = new Query().defaultLocator(By.name(\"q\")); }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "P.q",
+     "kind": "modified",
+     "before": "Query q = new Query(By.name(\"q\"))",
+     "after": "Query q = new Query().defaultLocator(By.name(\"q\"))",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "No known behaviour-related name; likely a data or descriptive value."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ P.q\n  Query q = new Query(By.name(\"q\")) → Query q = new Query().defaultLocator(By.name(\"q\"))\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `P.q`: `Query q = new Query(By.name(\"q\"))` → `Query q = new Query().defaultLocator(By.name(\"q\"))`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "java/qa/field-locator-added",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nclass P { }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nclass P { By b = By.id(\"x\"); }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 0,
+    "modified": 0,
+    "unchanged": 0
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "P.b › locator",
+     "kind": "added",
+     "after": "By.id(\"x\")",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Locator added."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n\nDetails:\n────────────────────────────\n+ P.b › locator\n  By.id(\"x\")\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 0 | 0 | 0 |\n\n## Changes\n\n- + `P.b › locator`: `By.id(\"x\")`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "java/qa/findby-strategy-improved",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.support.FindBy;\nclass P {\n  @FindBy(xpath = \"//input[@name='q']\")\n  WebElement q;\n}"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.support.FindBy;\nclass P {\n  @FindBy(id = \"q\")\n  WebElement q;\n}"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "P.q",
+     "kind": "unchanged",
+     "before": "WebElement q",
+     "after": "WebElement q",
+     "evidence": "fact"
+    },
+    {
+     "path": "P.q › locator",
+     "kind": "modified",
+     "before": "By.xpath(\"//input[@name='q']\")",
+     "after": "By.id(\"q\")",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "Locator changed; element lookup may behave differently and test stability may be affected. Moved from xpath to id, which is usually more stable."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ P.q › locator\n  By.xpath(\"//input[@name='q']\") → By.id(\"q\")\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `P.q › locator`: `By.xpath(\"//input[@name='q']\")` → `By.id(\"q\")`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "java/qa/import-version-bump",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.devtools.v138.network.Network;\nimport org.openqa.selenium.devtools.v138.network.model.Reason;\nimport java.util.List;\nclass C {}"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.devtools.v147.network.Network;\nimport org.openqa.selenium.devtools.v147.network.model.Reason;\nimport java.util.List;\nclass C {}"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 1
+   },
+   "impact": "low",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "imports › version bump",
+     "kind": "modified",
+     "before": "v138",
+     "after": "v147",
+     "evidence": "fact",
+     "impact": "low",
+     "reason": "2 imports moved to a different library version (v138 → v147); check for API changes."
+    },
+    {
+     "path": "C",
+     "kind": "unchanged",
+     "before": "class C",
+     "after": "class C",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ imports › version bump\n  v138 → v147\n  Impact: LOW\n\nPotential impact (estimate): low\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 1 |\n\n## Changes\n\n- ⚠ `imports › version bump`: `v138` → `v147`\n\n**Potential impact (estimate):** low\n"
+ },
+ {
+  "name": "java/qa/anonymous-class-body",
+  "left": {
+   "name": "A.java",
+   "content": "class C { void m() { new Wait(driver, 10).until(new Cond<Boolean>() { public Boolean apply(Driver d) { return d.title().startsWith(\"a\"); } }); } }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "class C { void m() { new Wait(driver, 10).until(new Cond<Boolean>() { public Boolean apply(Driver d) { return d.title().startsWith(\"b\"); } }); } }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "C.m() › call .until",
+     "kind": "modified",
+     "before": ".until(new Cond<Boolean>() { public Boolean apply(Driver d) { return d.title().startsWith(\"a\"); } })",
+     "after": ".until(new Cond<Boolean>() { public Boolean apply(Driver d) { return d.title().startsWith(\"b\"); } })",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ C.m() › call .until\n  .until(new Cond<Boolean>() { public Boolean apply(Driver d) { return d.title().startsWith(\"a\"); } }) → .until(new Cond<Boolean>() { public Boolean apply(Driver d) { return d.title().startsWith(\"b\"); } })\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `C.m() › call .until`: `.until(new Cond<Boolean>() { public Boolean apply(Driver d) { return d.title().startsWith(\"a\"); } })` → `.until(new Cond<Boolean>() { public Boolean apply(Driver d) { return d.title().startsWith(\"b\"); } })`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/qa/forced-off",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.cssSelector(\".x\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(20)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "options": {
+   "qaMode": false
+  },
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 1,
+    "removed": 1,
+    "modified": 3,
+    "unchanged": 1
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › call driver.findElement",
+     "kind": "modified",
+     "before": "driver.findElement(By.id(\"login\"))",
+     "after": "driver.findElement(By.cssSelector(\".x\"))",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "LoginTest.login() › call By.id",
+     "kind": "removed",
+     "before": "By.id(\"login\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "LoginTest.login() › call new WebDriverWait",
+     "kind": "modified",
+     "before": "new WebDriverWait(driver, Duration.ofSeconds(10))",
+     "after": "new WebDriverWait(driver, Duration.ofSeconds(20))",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "LoginTest.login() › call Duration.ofSeconds",
+     "kind": "modified",
+     "before": "Duration.ofSeconds(10)",
+     "after": "Duration.ofSeconds(20)",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "LoginTest.login() › call By.cssSelector",
+     "kind": "added",
+     "after": "By.cssSelector(\".x\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n+ 1 item added\n- 1 item removed\n⚠ 3 items modified\n✓ 1 unchanged\n\nDetails:\n────────────────────────────\n⚠ LoginTest.login() › call driver.findElement\n  driver.findElement(By.id(\"login\")) → driver.findElement(By.cssSelector(\".x\"))\n  Impact: MEDIUM\n\n- LoginTest.login() › call By.id\n  By.id(\"login\")\n  Impact: MEDIUM\n\n⚠ LoginTest.login() › call new WebDriverWait\n  new WebDriverWait(driver, Duration.ofSeconds(10)) → new WebDriverWait(driver, Duration.ofSeconds(20))\n  Impact: MEDIUM\n\n⚠ LoginTest.login() › call Duration.ofSeconds\n  Duration.ofSeconds(10) → Duration.ofSeconds(20)\n  Impact: MEDIUM\n\n+ LoginTest.login() › call By.cssSelector\n  By.cssSelector(\".x\")\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 1 | 1 | 3 | 1 |\n\n## Changes\n\n- ⚠ `LoginTest.login() › call driver.findElement`: `driver.findElement(By.id(\"login\"))` → `driver.findElement(By.cssSelector(\".x\"))`\n- − `LoginTest.login() › call By.id`: `By.id(\"login\")`\n- ⚠ `LoginTest.login() › call new WebDriverWait`: `new WebDriverWait(driver, Duration.ofSeconds(10))` → `new WebDriverWait(driver, Duration.ofSeconds(20))`\n- ⚠ `LoginTest.login() › call Duration.ofSeconds`: `Duration.ofSeconds(10)` → `Duration.ofSeconds(20)`\n- + `LoginTest.login() › call By.cssSelector`: `By.cssSelector(\".x\")`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/qa/forced-on-non-test",
+  "left": {
+   "name": "A.java",
+   "content": "class C { void m() { driver.findElement(By.id(\"a\")).click(); } }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "class C { void m() { driver.findElement(By.id(\"b\")).click(); } }"
+  },
+  "options": {
+   "qaMode": true
+  },
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 1,
+    "unchanged": 0
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "C.m() › locator",
+     "kind": "modified",
+     "before": "By.id(\"a\")",
+     "after": "By.id(\"b\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Locator changed; element lookup may behave differently and test stability may be affected."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 1 item modified\n\nDetails:\n────────────────────────────\n⚠ C.m() › locator\n  By.id(\"a\") → By.id(\"b\")\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 1 | 0 |\n\n## Changes\n\n- ⚠ `C.m() › locator`: `By.id(\"a\")` → `By.id(\"b\")`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/qa/auto-off-non-test",
+  "left": {
+   "name": "A.java",
+   "content": "class C { void m() { driver.findElement(By.id(\"a\")).click(); } }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "class C { void m() { driver.findElement(By.id(\"b\")).click(); } }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 0
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "C.m() › call driver.findElement",
+     "kind": "modified",
+     "before": "driver.findElement(By.id(\"a\"))",
+     "after": "driver.findElement(By.id(\"b\"))",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "C.m() › call By.id",
+     "kind": "modified",
+     "before": "By.id(\"a\")",
+     "after": "By.id(\"b\")",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 2 items modified\n\nDetails:\n────────────────────────────\n⚠ C.m() › call driver.findElement\n  driver.findElement(By.id(\"a\")) → driver.findElement(By.id(\"b\"))\n  Impact: MEDIUM\n\n⚠ C.m() › call By.id\n  By.id(\"a\") → By.id(\"b\")\n  Impact: MEDIUM\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 2 | 0 |\n\n## Changes\n\n- ⚠ `C.m() › call driver.findElement`: `driver.findElement(By.id(\"a\"))` → `driver.findElement(By.id(\"b\"))`\n- ⚠ `C.m() › call By.id`: `By.id(\"a\")` → `By.id(\"b\")`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/qa/wait-removed",
+  "left": {
+   "name": "A.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ready);\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.openqa.selenium.By;\nimport org.junit.jupiter.api.Test;\n\npublic class LoginTest {\n  private int timeout = 30;\n\n  @Test\n  void login() {\n    driver.findElement(By.id(\"login\")).click();\n    assertEquals(\"Home\", driver.getTitle());\n  }\n}\n"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 2,
+    "modified": 0,
+    "unchanged": 3
+   },
+   "impact": "medium",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "LoginTest.timeout",
+     "kind": "unchanged",
+     "before": "private int timeout = 30",
+     "after": "private int timeout = 30",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › wait strategy",
+     "kind": "removed",
+     "before": "Duration.ofSeconds(10)",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Wait removed; the test may become flaky if the page is not ready."
+    },
+    {
+     "path": "LoginTest.login() › call .until",
+     "kind": "removed",
+     "before": ".until(ready)",
+     "evidence": "fact",
+     "impact": "medium",
+     "reason": "Method call changed; behaviour may differ."
+    },
+    {
+     "path": "LoginTest.login() › locator",
+     "kind": "unchanged",
+     "before": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "after": "By.id(\"login\"); driver.findElement(By.id(\"login\"))",
+     "evidence": "fact"
+    },
+    {
+     "path": "LoginTest.login() › assertion",
+     "kind": "unchanged",
+     "before": "assertEquals(\"Home\", driver.getTitle())",
+     "after": "assertEquals(\"Home\", driver.getTitle())",
+     "evidence": "fact"
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n- 2 items removed\n✓ 3 unchanged\n\nDetails:\n────────────────────────────\n- LoginTest.login() › wait strategy\n  Duration.ofSeconds(10)\n  Impact: MEDIUM\n\n- LoginTest.login() › call .until\n  .until(ready)\n  Impact: MEDIUM\n\nUnchanged:\n✓ LoginTest.login() › locator\n✓ LoginTest.login() › assertion\n\nPotential impact (estimate): medium\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 2 | 0 | 3 |\n\n## Changes\n\n- − `LoginTest.login() › wait strategy`: `Duration.ofSeconds(10)`\n- − `LoginTest.login() › call .until`: `.until(ready)`\n\n## Unchanged\n\n- ✓ `LoginTest.login() › locator`\n- ✓ `LoginTest.login() › assertion`\n\n**Potential impact (estimate):** medium\n"
+ },
+ {
+  "name": "java/qa/assert-library-calls",
+  "left": {
+   "name": "A.java",
+   "content": "import org.junit.Assert;\nclass T { void t() { Assert.assertEquals(1, f()); assertThat(x).isEqualTo(2); } }"
+  },
+  "right": {
+   "name": "B.java",
+   "content": "import org.junit.Assert;\nclass T { void t() { Assert.assertEquals(2, f()); assertThat(x).isEqualTo(3); } }"
+  },
+  "options": {},
+  "expected": {
+   "format": "java",
+   "stats": {
+    "added": 0,
+    "removed": 0,
+    "modified": 2,
+    "unchanged": 0
+   },
+   "impact": "high",
+   "warnings": [],
+   "changes": [
+    {
+     "path": "T.t() › assertion",
+     "kind": "modified",
+     "before": "Assert.assertEquals(1, f())",
+     "after": "Assert.assertEquals(2, f())",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Assertion changed; the test now checks a different outcome."
+    },
+    {
+     "path": "T.t() › assertion",
+     "kind": "modified",
+     "before": ".isEqualTo(2)",
+     "after": ".isEqualTo(3)",
+     "evidence": "fact",
+     "impact": "high",
+     "reason": "Assertion changed; the test now checks a different outcome."
+    }
+   ]
+  },
+  "summary": "DiffSense — Change Summary\n\nFiles:\nA.java\nB.java\n\nChanges:\n⚠ 2 items modified\n\nDetails:\n────────────────────────────\n⚠ T.t() › assertion\n  Assert.assertEquals(1, f()) → Assert.assertEquals(2, f())\n  Impact: HIGH\n\n⚠ T.t() › assertion\n  .isEqualTo(2) → .isEqualTo(3)\n  Impact: HIGH\n\nPotential impact (estimate): high\n",
+  "markdown": "# DiffSense — Change Summary\n\n**Files:** `A.java` ↔ `B.java`\n\n| Added | Removed | Modified | Unchanged |\n|---:|---:|---:|---:|\n| 0 | 0 | 2 | 0 |\n\n## Changes\n\n- ⚠ `T.t() › assertion`: `Assert.assertEquals(1, f())` → `Assert.assertEquals(2, f())`\n- ⚠ `T.t() › assertion`: `.isEqualTo(2)` → `.isEqualTo(3)`\n\n**Potential impact (estimate):** high\n"
  }
 ]

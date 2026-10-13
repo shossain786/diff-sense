@@ -14,6 +14,7 @@
                 and get a pass/fail verdict with every check listed.</li>
             <li><b>Impact estimates</b> (informational to critical) with the reason for each one.</li>
             <li><b>Ignore rules</b> for paths, order, case and whitespace, in Settings or a project <code>.diffsense.json</code>.</li>
+            <li><b>Java</b> is compared semantically, and test files get locator, wait and assertion rules with impact estimates: <code>By.id("login")</code> to <code>By.cssSelector(".login-button")</code>, a wait going from 10 to 20 seconds, a disabled test with its reason.</li>
             <li><b>EDIFACT</b> files are compared segment by segment (<code>NAD[BY]</code>, <code>LOC[7].2.1</code>), whether they arrive on one line or many.</li>
             <li><b>Format File</b> re-indents JSON and XML and splits EDIFACT into one segment per line, without changing any value.</li>
             <li>Copy or export the summary as Markdown.</li>
@@ -22,10 +23,9 @@
         the DiffSense actions in the Tools menu.</p>
         <p><b>Fully local:</b> no network access, no account, no telemetry. Your files never leave your machine.</p>
         <p><img src="https://raw.githubusercontent.com/shossain786/diff-sense/master/packages/intellij/media/intellij-diff.png" width="800" alt="The IDE's own diff viewer plus the DiffSense summary"/></p>
-        <p>Java semantic analysis and the test-automation rules from the VS Code extension are planned for a later release.</p>
     ]]></description>
     <change-notes><![CDATA[
-        <b>0.2.0</b> EDIFACT comparison, Format File (JSON, XML, EDIFACT), fix for a deprecated API usage reported for IntelliJ IDEA 2026.3.<br/><b>0.1.0</b> First release: text, JSON, YAML, XML and API response comparison, impact estimates, Markdown export.
+        <b>0.3.0</b> Java semantic comparison and test-automation rules (locators, waits, assertions, disabled tests, page-object locators, import version bumps).<br/><b>0.2.0</b> EDIFACT comparison, Format File (JSON, XML, EDIFACT), fix for a deprecated API usage reported for IntelliJ IDEA 2026.3.<br/><b>0.1.0</b> First release: text, JSON, YAML, XML and API response comparison, impact estimates, Markdown export.
     ]]></change-notes>
 
     <depends>com.intellij.modules.platform</depends>

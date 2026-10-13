@@ -9,14 +9,15 @@ summary tool window that lists what changed, by structure, with impact estimates
 
 - **JSON, YAML, XML**: compared by structure. Reordered keys and reformatting are not changes; every changed value is listed with its path.
 - **API responses**: expected vs actual (raw HTTP, JSON envelope or bare body) with a pass/fail verdict.
+- **Java**: compared semantically (types, fields, methods, signatures, annotations, imports, conditions, calls, exception handling). Test files
+  (Selenium, JUnit, TestNG, Cucumber, Playwright, REST Assured) also get the test-automation rules: locator, wait and assertion changes
+  with an impact estimate, disabled or removed tests, locators declared in page objects or `@FindBy`, and import version bumps reported once.
+  Switch the rules on or off in Settings | Tools | DiffSense | Java.
 - **Text**: line diff for everything else.
 - **Impact estimates** (informational to critical) with the reason for each.
 - **Ignore rules**: Settings | Tools | DiffSense, or a `.diffsense.json` in the project root (same file as the VS Code extension).
 - Copy or export the summary as Markdown.
 - Fully local: no network access, no account, no telemetry.
-
-Not in this release: Java semantic analysis and the test-automation rules (locators, waits, assertions). Java files are compared as text
-and the tool window says so. These are planned for a later release.
 
 ## Use
 

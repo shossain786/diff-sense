@@ -24,6 +24,8 @@ class DiffSenseSettings : PersistentStateComponent<DiffSenseSettings.State> {
         var ignoreAttributes: String = ""
         var ignoreHeaders: String = ""
         var maxFileSizeMb: Int = 10
+        /** Java test-automation rules: `auto` (detect test files), `on` or `off`. */
+        var qaMode: String = "auto"
     }
 
     private var state = State()
@@ -49,6 +51,7 @@ class DiffSenseSettings : PersistentStateComponent<DiffSenseSettings.State> {
             ignorePaths = lines(s.ignorePaths),
             ignoreAttributes = lines(s.ignoreAttributes),
             ignoreHeaders = lines(s.ignoreHeaders),
+            qaMode = when (s.qaMode) { "on" -> true; "off" -> false; else -> null },
         )
     }
 
