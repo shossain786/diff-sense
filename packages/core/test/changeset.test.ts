@@ -28,6 +28,22 @@ describe('compareChangeSet', () => {
     expect(renderChangeSetMarkdown(r)).toContain('| `a.json` | modified |');
     expect(renderChangeSetMarkdown(r)).toContain('<summary><code>a.json</code></summary>');
   });
+  it('reports the same change across sibling files once', () => {
+    const mk = (n: string) => ({
+      path: `src/${n}Test.java`,
+      status: 'modified' as const,
+      before: `import org.junit.jupiter.api.Test;\nclass ${n}Test { @Test void a() {} }`,
+      after: `import org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.Disabled;\nclass ${n}Test { @Test @Disabled("Broken") void a() {} }`,
+    });
+    const set = compareChangeSet([mk('A'), mk('B'), mk('C')], {}, 'x');
+    const t = renderChangeSet(set);
+    expect(t).toContain('3 files with the same change');
+    expect(t).toContain('src/BTest.java');
+    expect(t).not.toContain('imports ›');
+    expect(t).toContain('Test disabled; it will no longer run.');
+    expect(t.split('\n').filter((l) => l.includes('@Disabled')).length).toBe(1);
+    expect(renderChangeSetMarkdown(set)).toContain('3 files with the same change');
+  });
   it('handles an empty change set', () => {
     expect(renderChangeSet(compareChangeSet([]))).toContain('No differences found.');
   });

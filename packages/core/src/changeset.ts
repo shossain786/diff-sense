@@ -126,6 +126,42 @@ function statsLine(s: ChangeSetStats): string {
 }
 
 const MAX_DETAILS = 8;
+const MAX_GROUP_FILES = 6;
+
+const changeText = (c: Change): string =>
+  c.kind === 'modified' ? `${formatValue(c.before)} → ${formatValue(c.after)}` : formatValue(c.kind === 'added' ? c.after : c.before);
+
+/** Path without the owning type or method, so the same edit in different files compares equal. */
+const tail = (c: Change): string => c.path.split(' › ').slice(1).join(' › ') || c.path;
+
+const signature = (f: FileChange): string =>
+  `${f.impact}|` + changedOf(f).map((c) => `${c.kind}|${tail(c)}|${changeText(c)}`).join('\n');
+
+/**
+ * Files that carry exactly the same changes (typically one edit repeated across
+ * sibling test classes) are reported once. Only compared, modified files group.
+ */
+function groupFiles(files: FileChange[]): FileChange[][] {
+  const groups: FileChange[][] = [];
+  const bySig = new Map<string, FileChange[]>();
+  for (const f of files) {
+    if (!f.result || changedOf(f).length === 0) {
+      groups.push([f]);
+      continue;
+    }
+    const key = signature(f);
+    const g = bySig.get(key);
+    if (g) g.push(f);
+    else {
+      const fresh = [f];
+      bySig.set(key, fresh);
+      groups.push(fresh);
+    }
+  }
+  return groups;
+}
+
+const noteOf = (c: Change): string => (c.reason && (c.impact === 'high' || c.impact === 'critical') ? `  — ${c.reason}` : '');
 
 /** Plain-text multi-file summary. */
 export function renderChangeSet(r: ChangeSetResult): string {
@@ -133,15 +169,21 @@ export function renderChangeSet(r: ChangeSetResult): string {
   if (r.label) out.push(`Comparing: ${r.label}`);
   out.push(statsLine(r.stats), '');
   if (r.files.length === 0) out.push('No differences found.');
-  for (const f of ordered(r.files)) {
+  for (const group of groupFiles(ordered(r.files))) {
+    const f = group[0]!;
     const impact = f.impact && f.impact !== 'informational' ? `  [${f.impact.toUpperCase()}]` : '';
-    out.push(`${ICON[f.status]} ${fileTitle(f)}  (${fileNote(f)})${impact}`);
     const changes = changedOf(f);
+    const grouped = group.length > 1;
+    if (grouped) out.push(`${ICON[f.status]} ${group.length} files with the same change  (${fileNote(f)} each)${impact}`);
+    else out.push(`${ICON[f.status]} ${fileTitle(f)}  (${fileNote(f)})${impact}`);
     for (const c of changes.slice(0, MAX_DETAILS)) {
-      const v = c.kind === 'modified' ? `${formatValue(c.before)} → ${formatValue(c.after)}` : formatValue(c.kind === 'added' ? c.after : c.before);
-      out.push(`    ${c.kind === 'added' ? '+' : c.kind === 'removed' ? '-' : '⚠'} ${c.path}: ${v}`);
+      out.push(`    ${c.kind === 'added' ? '+' : c.kind === 'removed' ? '-' : '⚠'} ${grouped ? tail(c) : c.path}: ${changeText(c)}${noteOf(c)}`);
     }
     if (changes.length > MAX_DETAILS) out.push(`    … and ${changes.length - MAX_DETAILS} more`);
+    if (grouped) {
+      for (const g of group.slice(0, MAX_GROUP_FILES)) out.push(`      · ${fileTitle(g)}`);
+      if (group.length > MAX_GROUP_FILES) out.push(`      · … and ${group.length - MAX_GROUP_FILES} more`);
+    }
     if (!f.result && f.reason) out.push(`    ${f.reason}`);
   }
   if (r.impact) out.push('', `Potential impact (estimate): ${r.impact}`);
@@ -162,15 +204,20 @@ export function renderChangeSetMarkdown(r: ChangeSetResult): string {
     out.push('| File | Status | Changes | Impact |', '|---|---|---|---|');
     for (const f of ordered(r.files)) out.push(`| ${code(fileTitle(f))} | ${f.status} | ${fileNote(f)} | ${f.impact ?? '—'} |`);
     out.push('');
-    for (const f of ordered(r.files).filter((x) => changedOf(x).length > 0)) {
-      out.push(`<details><summary><code>${html(f.path)}</code></summary>`, '');
+    for (const group of groupFiles(ordered(r.files).filter((x) => changedOf(x).length > 0))) {
+      const f = group[0]!;
+      const grouped = group.length > 1;
+      out.push(`<details><summary><code>${html(grouped ? `${group.length} files with the same change` : f.path)}</code></summary>`, '');
       const changes = changedOf(f);
       for (const c of changes.slice(0, MAX_DETAILS * 4)) {
-        if (c.kind === 'modified') out.push(`- ⚠ ${code(c.path)}: ${code(formatValue(c.before))} → ${code(formatValue(c.after))}`);
-        else if (c.kind === 'added') out.push(`- + ${code(c.path)}: ${code(formatValue(c.after))}`);
-        else out.push(`- − ${code(c.path)}: ${code(formatValue(c.before))}`);
+        const p = code(grouped ? tail(c) : c.path);
+        if (c.kind === 'modified') out.push(`- ⚠ ${p}: ${code(formatValue(c.before))} → ${code(formatValue(c.after))}`);
+        else if (c.kind === 'added') out.push(`- + ${p}: ${code(formatValue(c.after))}`);
+        else out.push(`- − ${p}: ${code(formatValue(c.before))}`);
+        if (c.reason && (c.impact === 'high' || c.impact === 'critical')) out.push(`  - ${c.reason}`);
       }
       if (changes.length > MAX_DETAILS * 4) out.push(`- … and ${changes.length - MAX_DETAILS * 4} more`);
+      if (grouped) out.push('', 'Files:', ...group.map((g) => `- ${code(g.path)}`));
       out.push('', '</details>', '');
     }
   }

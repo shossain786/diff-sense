@@ -71,6 +71,47 @@ describe('QA rule pack', () => {
     expect(disabled.changes.find((c) => c.path.endsWith('@Disabled'))).toMatchObject({ kind: 'added', impact: 'high' });
   });
 
+  it('disabling a test is one change: the matching import is not reported separately', () => {
+    const base = 'import org.junit.jupiter.api.Test;\nclass T { @Test void a() { assertEquals(1, x()); } }';
+    const off = 'import org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.Disabled;\nclass T { @Test @Disabled("Broken in Chrome 142") void a() { assertEquals(1, x()); } }';
+    const r = jv(base, off);
+    expect(r.changes.some((c) => c.path.startsWith('imports ›'))).toBe(false);
+    const d = r.changes.find((c) => c.path.endsWith('@Disabled'))!;
+    expect(d).toMatchObject({ kind: 'added', impact: 'high' });
+    expect(d.reason).toContain('"Broken in Chrome 142"');
+    // unrelated import changes stay
+    const other = jv(base, off.replace('import org.junit.jupiter.api.Disabled;', 'import java.util.List;'));
+    expect(other.changes.some((c) => c.path === 'imports › java.util.List')).toBe(true);
+  });
+
+  it('adding a skip reason to an already disabled test is low impact', () => {
+    const a = 'import org.junit.Ignore;\nimport org.junit.Test;\nclass T { @Test @Ignore void a() {} }';
+    const b = a.replace('@Ignore void', '@Ignore("flaky on CI") void');
+    const c = jv(a, b).changes.find((x) => x.path.endsWith('@Ignore'))!;
+    expect(c).toMatchObject({ kind: 'modified', impact: 'low' });
+  });
+
+  it('locators declared as page-object fields are locator changes', () => {
+    const page = (f: string) => `import org.openqa.selenium.By;\nclass LoginPage {\n  ${f}\n}`;
+    const r = jv(page('private Query q = new Query(By.id("q"));'), page('private Query q = new Query(By.xpath("/html/body/div[2]/input"));'));
+    const loc = r.changes.find((c) => c.path === 'LoginPage.q › locator')!;
+    expect(loc).toMatchObject({ kind: 'modified', before: 'By.id("q")', after: 'By.xpath("/html/body/div[2]/input")', impact: 'high' });
+    expect(loc.reason).toContain('position-based');
+    // wrapper-only change: the locator itself is the same, so no locator change is reported
+    const wrapped = jv(page('Query q = new Query(By.name("q"));'), page('Query q = new Query().defaultLocator(By.name("q"));'));
+    expect(wrapped.changes.some((c) => c.path.endsWith('› locator'))).toBe(false);
+    const added = jv(page(''), page('By b = By.id("x");'));
+    expect(added.changes.find((c) => c.path === 'LoginPage.b › locator')).toMatchObject({ kind: 'added', impact: 'low' });
+  });
+
+  it('@FindBy changes are locator changes; moving to a sturdier strategy is lower impact', () => {
+    const page = (a: string) => `import org.openqa.selenium.support.FindBy;\nclass P {\n  ${a}\n  WebElement q;\n}`;
+    const r = jv(page('@FindBy(xpath = "//input[@name=\'q\']")'), page('@FindBy(id = "q")'));
+    const loc = r.changes.find((c) => c.path === 'P.q › locator')!;
+    expect(loc).toMatchObject({ kind: 'modified', impact: 'low' });
+    expect(loc.reason).toContain('more stable');
+  });
+
   it('auto-detect: off for non-test files, forceable with qaMode', () => {
     const plain = 'class C { void m() { driver.findElement(By.id("a")).click(); } }';
     const changed = plain.replace('"a"', '"b"');
