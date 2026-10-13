@@ -22,6 +22,22 @@ Unchanged: LoginTest.login() › assertion
 
 Try it in 30 seconds: `node packages/cli/dist/index.js compare samples/LoginTestOld.java samples/LoginTestNew.java`
 
+### On a real repository
+
+Run against the history of [bonigarcia/selenium-webdriver-java](https://github.com/bonigarcia/selenium-webdriver-java) (JUnit 4, JUnit 5 and TestNG copies of every test):
+
+```
+$ diffsense git 84eae4d^..84eae4d
+⚠ 2 files with the same change  (1 added each)  [HIGH]
+    + @Ignore: @Ignore("Broken in Chrome 142")  — Test disabled; it will no longer run. Reason given: "Broken in Chrome 142".
+      · …/ch05/monitoring/RecordChromeJUnit4Test.java
+      · …/ch05/monitoring/RecordChromeNGTest.java
+⚠ 2 files with the same change  (1 added each)  [HIGH]
+    + @Disabled: @Disabled("Broken in Chrome 142")  — Test disabled; it will no longer run. ...
+```
+
+A commit that bumps the Chrome DevTools protocol from v138 to v147 touches 41 test files. DiffSense reports it as three grouped entries, each led by a single "version bump v138 → v147" line, instead of 41 near-identical diffs. Add `--fail-on high` to fail a CI job when a test is disabled or an assertion is removed.
+
 The same engine also explains config (JSON, YAML, XML), API response and EDIFACT changes by structure, so a reordered key is not a change and `timeout: 30000 → 45000` is reported as exactly that. Your editor's native diff is still used for the side-by-side view.
 
 ## Install
