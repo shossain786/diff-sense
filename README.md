@@ -4,7 +4,25 @@
 
 ![DiffSense](packages/vscode/media/hero.png)
 
-Compare files. Understand what changed.
+**Know which test changes will make your suite flaky, before you merge.**
+
+A line diff shows that `By.id("login")` became `By.cssSelector(".login-button")` and that a wait went from 10 to 20 seconds. DiffSense tells you what that means: the locator changed, the wait strategy changed, the assertion did not, and the overall risk is medium.
+
+```
+LoginTest.login() › locator
+  By.id("login") → By.cssSelector(".login-button")
+  Impact: MEDIUM
+
+LoginTest.login() › wait strategy
+  Duration.ofSeconds(10) → Duration.ofSeconds(20)
+  Impact: MEDIUM
+
+Unchanged: LoginTest.login() › assertion
+```
+
+Try it in 30 seconds: `node packages/cli/dist/index.js compare samples/LoginTestOld.java samples/LoginTestNew.java`
+
+The same engine also explains config (JSON, YAML, XML), API response and EDIFACT changes by structure, so a reordered key is not a change and `timeout: 30000 → 45000` is reported as exactly that. Your editor's native diff is still used for the side-by-side view.
 
 ## Install
 

@@ -2,9 +2,9 @@
 
 # DiffSense
 
-**Compare files. Understand what changed.**
+**Know which test changes will make your suite flaky, before you merge.**
 
-Line diffs tell you *which lines* changed. DiffSense tells you *what* changed. It compares JSON, YAML and XML by structure, so a reordered key or reformatted file is not a change, and `timeout: 30000 → 45000` is reported as exactly that. VS Code's own diff editor is still used for the side-by-side view.
+Line diffs tell you *which lines* changed. DiffSense tells you *what* changed and what it may affect: for Java tests, locator, wait and assertion changes with an impact estimate; for config, the exact value that moved. It compares JSON, YAML and XML by structure, so a reordered key or reformatted file is not a change, and `timeout: 30000 → 45000` is reported as exactly that. VS Code's own diff editor is still used for the side-by-side view.
 
 ## Usage
 
