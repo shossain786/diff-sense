@@ -149,3 +149,22 @@ describe('Java analyzer', () => {
     expect(s).toContain('private int timeout = 30 → private int timeout = 45');
   });
 });
+
+describe('noise reduction', () => {
+  it('reports a library version bump in imports once', () => {
+    const a = 'import a.devtools.v138.network.Network;\nimport a.devtools.v138.network.model.Reason;\nimport java.util.List;\nclass C {}';
+    const b = 'import a.devtools.v147.network.Network;\nimport a.devtools.v147.network.model.Reason;\nimport java.util.List;\nclass C {}';
+    const r = jv(a, b);
+    expect(changed(r)).toEqual(['modified:imports › version bump']);
+    const c = r.changes.find((x) => x.path === 'imports › version bump')!;
+    expect(c).toMatchObject({ before: 'v138', after: 'v147' });
+    expect(c.reason).toContain('2 imports');
+  });
+
+  it('does not treat the body of an anonymous class as separate changes of the method', () => {
+    const wait = (cond: string) =>
+      `class C { void m() { new Wait(driver, 10).until(new Cond<Boolean>() { public Boolean apply(Driver d) { return ${cond}; } }); } }`;
+    const r = jv(wait('d.title().startsWith("a")'), wait('d.title().startsWith("b")'));
+    expect(changed(r)).toEqual(['modified:C.m() › call .until']);
+  });
+});

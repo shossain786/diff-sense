@@ -133,7 +133,39 @@ function extractFacts(body: Node | undefined, src: string): Fact[] {
     return T.length - 1;
   };
 
+  // `new Foo<T>(..) { ... }`: the class body is part of the enclosing call's arguments, so its
+  // inner methods, returns and calls are not separate changes of the surrounding method.
+  const anonBodies: [number, number][] = [];
   for (let i = 0; i < T.length; i++) {
+    if (T[i]!.image !== 'new') continue;
+    let j = i + 1;
+    let angle = 0;
+    for (; j < T.length; j++) {
+      const im = T[j]!.image;
+      if (im === '<') angle++;
+      else if (im === '>') angle--;
+      else if (im === '>>') angle -= 2;
+      else if (angle === 0 && im === '(') break;
+      else if (angle === 0 && !IDENT.test(im) && im !== '.') {
+        j = T.length;
+      }
+    }
+    if (j >= T.length) continue;
+    const c = closeOf(j);
+    if (c < 0 || T[c + 1]?.image !== '{') continue;
+    let depth = 0;
+    for (let k = c + 1; k < T.length; k++) {
+      if (T[k]!.image === '{') depth++;
+      else if (T[k]!.image === '}' && --depth === 0) {
+        anonBodies.push([c + 1, k]);
+        break;
+      }
+    }
+  }
+  const inAnonBody = (i: number) => anonBodies.some(([a, b]) => i >= a && i <= b);
+
+  for (let i = 0; i < T.length; i++) {
+    if (inAnonBody(i)) continue;
     const t = T[i]!.image;
     const next = T[i + 1]?.image;
 
@@ -405,11 +437,38 @@ function diffModels(a: JModel, b: JModel): Change[] {
   if (a.pkg !== b.pkg) {
     out.push({ path: 'package', kind: 'modified', before: a.pkg, after: b.pkg, evidence: 'fact', impact: 'high', reason: 'Package changed; all references to this class are affected.' });
   }
-  for (const i of a.imports) {
-    if (!b.imports.includes(i)) out.push({ path: `imports › ${i}`, kind: 'removed', before: i, evidence: 'fact', impact: 'informational', reason: 'Import removed.' });
+  const goneImports = a.imports.filter((i) => !b.imports.includes(i));
+  const newImports = b.imports.filter((i) => !a.imports.includes(i));
+  // A library version bump renames many imports at once (`.v138.` -> `.v147.`); report it once.
+  const versionKey = (i: string) => i.replace(/\.v\d+(?=\.)/g, '.v*');
+  const versionOf = (i: string) => /\.(v\d+)(?=\.)/.exec(i)?.[1];
+  const bumps = new Map<string, number>();
+  for (const old of [...goneImports]) {
+    const k = versionKey(old);
+    const match = k !== old ? newImports.find((n) => versionKey(n) === k && n !== old) : undefined;
+    if (!match) continue;
+    goneImports.splice(goneImports.indexOf(old), 1);
+    newImports.splice(newImports.indexOf(match), 1);
+    const step = `${versionOf(old)} → ${versionOf(match)}`;
+    bumps.set(step, (bumps.get(step) ?? 0) + 1);
   }
-  for (const i of b.imports) {
-    if (!a.imports.includes(i)) out.push({ path: `imports › ${i}`, kind: 'added', after: i, evidence: 'fact', impact: 'informational', reason: 'Import added.' });
+  for (const [step, n] of bumps) {
+    const [from, to] = step.split(' → ');
+    out.push({
+      path: 'imports › version bump',
+      kind: 'modified',
+      before: from,
+      after: to,
+      evidence: 'fact',
+      impact: 'low',
+      reason: `${n} import${n === 1 ? '' : 's'} moved to a different library version (${step}); check for API changes.`,
+    });
+  }
+  for (const i of goneImports) {
+    out.push({ path: `imports › ${i}`, kind: 'removed', before: i, evidence: 'fact', impact: 'informational', reason: 'Import removed.' });
+  }
+  for (const i of newImports) {
+    out.push({ path: `imports › ${i}`, kind: 'added', after: i, evidence: 'fact', impact: 'informational', reason: 'Import added.' });
   }
 
   for (const [q, ta] of a.types) {
