@@ -46,6 +46,11 @@
         "category": "DiffSense"
       },
       {
+        "command": "diffsense.compareByPath",
+        "title": "Compare Files by Path",
+        "category": "DiffSense"
+      },
+      {
         "command": "diffsense.compareClipboard",
         "title": "Compare Clipboard",
         "category": "DiffSense"

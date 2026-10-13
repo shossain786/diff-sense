@@ -17,6 +17,8 @@ import {
 } from '@diffsense/core';
 import { createHash, randomBytes } from 'node:crypto';
 import { renderPanelHtml } from './html.js';
+import { resolveTypedPath } from './paths.js';
+import { statSync } from 'node:fs';
 
 const SCHEME = 'diffsense';
 
@@ -164,6 +166,48 @@ async function compareFiles(clicked?: vscode.Uri, selected?: vscode.Uri[], force
   if (!left) return;
   const right = await pickFile(`Compare ${fileName(left)} with…`, left);
   if (right) await analyze(left, right, true, forced);
+}
+
+/** Compares two files (or two folders) whose paths are typed or pasted; relative paths resolve against the workspace. */
+async function compareByPath(): Promise<void> {
+  const active = vscode.window.activeTextEditor?.document.uri;
+  const baseDir =
+    vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ??
+    (active?.scheme === 'file' ? vscode.Uri.joinPath(active, '..').fsPath : process.cwd());
+  const kindOf = (typed: string): 'file' | 'dir' | string => {
+    const p = resolveTypedPath(typed, baseDir);
+    if (!p) return 'Enter a path.';
+    try {
+      const st = statSync(p);
+      return st.isDirectory() ? 'dir' : 'file';
+    } catch {
+      return `Not found: ${p}`;
+    }
+  };
+  const ask = async (title: string, prompt: string, value?: string): Promise<string | undefined> =>
+    vscode.window.showInputBox({
+      title,
+      prompt,
+      value,
+      ignoreFocusOut: true,
+      placeHolder: 'e.g. samples/config-a.json, ~/Downloads/a.json or /abs/path/a.json',
+      validateInput: (v) => {
+        const k = kindOf(v);
+        return k === 'file' || k === 'dir' ? undefined : k;
+      },
+    });
+
+  const first = await ask('DiffSense: Compare by path (1/2)', 'Source (before) file or folder', active?.scheme === 'file' ? active.fsPath : undefined);
+  if (first === undefined) return;
+  const second = await ask('DiffSense: Compare by path (2/2)', 'Destination (after) file or folder');
+  if (second === undefined) return;
+
+  const left = vscode.Uri.file(resolveTypedPath(first, baseDir)!);
+  const right = vscode.Uri.file(resolveTypedPath(second, baseDir)!);
+  const [lk, rk] = [kindOf(first), kindOf(second)];
+  if (lk !== rk) return void vscode.window.showErrorMessage('DiffSense: compare two files or two folders, not one of each.');
+  if (lk === 'dir') return compareFolders(undefined, [left, right]);
+  await analyze(left, right, true);
 }
 
 /** Expected (current file) vs actual (picked file), reported as pass/fail. */
@@ -328,6 +372,7 @@ export function activate(context: vscode.ExtensionContext): void {
   context.subscriptions.push(
     vscode.workspace.registerTextDocumentContentProvider(SCHEME, virtualDocs),
     vscode.commands.registerCommand('diffsense.compareFiles', (u?: vscode.Uri, s?: vscode.Uri[]) => compareFiles(u, s)),
+    vscode.commands.registerCommand('diffsense.compareByPath', compareByPath),
     vscode.commands.registerCommand('diffsense.compareFolders', (u?: vscode.Uri, sel?: vscode.Uri[]) => compareFolders(u, sel)),
     vscode.commands.registerCommand('diffsense.compareApiResponses', compareApiResponses),
     vscode.commands.registerCommand('diffsense.compareClipboard', compareClipboard),

@@ -17,6 +17,7 @@ Command Palette:
 | Command | What it does |
 |---|---|
 | **DiffSense: Compare Files** | Compare two files |
+| **DiffSense: Compare Files by Path** | Type or paste the source and destination paths (files or folders; relative paths resolve against the workspace, `~` works) |
 | **DiffSense: Compare Clipboard** | Compare the current file (or selection) with the clipboard |
 | **DiffSense: Compare Selected Text** | Select text, run it, select other text, run it again |
 | **DiffSense: Analyze Current Diff** | Summarize a diff editor that is already open |
