@@ -82,7 +82,7 @@ jobs:
           fail-on: high            # optional: informational | low | medium | high | critical
 ```
 
-Inputs: `range` (default: PR base...head), `fail-on`, `comment` (default `true`), `config`. Pull requests from forks get a read-only token, so set `comment: 'false'` there and use the job summary.
+Inputs: `range` (default: PR base...head), `fail-on`, `comment` (default `true`), `config`, and the opt-in `explain: 'true'` with `anthropic-api-key` or `gemini-api-key` (pass a secret; optional `ai-provider`, `ai-model`) to add a generated explanation to the comment. Only a compact list of the changes is sent, never whole files. Fork PRs have no access to secrets, so the explanation is skipped there and the normal summary still posts. Pull requests from forks get a read-only token, so set `comment: 'false'` there and use the job summary.
 
 ## Develop
 ```

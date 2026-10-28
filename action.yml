@@ -22,6 +22,26 @@ inputs:
     description: Path to a .diffsense.json config file (default ./.diffsense.json if present).
     required: false
     default: ''
+  explain:
+    description: Add an AI explanation to the summary. Opt-in; sends a compact list of the changes (not whole files) to the chosen provider. Needs an API key input. Pull requests from forks have no access to secrets, so the explanation is skipped there.
+    required: false
+    default: 'false'
+  ai-provider:
+    description: anthropic or gemini. Empty = whichever API key is provided (Anthropic first).
+    required: false
+    default: ''
+  ai-model:
+    description: Model to use for the explanation. Empty = the provider default.
+    required: false
+    default: ''
+  anthropic-api-key:
+    description: Anthropic API key (pass a secret, never a literal).
+    required: false
+    default: ''
+  gemini-api-key:
+    description: Gemini API key (pass a secret, never a literal).
+    required: false
+    default: ''
   github-token:
     description: Token used to post the comment. Needs pull-requests write permission.
     required: false
@@ -54,6 +74,11 @@ runs:
         INPUT_RANGE: ${{ inputs.range }}
         INPUT_FAIL_ON: ${{ inputs.fail-on }}
         INPUT_CONFIG: ${{ inputs.config }}
+        INPUT_EXPLAIN: ${{ inputs.explain }}
+        INPUT_AI_PROVIDER: ${{ inputs.ai-provider }}
+        INPUT_AI_MODEL: ${{ inputs.ai-model }}
+        ANTHROPIC_API_KEY: ${{ inputs.anthropic-api-key }}
+        GEMINI_API_KEY: ${{ inputs.gemini-api-key }}
         PR_BASE: ${{ github.event.pull_request.base.sha }}
         PR_HEAD: ${{ github.event.pull_request.head.sha }}
       run: |
@@ -63,6 +88,11 @@ runs:
         out="${RUNNER_TEMP}/diffsense-summary.md"
         args=(git "$range" --markdown)
         [ -n "$INPUT_CONFIG" ] && args+=(--config "$INPUT_CONFIG")
+        if [ "$INPUT_EXPLAIN" = "true" ]; then
+          args+=(--explain)
+          [ -n "$INPUT_AI_PROVIDER" ] && args+=(--provider "$INPUT_AI_PROVIDER")
+          [ -n "$INPUT_AI_MODEL" ] && args+=(--model "$INPUT_AI_MODEL")
+        fi
         # Summary first, never failing; the threshold is applied afterwards so the comment is always posted.
         node "${{ github.action_path }}/packages/cli/dist/index.js" "${args[@]}" > "$out"
         cat "$out" >> "$GITHUB_STEP_SUMMARY"

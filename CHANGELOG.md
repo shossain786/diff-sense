@@ -6,6 +6,7 @@ Changes to the CLI and the GitHub Action. The IDE packages keep their own change
 ## Unreleased
 
 - `--explain` (with `--model <id>`) on `compare`, `git` and `dir` adds an AI explanation of the changes. Opt-in; needs `ANTHROPIC_API_KEY` or `GEMINI_API_KEY` (`--provider anthropic|gemini` to choose; default is whichever key is set, Anthropic first). Only a compact list of the changes is sent, never whole files. If the call fails, the normal summary still prints and the exit code is unchanged. With `--json` the text is in `explanation`.
+- GitHub Action: opt-in `explain` input (with `anthropic-api-key` / `gemini-api-key`, `ai-provider`, `ai-model`) adds the explanation to the PR comment and job summary. If the key is missing (fork PRs) or the call fails, the normal summary is still posted.
 - Core: `buildExplainPrompt` (pure) and `explainWithAnthropic`, `explainWithGemini`.
 
 ## 0.3.0 — 2026-10-13
