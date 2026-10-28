@@ -15,4 +15,4 @@ export * from './changeset.js';
 export { compareEdifact, parseEdifact, formatEdifact, looksLikeEdifact } from './edifact.js';
 export { formatContent, FORMATTABLE, type FormatOptions } from './format.js';
 export { pairDirectories, compilePathGlob, type DirFile, type DirectoryOptions, type DirectoryComparison } from './dirs.js';
-export { buildExplainPrompt, explainWithAnthropic, DEFAULT_MODEL, type ExplainPrompt, type ExplainOptions, type AnthropicOptions } from './explain.js';
+export { buildExplainPrompt, explainWithAnthropic, explainWithGemini, DEFAULT_MODEL, DEFAULT_GEMINI_MODEL, type ExplainPrompt, type ExplainOptions, type AnthropicOptions, type GeminiOptions } from './explain.js';

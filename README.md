@@ -36,7 +36,7 @@ $ diffsense git 84eae4d^..84eae4d
     + @Disabled: @Disabled("Broken in Chrome 142")  — Test disabled; it will no longer run. ...
 ```
 
-A commit that bumps the Chrome DevTools protocol from v138 to v147 touches 41 test files. DiffSense reports it as three grouped entries, each led by a single "version bump v138 → v147" line, instead of 41 near-identical diffs. Add `--fail-on high` to fail a CI job when a test is disabled or an assertion is removed. Add `--explain` (with `ANTHROPIC_API_KEY` set) for an optional plain-language explanation; it sends only a compact list of the changes, never whole files.
+A commit that bumps the Chrome DevTools protocol from v138 to v147 touches 41 test files. DiffSense reports it as three grouped entries, each led by a single "version bump v138 → v147" line, instead of 41 near-identical diffs. Add `--fail-on high` to fail a CI job when a test is disabled or an assertion is removed. Add `--explain` (with `ANTHROPIC_API_KEY` or `GEMINI_API_KEY` set) for an optional plain-language explanation; it sends only a compact list of the changes, never whole files.
 
 The same engine also explains config (JSON, YAML, XML), API response and EDIFACT changes by structure, so a reordered key is not a change and `timeout: 30000 → 45000` is reported as exactly that. Your editor's native diff is still used for the side-by-side view.
 

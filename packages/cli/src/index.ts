@@ -7,6 +7,7 @@ import {
   buildExplainPrompt,
   compareChangeSet,
   explainWithAnthropic,
+  explainWithGemini,
   IMPACT_ORDER,
   pairDirectories,
   parseConfig,
@@ -43,9 +44,10 @@ Options:
   --match name           dir: also pair files with a unique file name in both folders (e.g. target/ vs src/resources/)
   --exclude <glob>       dir: skip paths matching the glob, e.g. **/*.log (repeatable; .git and node_modules are always skipped)
   --markdown             git: print a Markdown summary (PR / CI step summary)
-  --explain              compare/git/dir: add an AI explanation of the changes (needs ANTHROPIC_API_KEY; sends a compact list of the
-                         changes, not whole files, to the Anthropic API)
-  --model <id>           explain: model to use (default claude-haiku-5-5)
+  --explain              compare/git/dir: add an AI explanation of the changes (needs ANTHROPIC_API_KEY or GEMINI_API_KEY; sends a compact list of the
+                         changes, not whole files, to the AI provider)
+  --model <id>           explain: model to use (default claude-haiku-5-5, or gemini-3.1-flash-lite)
+  --provider <name>      explain: anthropic | gemini (default: whichever API key is set, Anthropic first)
   --fail-on <impact>     git: exit 1 if overall impact >= informational|low|medium|high|critical
 
 Exit codes: 0 no differences / PASS, 1 differences / FAIL, 2 usage/error
@@ -69,6 +71,7 @@ let indent = 2;
 let failOn: Impact | undefined;
 let explain = false;
 let model: string | undefined;
+let aiProvider: 'anthropic' | 'gemini' | undefined;
 for (let i = 0; i < args.length; i++) {
   const a = args[i]!;
   if (a === '--json') asJson = true;
@@ -80,7 +83,11 @@ for (let i = 0; i < args.length; i++) {
   else if (a === '--ignore') (flags.ignorePaths ??= []).push(args[++i] ?? fail('--ignore needs a value'));
   else if (a === '--markdown') markdown = true;
   else if (a === '--explain') explain = true;
-  else if (a === '--model') model = args[++i] ?? fail('--model needs a value');
+  else if (a === '--provider') {
+    const v = args[++i];
+    if (v !== 'anthropic' && v !== 'gemini') fail('--provider must be anthropic or gemini');
+    aiProvider = v;
+  } else if (a === '--model') model = args[++i] ?? fail('--model needs a value');
   else if (a === '--write') write = true;
   else if (a === '--match') {
     if (args[++i] !== 'name') fail('--match only supports: name');
@@ -126,13 +133,15 @@ if (cfgFile) {
 
 /** Returns the AI explanation, or undefined (after a warning on stderr) so the deterministic output is never lost. */
 async function explainResult(result: ComparisonResult | ChangeSetResult): Promise<string | undefined> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const provider = aiProvider ?? (process.env.ANTHROPIC_API_KEY ? 'anthropic' : process.env.GEMINI_API_KEY ? 'gemini' : 'anthropic');
+  const apiKey = provider === 'gemini' ? process.env.GEMINI_API_KEY : process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    console.error('--explain needs the ANTHROPIC_API_KEY environment variable; skipping the explanation.');
+    console.error(`--explain needs the ${provider === 'gemini' ? 'GEMINI_API_KEY' : 'ANTHROPIC_API_KEY'} environment variable; skipping the explanation.`);
     return undefined;
   }
   try {
-    return await explainWithAnthropic(buildExplainPrompt(result), { apiKey, model });
+    const prompt = buildExplainPrompt(result);
+    return await (provider === 'gemini' ? explainWithGemini(prompt, { apiKey, model }) : explainWithAnthropic(prompt, { apiKey, model }));
   } catch (e) {
     console.error(`Explanation unavailable: ${(e as Error).message}`);
     return undefined;

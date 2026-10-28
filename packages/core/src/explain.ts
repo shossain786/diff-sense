@@ -115,3 +115,48 @@ export async function explainWithAnthropic(prompt: ExplainPrompt, opts: Anthropi
   if (!text) throw new Error('AI service returned an empty explanation');
   return text;
 }
+
+export interface GeminiOptions {
+  apiKey: string;
+  model?: string;
+  maxTokens?: number;
+  baseUrl?: string;
+  fetch?: typeof fetch;
+}
+
+export const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite';
+
+/** Asks the Gemini API to explain the prompt. Throws an Error with a user-facing message. */
+export async function explainWithGemini(prompt: ExplainPrompt, opts: GeminiOptions): Promise<string> {
+  if (!opts.apiKey) throw new Error('No Gemini API key set');
+  const doFetch = opts.fetch ?? globalThis.fetch;
+  const model = opts.model ?? DEFAULT_GEMINI_MODEL;
+  let res: Response;
+  try {
+    res = await doFetch(`${opts.baseUrl ?? 'https://generativelanguage.googleapis.com'}/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-goog-api-key': opts.apiKey },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: prompt.system }] },
+        contents: [{ role: 'user', parts: [{ text: prompt.user }] }],
+        generationConfig: { maxOutputTokens: opts.maxTokens ?? 1200 },
+      }),
+    });
+  } catch (e) {
+    throw new Error(`Could not reach the AI service: ${(e as Error).message}`);
+  }
+  if (!res.ok) {
+    let detail = '';
+    try {
+      detail = ((await res.json()) as { error?: { message?: string } }).error?.message ?? '';
+    } catch {
+      /* body was not JSON */
+    }
+    const hint = res.status === 400 || res.status === 403 ? ' (check the API key and model name)' : res.status === 429 ? ' (rate limited, try again shortly)' : '';
+    throw new Error(`AI service returned ${res.status}${hint}${detail ? `: ${detail}` : ''}`);
+  }
+  const data = (await res.json()) as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
+  const text = (data.candidates?.[0]?.content?.parts ?? []).map((p) => p.text ?? '').join('').trim();
+  if (!text) throw new Error('AI service returned an empty explanation');
+  return text;
+}
