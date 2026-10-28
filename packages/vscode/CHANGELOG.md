@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 — 2026-10-28
 
 - "DiffSense: Explain Changes (AI)" explains the last comparison in plain language. It is opt-in, uses your own Anthropic or Gemini API key (`diffsense.ai.provider`; stored in secret storage; model via `diffsense.ai.model`), and sends only a compact list of the changes, not file contents. New command "Remove Stored AI API Key".
 
