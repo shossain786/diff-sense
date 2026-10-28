@@ -121,10 +121,16 @@
     "configuration": {
       "title": "DiffSense",
       "properties": {
+        "diffsense.ai.provider": {
+          "type": "string",
+          "enum": ["anthropic", "gemini"],
+          "default": "anthropic",
+          "description": "AI provider used by Explain Changes (AI). You supply your own API key."
+        },
         "diffsense.ai.model": {
           "type": "string",
           "default": "",
-          "description": "Anthropic model used by Explain Changes (AI). Empty = the default (claude-haiku-5-5). Explanations are opt-in and send a compact list of the changes, not whole files."
+          "description": "Model used by Explain Changes (AI). Empty = the provider's default (claude-haiku-5-5 or gemini-3.1-flash-lite). Explanations are opt-in and send a compact list of the changes, not whole files."
         },
         "diffsense.ignoreWhitespace": {
           "type": "boolean",

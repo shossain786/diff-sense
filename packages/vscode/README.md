@@ -81,7 +81,7 @@ Available options: `ignoreWhitespace`, `ignoreCase`, `ignoreArrayOrder`, `numeri
 
 DiffSense runs entirely on your machine. By default it makes no network requests, needs no account, and sends no telemetry. Your files are never uploaded.
 
-The one exception is the optional **Explain Changes (AI)** command, which only runs when you invoke it. It sends a compact, truncated list of the changes found by the comparison (paths, kinds, short before/after values and impact estimates, never whole files) to the Anthropic API using your own API key, which is kept in VS Code secret storage. Use "Remove Stored AI API Key" to delete it.
+The one exception is the optional **Explain Changes (AI)** command, which only runs when you invoke it. It sends a compact, truncated list of the changes found by the comparison (paths, kinds, short before/after values and impact estimates, never whole files) to the Anthropic or Gemini API (setting `diffsense.ai.provider`) using your own API key, which is kept in VS Code secret storage. Use "Remove Stored AI API Key" to delete it.
 
 ## Known limitations
 
