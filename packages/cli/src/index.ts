@@ -4,7 +4,9 @@ import {
   detectFormat,
   compare,
   formatContent,
+  buildExplainPrompt,
   compareChangeSet,
+  explainWithAnthropic,
   IMPACT_ORDER,
   pairDirectories,
   parseConfig,
@@ -13,7 +15,7 @@ import {
   renderSummary,
   resolveOptions,
 } from '@diffsense/core';
-import type { CompareOptions, Impact } from '@diffsense/core';
+import type { ChangeSetResult, CompareOptions, ComparisonResult, Impact } from '@diffsense/core';
 import { readDirectory } from './dirs.js';
 import { collectChangeSet } from './git.js';
 
@@ -41,6 +43,9 @@ Options:
   --match name           dir: also pair files with a unique file name in both folders (e.g. target/ vs src/resources/)
   --exclude <glob>       dir: skip paths matching the glob, e.g. **/*.log (repeatable; .git and node_modules are always skipped)
   --markdown             git: print a Markdown summary (PR / CI step summary)
+  --explain              compare/git/dir: add an AI explanation of the changes (needs ANTHROPIC_API_KEY; sends a compact list of the
+                         changes, not whole files, to the Anthropic API)
+  --model <id>           explain: model to use (default claude-haiku-5-5)
   --fail-on <impact>     git: exit 1 if overall impact >= informational|low|medium|high|critical
 
 Exit codes: 0 no differences / PASS, 1 differences / FAIL, 2 usage/error
@@ -62,6 +67,8 @@ let matchByName = false;
 const excludes: string[] = [];
 let indent = 2;
 let failOn: Impact | undefined;
+let explain = false;
+let model: string | undefined;
 for (let i = 0; i < args.length; i++) {
   const a = args[i]!;
   if (a === '--json') asJson = true;
@@ -72,6 +79,8 @@ for (let i = 0; i < args.length; i++) {
   else if (a === '--ignore-header') (flags.ignoreHeaders ??= []).push(args[++i] ?? fail('--ignore-header needs a value'));
   else if (a === '--ignore') (flags.ignorePaths ??= []).push(args[++i] ?? fail('--ignore needs a value'));
   else if (a === '--markdown') markdown = true;
+  else if (a === '--explain') explain = true;
+  else if (a === '--model') model = args[++i] ?? fail('--model needs a value');
   else if (a === '--write') write = true;
   else if (a === '--match') {
     if (args[++i] !== 'name') fail('--match only supports: name');
@@ -115,6 +124,23 @@ if (cfgFile) {
   config = parsed.config;
 }
 
+/** Returns the AI explanation, or undefined (after a warning on stderr) so the deterministic output is never lost. */
+async function explainResult(result: ComparisonResult | ChangeSetResult): Promise<string | undefined> {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    console.error('--explain needs the ANTHROPIC_API_KEY environment variable; skipping the explanation.');
+    return undefined;
+  }
+  try {
+    return await explainWithAnthropic(buildExplainPrompt(result), { apiKey, model });
+  } catch (e) {
+    console.error(`Explanation unavailable: ${(e as Error).message}`);
+    return undefined;
+  }
+}
+const withExplanation = (text: string, explanation: string | undefined) =>
+  explanation ? `${text.trimEnd()}\n\n${markdown ? '## AI explanation\n\n' : 'AI explanation (generated, may be wrong):\n'}${explanation}\n` : text;
+
 if (isDir) {
   const [, l, r] = files as [string, string, string];
   let paired;
@@ -124,7 +150,8 @@ if (isDir) {
     fail(`Cannot read directories: ${(e as Error).message}`);
   }
   const result = compareChangeSet(paired.entries, config, `${l} ↔ ${r}`);
-  const text = asJson ? JSON.stringify({ ...result, identical: paired.identical }, null, 2) : markdown ? renderChangeSetMarkdown(result) : renderChangeSet(result);
+  const explanation = explain && result.files.length > 0 ? await explainResult(result) : undefined;
+  const text = asJson ? JSON.stringify({ ...result, identical: paired.identical, explanation }, null, 2) : withExplanation(markdown ? renderChangeSetMarkdown(result) : renderChangeSet(result), explanation);
   console.log(text.trimEnd());
   if (!asJson) console.log(`${paired.identical} identical file${paired.identical === 1 ? '' : 's'} not shown.`);
   const met = failOn ? !!result.impact && IMPACT_ORDER.indexOf(result.impact) >= IMPACT_ORDER.indexOf(failOn) : result.files.length > 0;
@@ -138,7 +165,8 @@ if (isGit) {
     fail((e as Error).message);
   }
   const result = compareChangeSet(set.entries, config, set.label);
-  console.log(asJson ? JSON.stringify(result, null, 2) : markdown ? renderChangeSetMarkdown(result) : renderChangeSet(result));
+  const explanation = explain && result.files.length > 0 ? await explainResult(result) : undefined;
+  console.log(asJson ? JSON.stringify({ ...result, explanation }, null, 2) : withExplanation(markdown ? renderChangeSetMarkdown(result) : renderChangeSet(result), explanation).trimEnd());
   const met = failOn && result.impact && IMPACT_ORDER.indexOf(result.impact) >= IMPACT_ORDER.indexOf(failOn);
   process.exit(met ? 1 : 0);
 }
@@ -154,6 +182,7 @@ const read = (p: string) => {
 };
 const options = resolveOptions(config, isApi ? 'api' : detectFormat(a), isApi ? { ...flags, format: 'api' } : flags);
 const result = compare({ name: a, content: read(a) }, { name: b, content: read(b) }, options);
-console.log(asJson ? JSON.stringify(result, null, 2) : renderSummary(result));
 const { added, removed, modified } = result.stats;
+const explanation = explain && added + removed + modified > 0 ? await explainResult(result) : undefined;
+console.log(asJson ? JSON.stringify({ ...result, explanation }, null, 2) : withExplanation(renderSummary(result), explanation).trimEnd());
 process.exit(added + removed + modified > 0 ? 1 : 0);

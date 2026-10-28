@@ -79,7 +79,9 @@ Available options: `ignoreWhitespace`, `ignoreCase`, `ignoreArrayOrder`, `numeri
 
 ## Privacy
 
-DiffSense runs entirely on your machine. It makes no network requests, needs no account, and sends no telemetry. Your files are never uploaded.
+DiffSense runs entirely on your machine. By default it makes no network requests, needs no account, and sends no telemetry. Your files are never uploaded.
+
+The one exception is the optional **Explain Changes (AI)** command, which only runs when you invoke it. It sends a compact, truncated list of the changes found by the comparison (paths, kinds, short before/after values and impact estimates, never whole files) to the Anthropic API using your own API key, which is kept in VS Code secret storage. Use "Remove Stored AI API Key" to delete it.
 
 ## Known limitations
 
@@ -87,7 +89,7 @@ DiffSense runs entirely on your machine. It makes no network requests, needs no 
 - XML namespaces are compared by prefix unless `ignoreNamespaces` is enabled.
 - Impact levels are keyword-based estimates, never guarantees. Read the reason shown with each one.
 - Java analysis covers a single file at a time, and does not resolve types across files.
-- AI explanations are planned but not part of this release.
+- AI explanations are generated text and can be wrong. The deterministic summary is the source of truth.
 
 ## Feedback
 

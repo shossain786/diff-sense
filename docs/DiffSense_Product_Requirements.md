@@ -819,8 +819,8 @@ The UI must not freeze.
 
 ### Later
 
-- [ ] AI explanation
-- [ ] API response comparison
+- [x] AI explanation (opt-in, bring your own Anthropic key; CLI `--explain`, VS Code "Explain Changes")
+- [x] API response comparison
 - [ ] QA automation mode
 - [ ] IntelliJ plugin
 - [ ] CLI
@@ -915,41 +915,43 @@ Alternative taglines:
 
 ### Phase 1 — MVP
 
-- [ ] VS Code extension
-- [ ] Local comparison engine
-- [ ] Text comparison
-- [ ] JSON comparison
-- [ ] XML comparison
-- [ ] YAML comparison
-- [ ] Summary panel
-- [ ] Ignore rules
-- [ ] Marketplace publication
+- [x] VS Code extension
+- [x] Local comparison engine
+- [x] Text comparison
+- [x] JSON comparison
+- [x] XML comparison
+- [x] YAML comparison
+- [x] Summary panel
+- [x] Ignore rules
+- [x] Marketplace publication
 
 ### Phase 2
 
-- [ ] Java semantic comparison
-- [ ] QA automation patterns
-- [ ] Clipboard comparison
-- [ ] Markdown export
-- [ ] Impact classification
+- [x] Java semantic comparison
+- [x] QA automation patterns
+- [x] Clipboard comparison
+- [x] Markdown export
+- [x] Impact classification
 
 ### Phase 3
 
 - [ ] AI explanation
-- [ ] API response comparison
-- [ ] CLI
+- [x] API response comparison
+- [x] CLI
 
 ### Phase 4
 
-- [ ] IntelliJ plugin
-- [ ] Git integration
-- [ ] GitHub integration
+- [x] IntelliJ plugin
+- [x] Git integration
+- [x] GitHub integration
 
 ### Phase 5
 
-- [ ] CI/CD
+- [x] CI/CD (GitHub Action with `fail-on`)
 - [ ] Enterprise policies
 - [ ] Team-level reporting
+
+Shipped beyond the original plan: EDIFACT comparison, folder comparison (`diffsense dir`), and a formatter (`diffsense format`).
 
 ---
 

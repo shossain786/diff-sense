@@ -77,7 +77,12 @@
       },
       {
         "command": "diffsense.explainChanges",
-        "title": "Explain Changes",
+        "title": "Explain Changes (AI)",
+        "category": "DiffSense"
+      },
+      {
+        "command": "diffsense.clearApiKey",
+        "title": "Remove Stored AI API Key",
         "category": "DiffSense"
       }
     ],
@@ -116,6 +121,11 @@
     "configuration": {
       "title": "DiffSense",
       "properties": {
+        "diffsense.ai.model": {
+          "type": "string",
+          "default": "",
+          "description": "Anthropic model used by Explain Changes (AI). Empty = the default (claude-haiku-5-5). Explanations are opt-in and send a compact list of the changes, not whole files."
+        },
         "diffsense.ignoreWhitespace": {
           "type": "boolean",
           "default": false,

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- "DiffSense: Explain Changes (AI)" explains the last comparison in plain language. It is opt-in, uses your own Anthropic API key (stored in secret storage; model via `diffsense.ai.model`), and sends only a compact list of the changes, not file contents. New command "Remove Stored AI API Key".
+
 ## 0.3.0 — 2026-10-13
 
 - New command "DiffSense: Compare Files by Path": type or paste the source and destination paths (files or folders). Relative paths resolve against the workspace, `~` and quoted paths work, and each box validates that the path exists.
