@@ -102,6 +102,7 @@ class SummaryPanel(private val project: Project) : JPanel(BorderLayout()) {
 
     private val openDiff = JButton("Open Diff")
     private val swap = JButton("Swap sides").apply { toolTipText = "Treat the right file as the old version and the left as the new one" }
+    private val explainAi = JButton("Explain (AI)").apply { toolTipText = "Ask an AI to explain the changes in plain language (sends a compact list of the changes to your chosen provider)" }
     private val copy = JButton("Copy as Markdown")
     private val export = JButton("Export Markdown…")
 
@@ -117,7 +118,7 @@ class SummaryPanel(private val project: Project) : JPanel(BorderLayout()) {
             add(JPanel(FlowLayout(FlowLayout.LEFT, 0, JBUI.scale(6))).apply {
                 isOpaque = false
                 alignmentX = Component.LEFT_ALIGNMENT
-                for (b in listOf(openDiff, swap, copy, export)) add(b)
+                for (b in listOf(openDiff, swap, explainAi, copy, export)) add(b)
                 add(showUnchanged)
             })
         }
@@ -143,6 +144,7 @@ class SummaryPanel(private val project: Project) : JPanel(BorderLayout()) {
         add(notes, BorderLayout.SOUTH)
 
         openDiff.addActionListener { current?.let { DiffSenseRunner.openNativeDiff(project, it) } }
+        explainAi.addActionListener { AiExplain.run(project, current) }
         swap.addActionListener { current?.let { DiffSenseRunner.swap(project, it) } }
         copy.addActionListener {
             current?.let {
@@ -160,12 +162,12 @@ class SummaryPanel(private val project: Project) : JPanel(BorderLayout()) {
         subtitle.text = "Select two files, right-click and choose \"Compare with DiffSense\"."
         stats.text = ""
         notes.text = ""
-        listOf(openDiff, swap, copy, export, showUnchanged).forEach { it.isEnabled = false }
+        listOf(openDiff, swap, explainAi, copy, export, showUnchanged).forEach { it.isEnabled = false }
     }
 
     fun update(a: Analysis) {
         current = a
-        listOf(openDiff, swap, copy, export, showUnchanged).forEach { it.isEnabled = true }
+        listOf(openDiff, swap, explainAi, copy, export, showUnchanged).forEach { it.isEnabled = true }
         val r = a.result
         val api = r.format == Format.API
         showUnchanged.isVisible = !api

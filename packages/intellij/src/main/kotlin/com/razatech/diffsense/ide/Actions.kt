@@ -128,3 +128,15 @@ class FormatFileAction : DumbAwareAction() {
         WriteCommandAction.runWriteCommandAction(project, "DiffSense: Format File", null, { doc.setText(formatted) })
     }
 }
+
+/** AI explanation of the latest comparison. Opt-in; see [AiExplain]. */
+class ExplainChangesAction : DumbAwareAction() {
+    override fun getActionUpdateThread() = ActionUpdateThread.BGT
+    override fun update(e: AnActionEvent) {
+        e.presentation.isEnabledAndVisible = e.project != null
+    }
+    override fun actionPerformed(e: AnActionEvent) {
+        val project = e.project ?: return
+        AiExplain.run(project, DiffSenseSession.getInstance(project).last)
+    }
+}

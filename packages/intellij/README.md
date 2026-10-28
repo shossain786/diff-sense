@@ -17,7 +17,7 @@ summary tool window that lists what changed, by structure, with impact estimates
 - **Impact estimates** (informational to critical) with the reason for each.
 - **Ignore rules**: Settings | Tools | DiffSense, or a `.diffsense.json` in the project root (same file as the VS Code extension).
 - Copy or export the summary as Markdown.
-- Fully local: no network access, no account, no telemetry.
+- Local by default: no account, no telemetry, files never uploaded. The optional **Explain Changes (AI)** (Tools | DiffSense, or the Explain (AI) button in the tool window) runs only when you choose it. It sends a compact, truncated list of the changes the comparison found (not file contents) to Anthropic or Gemini using your own API key, stored in the IDE credential store. Choose the provider and model in Settings | Tools | DiffSense.
 
 ## Use
 

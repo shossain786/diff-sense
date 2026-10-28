@@ -15,7 +15,7 @@ import com.razatech.diffsense.engine.Format
 class PluginWiringTest : BasePlatformTestCase() {
     fun testActionsAreRegistered() {
         val am = ActionManager.getInstance()
-        for (id in listOf("DiffSense.CompareFiles", "DiffSense.CompareFilesMenu", "DiffSense.CompareApiResponses", "DiffSense.CompareClipboard", "DiffSense.CompareSelectedText", "DiffSense.FormatFile", "DiffSense.Group")) {
+        for (id in listOf("DiffSense.CompareFiles", "DiffSense.CompareFilesMenu", "DiffSense.CompareApiResponses", "DiffSense.CompareClipboard", "DiffSense.CompareSelectedText", "DiffSense.FormatFile", "DiffSense.ExplainChanges", "DiffSense.Group")) {
             assertNotNull("action $id is not registered", am.getAction(id))
         }
         assertEquals("Compare with DiffSense", am.getAction("DiffSense.CompareFiles").templatePresentation.text)

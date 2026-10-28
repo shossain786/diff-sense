@@ -40,6 +40,16 @@ class DiffSenseConfigurable : BoundSearchableConfigurable("DiffSense", "com.raza
                         .comment("Locator, wait and assertion changes. <code>auto</code> turns them on for files that import Selenium, JUnit, TestNG, Cucumber, Playwright or REST Assured.")
                 }
             }
+            group("Explain Changes (AI)") {
+                row("Provider:") {
+                    comboBox(listOf("anthropic", "gemini")).bindItem({ s.aiProvider }, { s.aiProvider = it ?: "anthropic" })
+                        .comment("Optional and off until you run <b>Explain Changes (AI)</b>. Sends a compact list of the changes, not whole files, to the provider with your own API key.")
+                }
+                row("Model:") {
+                    textField().bindText(s::aiModel).comment("Empty = the provider default (claude-haiku-5-5 or gemini-3.1-flash-lite).")
+                }
+                row { button("Remove Stored API Keys") { AiKeys.clearAll() } }
+            }
             group("Ignored paths") {
                 row {
                     textArea().rows(4).bindText(s::ignorePaths)

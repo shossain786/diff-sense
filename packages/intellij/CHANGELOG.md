@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+- New optional **Explain Changes (AI)**: Tools | DiffSense | Explain Changes (AI), or the Explain (AI) button in the tool window, explains the last comparison in plain language. Bring your own Anthropic or Gemini API key (kept in the IDE credential store; provider and model in Settings | Tools | DiffSense). Only a compact list of the changes is sent, never file contents, and nothing is sent until you run it. Same prompt as the CLI and VS Code extension.
+
 ## 0.3.0
 
 - Java files are now compared semantically instead of as text: types, fields, methods and signatures, annotations, imports, conditions, calls and exception handling. Results are identical to the VS Code extension and CLI (shared conformance suite, 47 new Java cases).

@@ -17,15 +17,16 @@
             <li><b>Java</b> is compared semantically, and test files get locator, wait and assertion rules with impact estimates: <code>By.id("login")</code> to <code>By.cssSelector(".login-button")</code>, a wait going from 10 to 20 seconds, a disabled test with its reason.</li>
             <li><b>EDIFACT</b> files are compared segment by segment (<code>NAD[BY]</code>, <code>LOC[7].2.1</code>), whether they arrive on one line or many.</li>
             <li><b>Format File</b> re-indents JSON and XML and splits EDIFACT into one segment per line, without changing any value.</li>
+            <li><b>Explain Changes (AI)</b> (optional, bring your own Anthropic or Gemini key) phrases the findings in plain language. The AI never computes the diff.</li>
             <li>Copy or export the summary as Markdown.</li>
         </ul>
         <p>Right-click one or two files in the Project view and choose <b>DiffSense | Compare with DiffSense</b>, or use
         the DiffSense actions in the Tools menu.</p>
-        <p><b>Fully local:</b> no network access, no account, no telemetry. Your files never leave your machine.</p>
+        <p><b>Local by default:</b> no account and no telemetry, and your files are never uploaded. The one optional exception is <b>Explain Changes (AI)</b>, which only runs when you choose it: it sends a compact, truncated list of the changes the comparison found (not file contents) to Anthropic or Gemini, using your own API key from the IDE credential store.</p>
         <p><img src="https://raw.githubusercontent.com/shossain786/diff-sense/master/packages/intellij/media/intellij-diff.png" width="800" alt="The IDE's own diff viewer plus the DiffSense summary"/></p>
     ]]></description>
     <change-notes><![CDATA[
-        <b>0.3.0</b> Java semantic comparison and test-automation rules (locators, waits, assertions, disabled tests, page-object locators, import version bumps).<br/><b>0.2.0</b> EDIFACT comparison, Format File (JSON, XML, EDIFACT), fix for a deprecated API usage reported for IntelliJ IDEA 2026.3.<br/><b>0.1.0</b> First release: text, JSON, YAML, XML and API response comparison, impact estimates, Markdown export.
+        <b>0.4.0</b> Optional Explain Changes (AI): bring your own Anthropic or Gemini key; only a compact list of the changes is sent, never file contents.<br/><b>0.3.0</b> Java semantic comparison and test-automation rules (locators, waits, assertions, disabled tests, page-object locators, import version bumps).<br/><b>0.2.0</b> EDIFACT comparison, Format File (JSON, XML, EDIFACT), fix for a deprecated API usage reported for IntelliJ IDEA 2026.3.<br/><b>0.1.0</b> First release: text, JSON, YAML, XML and API response comparison, impact estimates, Markdown export.
     ]]></change-notes>
 
     <depends>com.intellij.modules.platform</depends>
@@ -51,6 +52,9 @@
             <action id="DiffSense.CompareApiResponses" class="com.razatech.diffsense.ide.CompareApiResponsesAction"
                     text="Compare API Responses (Expected vs Actual)…"
                     description="Check an actual API response against an expected one, with a pass/fail verdict"/>
+            <action id="DiffSense.ExplainChanges" class="com.razatech.diffsense.ide.ExplainChangesAction"
+                    text="Explain Changes (AI)"
+                    description="Ask an AI to explain the last comparison in plain language (opt-in, uses your own API key)"/>
             <action id="DiffSense.FormatFile" class="com.razatech.diffsense.ide.FormatFileAction"
                     text="Format File (JSON, XML, EDIFACT)"
                     description="Re-indent JSON or XML, or put each EDIFACT segment on its own line"/>

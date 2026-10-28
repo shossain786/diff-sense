@@ -26,6 +26,9 @@ class DiffSenseSettings : PersistentStateComponent<DiffSenseSettings.State> {
         var maxFileSizeMb: Int = 10
         /** Java test-automation rules: `auto` (detect test files), `on` or `off`. */
         var qaMode: String = "auto"
+        /** Explain Changes (AI): `anthropic` or `gemini`; model empty = the provider default. Keys are in the credential store. */
+        var aiProvider: String = "anthropic"
+        var aiModel: String = ""
     }
 
     private var state = State()
