@@ -49,7 +49,9 @@ intellijPlatform {
 tasks.test {
     useJUnit()
     // The installed IDE is Ultimate; its licensed modules cannot start headlessly. Load only what the tests need.
-    systemProperty("idea.load.plugins.id", "com.razatech.diffsense")
+    // Since 2026.3 (263) VCS ships as its own plugin, and the core's content modules need it; without it the
+    // platform disables every plugin that depends on com.intellij, ours included.
+    systemProperty("idea.load.plugins.id", "com.razatech.diffsense,com.intellij.platform.vcs")
     systemProperty("idea.load.plugins.category", "none")
 }
 
